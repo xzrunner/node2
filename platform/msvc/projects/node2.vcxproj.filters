@@ -10,6 +10,9 @@
     <Filter Include="render">
       <UniqueIdentifier>{27c0fe33-3dfe-42f6-85ff-7d4564535a9d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="components\color">
+      <UniqueIdentifier>{bde14b73-e163-4a00-9438-aa8c926b1438}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\include\node2\CompImage.h">
@@ -32,6 +35,12 @@
     <ClInclude Include="..\..\..\include\node2\CompBoundingBox.h">
       <Filter>components</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\include\node2\CompColorCommon.h">
+      <Filter>components\color</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\node2\CompColorMap.h">
+      <Filter>components\color</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\source\CompText.cpp">
@@ -51,6 +60,12 @@
     </ClCompile>
     <ClCompile Include="..\..\..\source\CompBoundingBox.cpp">
       <Filter>components</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\CompColorCommon.cpp">
+      <Filter>components\color</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\CompColorMap.cpp">
+      <Filter>components\color</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

@@ -3,6 +3,8 @@
 #include <node0/NodeComponent.h>
 #include <painting2/RenderColorCommon.h>
 
+namespace ee0 { class SubjectMgr; }
+
 namespace n2
 {
 

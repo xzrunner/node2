@@ -3,6 +3,7 @@
 #include "node2/CompImage.h"
 #include "node2/CompColorCommon.h"
 #include "node2/CompColorMap.h"
+#include "node2/CompText.h"
 
 #include <node0/SceneNode.h>
 #include <painting2/RenderSystem.h>
@@ -35,7 +36,13 @@ void DrawNode::Draw(const n0::SceneNodePtr& node, const N2_MAT& mt)
 			pt2::RenderSystem::DrawTexture(*tex, sm::rect(sz.x, sz.y), mt_child);
 		}
 	}
-
+	if (node->HasComponent<CompText>())
+	{
+		auto& ctext = node->GetComponent<CompText>();
+		auto& text = ctext.GetText();
+		pt2::RenderSystem::DrawText(text, mt_child);
+	}
+	
 	auto& children = node->GetAllChildren();
 	for (auto& child : children) {
 		Draw(child, mt_child);

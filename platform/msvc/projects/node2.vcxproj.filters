@@ -13,59 +13,62 @@
     <Filter Include="components\color">
       <UniqueIdentifier>{bde14b73-e163-4a00-9438-aa8c926b1438}</UniqueIdentifier>
     </Filter>
+    <Filter Include="components\others">
+      <UniqueIdentifier>{36f6ead0-a4b6-4658-8e34-5898bd1711bc}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\..\include\node2\CompImage.h">
-      <Filter>components</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\include\node2\CompText.h">
-      <Filter>components</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\include\node2\ComponentFactory.h">
       <Filter>components</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\include\node2\DrawNode.h">
       <Filter>render</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\include\node2\CompTransform.h">
-      <Filter>components</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\include\node2\predef.h" />
     <ClInclude Include="..\..\..\include\node2\config.h" />
-    <ClInclude Include="..\..\..\include\node2\CompBoundingBox.h">
-      <Filter>components</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\include\node2\CompColorCommon.h">
       <Filter>components\color</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\include\node2\CompColorMap.h">
       <Filter>components\color</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\include\node2\CompBoundingBox.h">
+      <Filter>components\others</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\node2\CompImage.h">
+      <Filter>components\others</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\node2\CompText.h">
+      <Filter>components\others</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\node2\CompTransform.h">
+      <Filter>components\others</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\..\source\CompText.cpp">
-      <Filter>components</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\source\ComponentFactory.cpp">
-      <Filter>components</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\source\CompImage.cpp">
       <Filter>components</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\source\DrawNode.cpp">
       <Filter>render</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\source\CompTransform.cpp">
-      <Filter>components</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\source\CompBoundingBox.cpp">
-      <Filter>components</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\source\CompColorCommon.cpp">
       <Filter>components\color</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\source\CompColorMap.cpp">
       <Filter>components\color</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\CompBoundingBox.cpp">
+      <Filter>components\others</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\CompImage.cpp">
+      <Filter>components\others</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\CompText.cpp">
+      <Filter>components\others</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\CompTransform.cpp">
+      <Filter>components\others</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

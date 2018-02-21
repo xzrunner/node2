@@ -17,12 +17,17 @@ public:
 		rapidjson::MemoryPoolAllocator<>& alloc) const override;
 	virtual void LoadFromJson(const rapidjson::Value& val) override;
 
+	void SetFilepath(const std::string& filepath) { m_filepath = filepath; }
+	const std::string& GetFilepath() const { return m_filepath; }
+
 	void SetTexture(const std::shared_ptr<pt2::Texture>& tex) { m_tex = tex; }
 	const std::shared_ptr<pt2::Texture>& GetTexture() const { return m_tex; }
 
 	static const char* const TYPE_NAME;
 
 private:
+	std::string m_filepath;
+
 	std::shared_ptr<pt2::Texture> m_tex = nullptr;
 
 }; // CompImage

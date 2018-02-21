@@ -24,6 +24,8 @@ public:
 		rapidjson::MemoryPoolAllocator<>& alloc) const override;
 	virtual void LoadFromJson(const rapidjson::Value& val) override;
 
+	void SetSize(const sm::rect& size);
+	
 	void Build(const pt2::SRT& srt);
 
 	const pt2::BoundingBox& GetBounding() const;

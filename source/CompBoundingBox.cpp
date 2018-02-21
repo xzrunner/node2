@@ -18,6 +18,11 @@ void CompBoundingBox::LoadFromJson(const rapidjson::Value& val)
 {
 }
 
+void CompBoundingBox::SetSize(const sm::rect& size)
+{
+	m_size = size;
+}
+
 void CompBoundingBox::Build(const pt2::SRT& srt)
 {
 	m_bounding = std::make_unique<pt2::OBB>();

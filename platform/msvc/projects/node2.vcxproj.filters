@@ -16,6 +16,9 @@
     <Filter Include="components\others">
       <UniqueIdentifier>{36f6ead0-a4b6-4658-8e34-5898bd1711bc}</UniqueIdentifier>
     </Filter>
+    <Filter Include="components\node">
+      <UniqueIdentifier>{4f6644e8-1b8b-4b85-9b50-13a72a696951}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\include\node2\ComponentFactory.h">
@@ -35,14 +38,17 @@
     <ClInclude Include="..\..\..\include\node2\CompBoundingBox.h">
       <Filter>components\others</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\include\node2\CompImage.h">
-      <Filter>components\others</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\include\node2\CompText.h">
-      <Filter>components\others</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\include\node2\CompTransform.h">
       <Filter>components\others</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\node2\CompImage.h">
+      <Filter>components\node</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\node2\CompText.h">
+      <Filter>components\node</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\node2\CompSprite2.h">
+      <Filter>components\node</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -61,14 +67,17 @@
     <ClCompile Include="..\..\..\source\CompBoundingBox.cpp">
       <Filter>components\others</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\source\CompImage.cpp">
-      <Filter>components\others</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\source\CompText.cpp">
-      <Filter>components\others</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\source\CompTransform.cpp">
       <Filter>components\others</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\CompImage.cpp">
+      <Filter>components\node</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\CompText.cpp">
+      <Filter>components\node</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\CompSprite2.cpp">
+      <Filter>components\node</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

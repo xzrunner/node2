@@ -14,6 +14,7 @@
     <ClInclude Include="..\..\..\include\node2\CompBoundingBox.h" />
     <ClInclude Include="..\..\..\include\node2\CompColorCommon.h" />
     <ClInclude Include="..\..\..\include\node2\CompColorMap.h" />
+    <ClInclude Include="..\..\..\include\node2\CompSprite2.h" />
     <ClInclude Include="..\..\..\include\node2\CompImage.h" />
     <ClInclude Include="..\..\..\include\node2\ComponentFactory.h" />
     <ClInclude Include="..\..\..\include\node2\CompText.h" />
@@ -26,6 +27,7 @@
     <ClCompile Include="..\..\..\source\CompBoundingBox.cpp" />
     <ClCompile Include="..\..\..\source\CompColorCommon.cpp" />
     <ClCompile Include="..\..\..\source\CompColorMap.cpp" />
+    <ClCompile Include="..\..\..\source\CompSprite2.cpp" />
     <ClCompile Include="..\..\..\source\CompImage.cpp" />
     <ClCompile Include="..\..\..\source\ComponentFactory.cpp" />
     <ClCompile Include="..\..\..\source\CompText.cpp" />

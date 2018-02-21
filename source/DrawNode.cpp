@@ -4,9 +4,11 @@
 #include "node2/CompColorCommon.h"
 #include "node2/CompColorMap.h"
 #include "node2/CompText.h"
+#include "node2/CompSprite2.h"
 
 #include <node0/SceneNode.h>
 #include <painting2/RenderSystem.h>
+#include <sprite2/DrawNode.h>
 
 namespace n2
 {
@@ -41,6 +43,12 @@ void DrawNode::Draw(const n0::SceneNodePtr& node, const N2_MAT& mt)
 		auto& ctext = node->GetComponent<CompText>();
 		auto& text = ctext.GetText();
 		pt2::RenderSystem::DrawText(text, mt_child);
+	}
+	if (node->HasComponent<CompSprite2>())
+	{
+		auto& csprite2 = node->GetComponent<CompSprite2>();
+		auto& sym = csprite2.GetSymbol();
+		s2::DrawNode::Draw(*sym, s2::RenderParams(), mt_child);
 	}
 	
 	auto& children = node->GetAllChildren();

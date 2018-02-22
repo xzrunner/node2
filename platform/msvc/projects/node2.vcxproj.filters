@@ -50,6 +50,9 @@
     <ClInclude Include="..\..\..\include\node2\CompSprite2.h">
       <Filter>components\node</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\include\node2\CompMask.h">
+      <Filter>components\node</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\source\ComponentFactory.cpp">
@@ -77,6 +80,9 @@
       <Filter>components\node</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\source\CompSprite2.cpp">
+      <Filter>components\node</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\CompMask.cpp">
       <Filter>components\node</Filter>
     </ClCompile>
   </ItemGroup>

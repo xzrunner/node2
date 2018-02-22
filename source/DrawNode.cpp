@@ -4,6 +4,7 @@
 #include "node2/CompColorCommon.h"
 #include "node2/CompColorMap.h"
 #include "node2/CompText.h"
+#include "node2/CompMask.h"
 #include "node2/CompSprite2.h"
 
 #include <node0/SceneNode.h>
@@ -44,6 +45,12 @@ void DrawNode::Draw(const n0::SceneNodePtr& node, const N2_MAT& mt)
 		auto& text = ctext.GetText();
 		pt2::RenderSystem::DrawText(text, mt_child);
 	}
+	if (node->HasComponent<CompMask>())
+	{
+		auto& cmask = node->GetComponent<CompMask>();
+//		pt2::RenderSystem::DrawText
+	}
+
 	if (node->HasComponent<CompSprite2>())
 	{
 		auto& csprite2 = node->GetComponent<CompSprite2>();

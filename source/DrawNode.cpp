@@ -6,19 +6,68 @@
 #include "node2/CompText.h"
 #include "node2/CompMask.h"
 #include "node2/CompSprite2.h"
+#include "node2/CompBoundingBox.h"
 
 #include <node0/SceneNode.h>
 #include <painting2/RenderSystem.h>
 #include <painting2/DrawMask.h>
 #include <sprite2/DrawNode.h>
 
+namespace
+{
+
+class DrawMask : public pt2::DrawMask<n0::SceneNodePtr, sm::Matrix2D>
+{
+public:
+	DrawMask(const n0::SceneNodePtr& base, const n0::SceneNodePtr& mask, const sm::Matrix2D& mt)
+		: pt2::DrawMask<n0::SceneNodePtr, sm::Matrix2D>(base, mask, mt) {}
+
+	virtual pt2::RenderReturn Draw(cooking::DisplayList* dlist) const override
+	{
+		if (!m_base || !m_mask) {
+			return pt2::RENDER_NO_DATA;
+		}
+		return this->DrawImpl(dlist);
+	}
+
+protected:
+	virtual pt2::RenderReturn DrawBaseNode(const n0::SceneNodePtr& node, const sm::Matrix2D& mt) const override
+	{
+		return n2::DrawNode::Draw(node, mt);
+	}
+	virtual pt2::RenderReturn DrawMaskNode(const n0::SceneNodePtr& node, const sm::Matrix2D& mt) const override
+	{
+		return n2::DrawNode::Draw(node, mt);
+	}
+
+	virtual sm::rect GetBounding(const n0::SceneNodePtr& node) const override
+	{
+		auto& bb = node->GetComponent<n2::CompBoundingBox>();
+		return bb.GetSize();
+	}
+
+	const sm::Matrix2D& GetMat(const sm::Matrix2D& mt) const override
+	{
+		return mt;
+	}
+
+}; // DrawMask
+
+}
+
 namespace n2
 {
 
-void DrawNode::Draw(const n0::SceneNodePtr& node, const N2_MAT& mt)
+pt2::RenderReturn DrawNode::Draw(const n0::SceneNodePtr& node, const N2_MAT& mt)
 {
-	auto& ctrans = node->GetComponent<CompTransform>();
-	auto mt_child = ctrans.GetTrans().GetMatrix() * mt;
+	pt2::RenderReturn ret = pt2::RENDER_OK;
+
+	auto mt_child = mt;
+	if (node->HasComponent<CompTransform>())
+	{
+		auto& ctrans = node->GetComponent<CompTransform>();
+		mt_child = ctrans.GetTrans().GetMatrix() * mt;
+	}
 
 	if (node->HasComponent<CompColorCommon>())
 	{
@@ -49,12 +98,8 @@ void DrawNode::Draw(const n0::SceneNodePtr& node, const N2_MAT& mt)
 	if (node->HasComponent<CompMask>())
 	{
 		auto& cmask = node->GetComponent<CompMask>();
-		pt2::DrawMask::Draw(cmask.GetBaseNode(), cmask.GetMaskNode(), sm::Matrix2D(), 
-			[&](const n0::SceneNodePtr& node, const sm::Matrix2D& mat)
-			{
-				Draw(node, mat);
-			}
-		);
+		DrawMask draw(cmask.GetBaseNode(), cmask.GetMaskNode(), sm::Matrix2D());
+		ret |= draw.Draw(nullptr);
 	}
 
 	if (node->HasComponent<CompSprite2>())
@@ -68,6 +113,8 @@ void DrawNode::Draw(const n0::SceneNodePtr& node, const N2_MAT& mt)
 	for (auto& child : children) {
 		Draw(child, mt_child);
 	}
+
+	return ret;
 }
 
 }

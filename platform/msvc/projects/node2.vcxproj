@@ -22,6 +22,7 @@
     <ClInclude Include="..\..\..\include\node2\CompTransform.h" />
     <ClInclude Include="..\..\..\include\node2\config.h" />
     <ClInclude Include="..\..\..\include\node2\DrawNode.h" />
+    <ClInclude Include="..\..\..\include\node2\NodeHelper.h" />
     <ClInclude Include="..\..\..\include\node2\predef.h" />
   </ItemGroup>
   <ItemGroup>
@@ -35,6 +36,7 @@
     <ClCompile Include="..\..\..\source\CompText.cpp" />
     <ClCompile Include="..\..\..\source\CompTransform.cpp" />
     <ClCompile Include="..\..\..\source\DrawNode.cpp" />
+    <ClCompile Include="..\..\..\source\NodeHelper.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectName>3.node2</ProjectName>

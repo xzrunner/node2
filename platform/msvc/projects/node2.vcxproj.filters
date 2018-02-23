@@ -53,6 +53,9 @@
     <ClInclude Include="..\..\..\include\node2\CompMask.h">
       <Filter>components\node</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\include\node2\NodeHelper.h">
+      <Filter>system</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\source\ComponentFactory.cpp">
@@ -84,6 +87,9 @@
     </ClCompile>
     <ClCompile Include="..\..\..\source\CompMask.cpp">
       <Filter>components\node</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\NodeHelper.cpp">
+      <Filter>system</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

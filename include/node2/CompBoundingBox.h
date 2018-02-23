@@ -25,6 +25,7 @@ public:
 	virtual void LoadFromJson(const rapidjson::Value& val) override;
 
 	void SetSize(const sm::rect& size);
+	const sm::rect& GetSize() const { return m_size; }
 	
 	void Build(const pt2::SRT& srt);
 

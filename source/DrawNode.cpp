@@ -9,6 +9,7 @@
 
 #include <node0/SceneNode.h>
 #include <painting2/RenderSystem.h>
+#include <painting2/DrawMask.h>
 #include <sprite2/DrawNode.h>
 
 namespace n2
@@ -48,7 +49,12 @@ void DrawNode::Draw(const n0::SceneNodePtr& node, const N2_MAT& mt)
 	if (node->HasComponent<CompMask>())
 	{
 		auto& cmask = node->GetComponent<CompMask>();
-//		pt2::RenderSystem::DrawText
+		pt2::DrawMask::Draw(cmask.GetBaseNode(), cmask.GetMaskNode(), sm::Matrix2D(), 
+			[&](const n0::SceneNodePtr& node, const sm::Matrix2D& mat)
+			{
+				Draw(node, mat);
+			}
+		);
 	}
 
 	if (node->HasComponent<CompSprite2>())

@@ -15,6 +15,7 @@
     <ClInclude Include="..\..\..\include\node2\CompColorCommon.h" />
     <ClInclude Include="..\..\..\include\node2\CompColorMap.h" />
     <ClInclude Include="..\..\..\include\node2\CompMask.h" />
+    <ClInclude Include="..\..\..\include\node2\CompMesh.h" />
     <ClInclude Include="..\..\..\include\node2\CompSprite2.h" />
     <ClInclude Include="..\..\..\include\node2\CompImage.h" />
     <ClInclude Include="..\..\..\include\node2\ComponentFactory.h" />
@@ -30,6 +31,7 @@
     <ClCompile Include="..\..\..\source\CompColorCommon.cpp" />
     <ClCompile Include="..\..\..\source\CompColorMap.cpp" />
     <ClCompile Include="..\..\..\source\CompMask.cpp" />
+    <ClCompile Include="..\..\..\source\CompMesh.cpp" />
     <ClCompile Include="..\..\..\source\CompSprite2.cpp" />
     <ClCompile Include="..\..\..\source\CompImage.cpp" />
     <ClCompile Include="..\..\..\source\ComponentFactory.cpp" />
@@ -81,7 +83,7 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <Optimization>Disabled</Optimization>
-      <AdditionalIncludeDirectories>..\..\..\include;..\..\..\..\sm\src\sm;..\..\..\..\cu\src;..\..\..\..\rapidvg\src\rapidvg;..\..\..\..\node0\include;..\..\..\..\painting2\include;..\..\..\..\guard\include;..\..\..\..\stat\include;..\..\..\..\sprite2\include;..\..\..\..\memmgr\include;..\..\..\..\unirender\include;..\..\..\..\shaderlab\include;..\..\..\..\external\assimp\include;..\..\..\..\external\boost\include;..\..\..\..\external\rapidjson\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\..\include;..\..\..\..\sm\src\sm;..\..\..\..\cu\src;..\..\..\..\rapidvg\src\rapidvg;..\..\..\..\rigging\src\rigging;..\..\..\..\node0\include;..\..\..\..\painting2\include;..\..\..\..\guard\include;..\..\..\..\stat\include;..\..\..\..\sprite2\include;..\..\..\..\memmgr\include;..\..\..\..\polymesh\include;..\..\..\..\unirender\include;..\..\..\..\shaderlab\include;..\..\..\..\external\assimp\include;..\..\..\..\external\boost\include;..\..\..\..\external\rapidjson\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;_CRT_SECURE_NO_WARNINGS;__STDC_LIMIT_MACROS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MinimalRebuild>true</MinimalRebuild>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -95,7 +97,7 @@
     <ClCompile>
       <Optimization>MaxSpeed</Optimization>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <AdditionalIncludeDirectories>..\..\..\include;..\..\..\..\sm\src\sm;..\..\..\..\cu\src;..\..\..\..\rapidvg\src\rapidvg;..\..\..\..\node0\include;..\..\..\..\painting2\include;..\..\..\..\guard\include;..\..\..\..\stat\include;..\..\..\..\sprite2\include;..\..\..\..\memmgr\include;..\..\..\..\unirender\include;..\..\..\..\shaderlab\include;..\..\..\..\external\assimp\include;..\..\..\..\external\boost\include;..\..\..\..\external\rapidjson\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\..\include;..\..\..\..\sm\src\sm;..\..\..\..\cu\src;..\..\..\..\rapidvg\src\rapidvg;..\..\..\..\rigging\src\rigging;..\..\..\..\node0\include;..\..\..\..\painting2\include;..\..\..\..\guard\include;..\..\..\..\stat\include;..\..\..\..\sprite2\include;..\..\..\..\memmgr\include;..\..\..\..\polymesh\include;..\..\..\..\unirender\include;..\..\..\..\shaderlab\include;..\..\..\..\external\assimp\include;..\..\..\..\external\boost\include;..\..\..\..\external\rapidjson\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>WIN32;NDEBUG;_LIB;_CRT_SECURE_NO_WARNINGS;__STDC_LIMIT_MACROS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <FunctionLevelLinking>true</FunctionLevelLinking>

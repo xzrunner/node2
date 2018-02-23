@@ -56,6 +56,9 @@
     <ClInclude Include="..\..\..\include\node2\NodeHelper.h">
       <Filter>system</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\include\node2\CompMesh.h">
+      <Filter>components\node</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\source\ComponentFactory.cpp">
@@ -90,6 +93,9 @@
     </ClCompile>
     <ClCompile Include="..\..\..\source\NodeHelper.cpp">
       <Filter>system</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\CompMesh.cpp">
+      <Filter>components\node</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

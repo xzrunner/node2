@@ -1,4 +1,4 @@
-#include "node2/DrawNode.h"
+#include "node2/RenderSystem.h"
 #include "node2/CompTransform.h"
 #include "node2/CompImage.h"
 #include "node2/CompColorCommon.h"
@@ -33,11 +33,11 @@ public:
 protected:
 	virtual pt2::RenderReturn DrawBaseNode(const n0::SceneNodePtr& node, const sm::Matrix2D& mt) const override
 	{
-		return n2::DrawNode::Draw(node, mt);
+		return n2::RenderSystem::Draw(node, mt);
 	}
 	virtual pt2::RenderReturn DrawMaskNode(const n0::SceneNodePtr& node, const sm::Matrix2D& mt) const override
 	{
-		return n2::DrawNode::Draw(node, mt);
+		return n2::RenderSystem::Draw(node, mt);
 	}
 
 	virtual sm::rect GetBounding(const n0::SceneNodePtr& node) const override
@@ -58,7 +58,7 @@ protected:
 namespace n2
 {
 
-pt2::RenderReturn DrawNode::Draw(const n0::SceneNodePtr& node, const N2_MAT& mt)
+pt2::RenderReturn RenderSystem::Draw(const n0::SceneNodePtr& node, const N2_MAT& mt)
 {
 	pt2::RenderReturn ret = pt2::RENDER_OK;
 

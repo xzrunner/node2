@@ -18,11 +18,10 @@
     <ClInclude Include="..\..\..\include\node2\CompMesh.h" />
     <ClInclude Include="..\..\..\include\node2\CompSprite2.h" />
     <ClInclude Include="..\..\..\include\node2\CompImage.h" />
-    <ClInclude Include="..\..\..\include\node2\ComponentFactory.h" />
     <ClInclude Include="..\..\..\include\node2\CompText.h" />
     <ClInclude Include="..\..\..\include\node2\CompTransform.h" />
     <ClInclude Include="..\..\..\include\node2\config.h" />
-    <ClInclude Include="..\..\..\include\node2\DrawNode.h" />
+    <ClInclude Include="..\..\..\include\node2\RenderSystem.h" />
     <ClInclude Include="..\..\..\include\node2\NodeHelper.h" />
     <ClInclude Include="..\..\..\include\node2\predef.h" />
   </ItemGroup>
@@ -34,10 +33,9 @@
     <ClCompile Include="..\..\..\source\CompMesh.cpp" />
     <ClCompile Include="..\..\..\source\CompSprite2.cpp" />
     <ClCompile Include="..\..\..\source\CompImage.cpp" />
-    <ClCompile Include="..\..\..\source\ComponentFactory.cpp" />
     <ClCompile Include="..\..\..\source\CompText.cpp" />
     <ClCompile Include="..\..\..\source\CompTransform.cpp" />
-    <ClCompile Include="..\..\..\source\DrawNode.cpp" />
+    <ClCompile Include="..\..\..\source\RenderSystem.cpp" />
     <ClCompile Include="..\..\..\source\NodeHelper.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">

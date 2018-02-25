@@ -10,11 +10,11 @@
 namespace n2
 {
 
-class DrawNode
+class RenderSystem
 {
 public:
 	static pt2::RenderReturn Draw(const n0::SceneNodePtr& node, const N2_MAT& mt);
 
-}; // DrawNode
+}; // RenderSystem
 
 }

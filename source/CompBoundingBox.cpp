@@ -9,15 +9,6 @@ namespace n2
 
 const char* const CompBoundingBox::TYPE_NAME = "bounding_box";
 
-bool CompBoundingBox::StoreToJson(rapidjson::Value& val, rapidjson::MemoryPoolAllocator<>& alloc) const
-{
-	return true;
-}
-
-void CompBoundingBox::LoadFromJson(const rapidjson::Value& val)
-{
-}
-
 void CompBoundingBox::SetSize(const sm::rect& size)
 {
 	m_size = size;

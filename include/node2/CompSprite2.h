@@ -13,10 +13,6 @@ class CompSprite2 : public n0::NodeComponent
 public:
 	virtual const char* Type() const override { return TYPE_NAME; }
 
-	virtual bool StoreToJson(rapidjson::Value& val,
-		rapidjson::MemoryPoolAllocator<>& alloc) const override;
-	virtual void LoadFromJson(const rapidjson::Value& val) override;
-
 	void SetFilepath(const std::string& filepath) { m_filepath = filepath; }
 	const std::string& GetFilepath() const { return m_filepath; }
 

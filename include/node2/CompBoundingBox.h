@@ -15,14 +15,11 @@ namespace n2
 class CompBoundingBox : public n0::NodeComponent
 {
 public:
+	CompBoundingBox() {}
 	CompBoundingBox(const sm::rect& size) : m_size(size) {}
 	virtual ~CompBoundingBox() = default;
 
 	virtual const char* Type() const override { return TYPE_NAME; }
-
-	virtual bool StoreToJson(rapidjson::Value& val,
-		rapidjson::MemoryPoolAllocator<>& alloc) const override;
-	virtual void LoadFromJson(const rapidjson::Value& val) override;
 
 	void SetSize(const sm::rect& size);
 	const sm::rect& GetSize() const { return m_size; }

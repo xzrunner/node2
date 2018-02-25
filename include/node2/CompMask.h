@@ -11,10 +11,6 @@ class CompMask : public n0::NodeComponent
 public:
 	virtual const char* Type() const override { return TYPE_NAME; }
 
-	virtual bool StoreToJson(rapidjson::Value& val,
-		rapidjson::MemoryPoolAllocator<>& alloc) const override;
-	virtual void LoadFromJson(const rapidjson::Value& val) override;
-
 	void SetBaseNode(const n0::SceneNodePtr& base) { m_base = base; }
 	void SetMaskNode(const n0::SceneNodePtr& mask) { m_mask = mask; }
 	const n0::SceneNodePtr& GetBaseNode() const { return m_base; }

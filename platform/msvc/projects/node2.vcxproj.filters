@@ -7,9 +7,6 @@
     <Filter Include="system">
       <UniqueIdentifier>{912ad0e5-6291-4236-b242-d5f8380dbc7b}</UniqueIdentifier>
     </Filter>
-    <Filter Include="render">
-      <UniqueIdentifier>{27c0fe33-3dfe-42f6-85ff-7d4564535a9d}</UniqueIdentifier>
-    </Filter>
     <Filter Include="components\color">
       <UniqueIdentifier>{bde14b73-e163-4a00-9438-aa8c926b1438}</UniqueIdentifier>
     </Filter>
@@ -54,7 +51,7 @@
       <Filter>components\mesh</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\include\node2\RenderSystem.h">
-      <Filter>render</Filter>
+      <Filter>system</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -89,7 +86,7 @@
       <Filter>components\mesh</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\source\RenderSystem.cpp">
-      <Filter>render</Filter>
+      <Filter>system</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

@@ -53,6 +53,9 @@
     <ClInclude Include="..\..\..\include\node2\RenderSystem.h">
       <Filter>system</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\include\node2\CompScale9.h">
+      <Filter>components\mesh</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\source\CompColorCommon.cpp">
@@ -87,6 +90,9 @@
     </ClCompile>
     <ClCompile Include="..\..\..\source\RenderSystem.cpp">
       <Filter>system</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\CompScale9.cpp">
+      <Filter>components\mesh</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

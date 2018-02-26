@@ -33,11 +33,11 @@ public:
 protected:
 	virtual pt2::RenderReturn DrawBaseNode(const n0::SceneNodePtr& node, const sm::Matrix2D& mt) const override
 	{
-		return n2::RenderSystem::Draw(node, mt);
+		return n2::RenderSystem::Draw(node, sm::Matrix2D());
 	}
 	virtual pt2::RenderReturn DrawMaskNode(const n0::SceneNodePtr& node, const sm::Matrix2D& mt) const override
 	{
-		return n2::RenderSystem::Draw(node, mt);
+		return n2::RenderSystem::Draw(node, sm::Matrix2D());
 	}
 
 	virtual sm::rect GetBounding(const n0::SceneNodePtr& node) const override
@@ -98,7 +98,7 @@ pt2::RenderReturn RenderSystem::Draw(const n0::SceneNodePtr& node, const N2_MAT&
 	if (node->HasComponent<CompMask>())
 	{
 		auto& cmask = node->GetComponent<CompMask>();
-		DrawMask draw(cmask.GetBaseNode(), cmask.GetMaskNode(), sm::Matrix2D());
+		DrawMask draw(cmask.GetBaseNode(), cmask.GetMaskNode(), mt_child);
 		ret |= draw.Draw(nullptr);
 	}
 

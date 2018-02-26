@@ -3,6 +3,6 @@
 namespace n2
 {
 
-const char* const CompImage::TYPE_NAME = "image";
+const char* const CompImage::TYPE_NAME = "n2_image";
 
 }

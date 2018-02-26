@@ -7,7 +7,7 @@
 namespace n2
 {
 
-const char* const CompBoundingBox::TYPE_NAME = "bounding_box";
+const char* const CompBoundingBox::TYPE_NAME = "n2_bounding_box";
 
 void CompBoundingBox::SetSize(const sm::rect& size)
 {

@@ -14,6 +14,8 @@ public:
 	const pt2::Text& GetText() const { return m_text; }
 	pt2::Text& GetText() { return m_text; }
 
+	void SetText(const pt2::Text& text) { m_text = text; }
+
 	static const char* const TYPE_NAME;
 
 private:

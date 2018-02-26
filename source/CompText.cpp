@@ -3,6 +3,6 @@
 namespace n2
 {
 
-const char* const CompText::TYPE_NAME = "text";
+const char* const CompText::TYPE_NAME = "n2_text";
 
 }

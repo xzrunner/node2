@@ -3,6 +3,6 @@
 namespace n2
 {
 
-const char* const CompColorCommon::TYPE_NAME = "color_common";
+const char* const CompColorCommon::TYPE_NAME = "n2_color_common";
 
 }

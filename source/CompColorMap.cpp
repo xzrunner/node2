@@ -3,6 +3,6 @@
 namespace n2
 {
 
-const char* const CompColorMap::TYPE_NAME = "color_map";
+const char* const CompColorMap::TYPE_NAME = "n2_color_map";
 
 }

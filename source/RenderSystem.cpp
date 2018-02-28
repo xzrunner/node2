@@ -60,6 +60,10 @@ namespace n2
 
 pt2::RenderReturn RenderSystem::Draw(const n0::SceneNodePtr& node, const N2_MAT& mt)
 {
+	if (!node) {
+		return pt2::RENDER_NO_DATA;
+	}
+
 	pt2::RenderReturn ret = pt2::RENDER_OK;
 
 	auto mt_child = mt;

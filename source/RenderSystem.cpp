@@ -9,6 +9,7 @@
 #include "node2/CompBoundingBox.h"
 
 #include <node0/SceneNode.h>
+#include <node0/CompComplex.h>
 #include <painting2/RenderSystem.h>
 #include <painting2/DrawMask.h>
 #include <sprite2/DrawNode.h>
@@ -113,9 +114,13 @@ pt2::RenderReturn RenderSystem::Draw(const n0::SceneNodePtr& node, const N2_MAT&
 		s2::DrawNode::Draw(*sym, s2::RenderParams(), mt_child);
 	}
 	
-	auto& children = node->GetAllChildren();
-	for (auto& child : children) {
-		Draw(child, mt_child);
+	if (node->HasComponent<n0::CompComplex>())
+	{
+		auto& ccomplex = node->GetComponent<n0::CompComplex>();
+		auto& children = ccomplex.GetAllChildren();
+		for (auto& child : children) {
+			Draw(child, mt_child);
+		}
 	}
 
 	return ret;

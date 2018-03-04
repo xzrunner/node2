@@ -65,77 +65,6 @@ void CompScale9::SetHeight(float height)
 	}
 }
 
-void CompScale9::Build(Scale9Type type, float w, float h, n0::SceneNodePtr grids[9],
-	                   int sz_left, int sz_right, int sz_top, int sz_down)
-{
-	m_type = type;
-	m_width = m_height = 0;
-	for (int i = 0; i < 9; ++i) 
-	{
-		auto& src = grids[i];
-		if (src) {
-			m_grids[i] = src->Clone();
-		} else {
-			m_grids[i] = nullptr;
-		}
-	}
-	m_sz_left  = sz_left;
-	m_sz_right = sz_right;
-	m_sz_top   = sz_top;
-	m_sz_down  = sz_down;
-	SetSize(static_cast<float>(w), static_cast<float>(h));
-}
-
-CompScale9::Scale9Type CompScale9::CheckType(const n0::SceneNodePtr grids[9])
-{
-	Scale9Type type = S9_NULL;
-	do {
-		// S9_9GRID
-		type = S9_9GRID;
-		for (int i = 0; i < 9; ++i) {
-			if (!grids[i]) {
-				type = S9_NULL;
-				break;
-			}
-		}
-		if (type != S9_NULL) break;
-
-		// S9_9GRID_HOLLOW
-		type = S9_9GRID_HOLLOW;
-		for (int i = 0; i < 9; ++i) {
-			if (i == 4) {
-				continue;
-			}
-			if (!grids[i]) {
-				type = S9_NULL;
-				break;
-			}
-		}
-		if (type != S9_NULL) break;
-
-		// S9_6GRID_UPPER
-		type = S9_6GRID_UPPER;
-		for (int i = 3; i < 9; ++i) {
-			if (!grids[i]) {
-				type = S9_NULL;
-				break;
-			}
-		}
-		if (type != S9_NULL) break;
-
-		// S9_3GRID_HORI
-		if (grids[3] && grids[4] && grids[5]) {
-			type = S9_3GRID_HORI;			
-		}
-
-		// S9_3GRID_VERT
-		if (grids[1] && grids[4] && grids[7]) {
-			type = S9_3GRID_VERT;
-		}
-	} while (false);
-	return type;
-}
-
 void CompScale9::SetSize(float width, float height)
 {
 	if (m_width == width && m_height == height) {
@@ -232,6 +161,77 @@ void CompScale9::SetSize(float width, float height)
 	default:
 		break;
 	}
+}
+
+void CompScale9::Build(Scale9Type type, float w, float h, n0::SceneNodePtr grids[9],
+	                   int sz_left, int sz_right, int sz_top, int sz_down)
+{
+	m_type = type;
+	m_width = m_height = 0;
+	for (int i = 0; i < 9; ++i) 
+	{
+		auto& src = grids[i];
+		if (src) {
+			m_grids[i] = src->Clone();
+		} else {
+			m_grids[i] = nullptr;
+		}
+	}
+	m_sz_left  = sz_left;
+	m_sz_right = sz_right;
+	m_sz_top   = sz_top;
+	m_sz_down  = sz_down;
+	SetSize(static_cast<float>(w), static_cast<float>(h));
+}
+
+CompScale9::Scale9Type CompScale9::CheckType(const n0::SceneNodePtr grids[9])
+{
+	Scale9Type type = S9_NULL;
+	do {
+		// S9_9GRID
+		type = S9_9GRID;
+		for (int i = 0; i < 9; ++i) {
+			if (!grids[i]) {
+				type = S9_NULL;
+				break;
+			}
+		}
+		if (type != S9_NULL) break;
+
+		// S9_9GRID_HOLLOW
+		type = S9_9GRID_HOLLOW;
+		for (int i = 0; i < 9; ++i) {
+			if (i == 4) {
+				continue;
+			}
+			if (!grids[i]) {
+				type = S9_NULL;
+				break;
+			}
+		}
+		if (type != S9_NULL) break;
+
+		// S9_6GRID_UPPER
+		type = S9_6GRID_UPPER;
+		for (int i = 3; i < 9; ++i) {
+			if (!grids[i]) {
+				type = S9_NULL;
+				break;
+			}
+		}
+		if (type != S9_NULL) break;
+
+		// S9_3GRID_HORI
+		if (grids[3] && grids[4] && grids[5]) {
+			type = S9_3GRID_HORI;			
+		}
+
+		// S9_3GRID_VERT
+		if (grids[1] && grids[4] && grids[7]) {
+			type = S9_3GRID_VERT;
+		}
+	} while (false);
+	return type;
 }
 
 void CompScale9::ResizeNode(Scale9Idx idx, const sm::vec2& center, float dst_w, 

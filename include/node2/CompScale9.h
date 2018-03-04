@@ -24,17 +24,17 @@ public:
 
 	enum Scale9Idx
 	{
-		S9_DOWN_LEFT = 0,
+		S9_DOWN_LEFT   = 0,
 		S9_DOWN_CENTER = 1,
-		S9_DOWN_RIGHT = 2,
+		S9_DOWN_RIGHT  = 2,
 
-		S9_MID_LEFT = 3,
-		S9_MID_CENTER = 4,
-		S9_MID_RIGHT = 5,
+		S9_MID_LEFT    = 3,
+		S9_MID_CENTER  = 4,
+		S9_MID_RIGHT   = 5,
 
-		S9_TOP_LEFT = 6,
-		S9_TOP_CENTER = 7,
-		S9_TOP_RIGHT = 8,
+		S9_TOP_LEFT    = 6,
+		S9_TOP_CENTER  = 7,
+		S9_TOP_RIGHT   = 8,
 	};
 
 public:
@@ -47,8 +47,10 @@ public:
 
 	float GetWidth() const { return m_width; }
 	float GetHeight() const { return m_height; }
-	void  SetWidth(float width);
-	void  SetHeight(float height);
+
+	void SetWidth(float width);
+	void SetHeight(float height);
+	void SetSize(float width, float height);
 
 	void Build(Scale9Type type, float w, float h, n0::SceneNodePtr grids[9],
 		int sz_left, int sz_right, int sz_top, int sz_down);
@@ -59,8 +61,6 @@ public:
 	static const char* const TYPE_NAME;
 
 private:
-	void SetSize(float width, float height);
-
 	void ResizeNode(Scale9Idx idx, const sm::vec2& center,
 		float dst_w, float dst_h, bool no_scale_w, bool no_scale_h);
 

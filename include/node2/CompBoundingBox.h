@@ -17,7 +17,6 @@ class CompBoundingBox : public n0::NodeComponent
 public:
 	CompBoundingBox() {}
 	CompBoundingBox(const sm::rect& size) : m_size(size) {}
-	virtual ~CompBoundingBox() = default;
 
 	virtual const char* Type() const override { return TYPE_NAME; }
 	virtual std::unique_ptr<n0::NodeComponent> Clone() const override;

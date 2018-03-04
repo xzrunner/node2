@@ -13,7 +13,7 @@ std::unique_ptr<n0::NodeComponent> CompBoundingBox::Clone() const
 {
 	auto comp = std::make_unique<CompBoundingBox>();
 	comp->m_size = m_size;
-	comp->m_bounding = std::unique_ptr<pt2::BoundingBox>(m_bounding->Clone());
+	comp->m_bounding = m_bounding->Clone2();
 	return comp;
 }
 

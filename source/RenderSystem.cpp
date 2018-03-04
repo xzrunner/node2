@@ -7,6 +7,7 @@
 #include "node2/CompMask.h"
 #include "node2/CompSprite2.h"
 #include "node2/CompBoundingBox.h"
+#include "node2/CompScale9.h"
 
 #include <node0/SceneNode.h>
 #include <node0/CompComplex.h>
@@ -105,6 +106,14 @@ pt2::RenderReturn RenderSystem::Draw(const n0::SceneNodePtr& node, const N2_MAT&
 		auto& cmask = node->GetComponent<CompMask>();
 		DrawMask draw(cmask.GetBaseNode(), cmask.GetMaskNode(), mt_child);
 		ret |= draw.Draw(nullptr);
+	}
+	if (node->HasComponent<CompScale9>())
+	{
+		auto& cscale9 = node->GetComponent<CompScale9>();
+		cscale9.Traverse([&](const n0::SceneNodePtr& node)->bool {
+			n2::RenderSystem::Draw(node, mt_child);
+			return true;
+		});
 	}
 
 	if (node->HasComponent<CompSprite2>())

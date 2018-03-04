@@ -9,6 +9,14 @@ namespace n2
 
 const char* const CompBoundingBox::TYPE_NAME = "n2_bounding_box";
 
+std::unique_ptr<n0::NodeComponent> CompBoundingBox::Clone() const
+{
+	auto comp = std::make_unique<CompBoundingBox>();
+	comp->m_size = m_size;
+	comp->m_bounding = std::unique_ptr<pt2::BoundingBox>(m_bounding->Clone());
+	return comp;
+}
+
 void CompBoundingBox::SetSize(const sm::rect& size)
 {
 	m_size = size;

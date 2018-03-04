@@ -10,6 +10,7 @@ class CompColorMap : public n0::NodeComponent
 {
 public:
 	virtual const char* Type() const override { return TYPE_NAME; }
+	virtual std::unique_ptr<n0::NodeComponent> Clone() const override;
 
 	const pt2::RenderColorMap& GetColor() const { return m_col; }
 	pt2::RenderColorMap& GetColor() { return m_col; }

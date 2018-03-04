@@ -20,6 +20,7 @@ public:
 	virtual ~CompBoundingBox() = default;
 
 	virtual const char* Type() const override { return TYPE_NAME; }
+	virtual std::unique_ptr<n0::NodeComponent> Clone() const override;
 
 	void SetSize(const sm::rect& size);
 	const sm::rect& GetSize() const { return m_size; }

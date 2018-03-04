@@ -10,6 +10,7 @@ class CompText : public n0::NodeComponent
 {
 public:
 	virtual const char* Type() const override { return TYPE_NAME; }
+	virtual std::unique_ptr<n0::NodeComponent> Clone() const override;
 
 	const pt2::Text& GetText() const { return m_text; }
 	pt2::Text& GetText() { return m_text; }

@@ -12,6 +12,8 @@ class CompSprite2 : public n0::NodeComponent
 {
 public:
 	virtual const char* Type() const override { return TYPE_NAME; }
+	virtual n0::ComponentID TypeID() const override { 
+		return n0::GetComponentTypeID<CompSprite2>(); }
 	virtual std::unique_ptr<n0::NodeComponent> Clone() const override;
 
 	void SetFilepath(const std::string& filepath) { m_filepath = filepath; }

@@ -12,6 +12,8 @@ class CompMask : public n0::NodeComponent
 {
 public:
 	virtual const char* Type() const override { return TYPE_NAME; }
+	virtual n0::ComponentID TypeID() const override { 
+		return n0::GetComponentTypeID<CompMask>();
 	virtual std::unique_ptr<n0::NodeComponent> Clone() const override;
 
 	void Traverse(std::function<bool(const n0::SceneNodePtr&)> func) const;

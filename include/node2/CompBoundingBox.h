@@ -19,6 +19,8 @@ public:
 	CompBoundingBox(const sm::rect& size) : m_size(size) {}
 
 	virtual const char* Type() const override { return TYPE_NAME; }
+	virtual n0::ComponentID TypeID() const override { 
+		return n0::GetComponentTypeID<CompBoundingBox>(); }
 	virtual std::unique_ptr<n0::NodeComponent> Clone() const override;
 
 	void SetSize(const sm::rect& size);

@@ -12,6 +12,8 @@ class CompColorCommon : public n0::NodeComponent
 {
 public:
 	virtual const char* Type() const override { return TYPE_NAME; }
+	virtual n0::ComponentID TypeID() const override { 
+		return n0::GetComponentTypeID<CompColorCommon>(); }
 	virtual std::unique_ptr<n0::NodeComponent> Clone() const override;
 
 	const pt2::RenderColorCommon& GetColor() const { return m_col; }

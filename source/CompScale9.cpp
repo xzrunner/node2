@@ -19,28 +19,28 @@ CompScale9::CompScale9()
 	m_sz_left = m_sz_right = m_sz_top = m_sz_down = 0;
 }
 
-std::unique_ptr<n0::NodeComponent> CompScale9::Clone() const
-{
-	auto comp = std::make_unique<CompScale9>();
-
-	comp->m_type = m_type;
-
-	comp->m_width  = m_width;
-	comp->m_height = m_height;
-
-	for (int i = 0; i < 9; ++i) {
-		if (m_grids[i]) {
-			comp->m_grids[i] = m_grids[i]->Clone();
-		}
-	}
-
-	comp->m_sz_left  = m_sz_left;
-	comp->m_sz_right = m_sz_right;
-	comp->m_sz_top   = m_sz_top;
-	comp->m_sz_down  = m_sz_down;
-
-	return comp;
-}
+//std::unique_ptr<n0::NodeComponent> CompScale9::Clone() const
+//{
+//	auto comp = std::make_unique<CompScale9>();
+//
+//	comp->m_type = m_type;
+//
+//	comp->m_width  = m_width;
+//	comp->m_height = m_height;
+//
+//	for (int i = 0; i < 9; ++i) {
+//		if (m_grids[i]) {
+//			comp->m_grids[i] = m_grids[i]->Clone();
+//		}
+//	}
+//
+//	comp->m_sz_left  = m_sz_left;
+//	comp->m_sz_right = m_sz_right;
+//	comp->m_sz_top   = m_sz_top;
+//	comp->m_sz_down  = m_sz_down;
+//
+//	return comp;
+//}
 
 void CompScale9::Traverse(std::function<bool(const n0::SceneNodePtr&)> func) const
 {
@@ -246,12 +246,12 @@ void CompScale9::ResizeNode(Scale9Idx idx, const sm::vec2& center, float dst_w,
 	if (dst_w < 0) { dst_w = 1; }
 	if (dst_h < 0) { dst_h = 1; }
 
-	auto& ctrans = node->GetComponent<n2::CompTransform>();
+	auto& ctrans = node->GetUniqueComp<n2::CompTransform>();
 	auto& trans = ctrans.GetTrans();
 	trans.SetPosition(center);
 
 	float src_w, src_h;
-	auto& cbb = node->GetComponent<n2::CompBoundingBox>();
+	auto& cbb = node->GetUniqueComp<n2::CompBoundingBox>();
 	auto& cbb_sz = cbb.GetSize();
 	src_w = cbb_sz.Width();
 	src_h = cbb_sz.Height();
@@ -367,7 +367,7 @@ sm::vec2 CompScale9::GetChildSize(Scale9Idx idx) const
 	}
 
 	auto& node = m_grids[idx];
-	auto& cbb = node->GetComponent<n2::CompBoundingBox>();
+	auto& cbb = node->GetUniqueComp<n2::CompBoundingBox>();
 	auto& sz = cbb.GetSize();
 	return sm::vec2(sz.Width(), sz.Height());
 }

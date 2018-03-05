@@ -1,6 +1,6 @@
 #pragma once
 
-#include <node0/NodeComponent.h>
+#include <node0/CompAsset.h>
 #include <sprite2/Symbol.h>
 
 #include <memory>
@@ -8,13 +8,15 @@
 namespace n2
 {
 
-class CompSprite2 : public n0::NodeComponent
+class CompSprite2 : public n0::CompAsset
 {
 public:
 	virtual const char* Type() const override { return TYPE_NAME; }
-	virtual n0::ComponentID TypeID() const override { 
-		return n0::GetComponentTypeID<CompSprite2>(); }
-	virtual std::unique_ptr<n0::NodeComponent> Clone() const override;
+
+	virtual n0::AssetID AssetTypeID() const override {
+		return n0::GetAssetUniqueTypeID<CompSprite2>();
+	}
+	virtual void Traverse(std::function<bool(const n0::SceneNodePtr&)> func) const {}
 
 	void SetFilepath(const std::string& filepath) { m_filepath = filepath; }
 	const std::string& GetFilepath() const { return m_filepath; }

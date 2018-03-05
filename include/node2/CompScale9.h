@@ -1,7 +1,7 @@
 #pragma once
 
 #include <SM_Vector.h>
-#include <node0/NodeComponent.h>
+#include <node0/CompAsset.h>
 #include <node0/typedef.h>
 
 #include <functional>
@@ -9,7 +9,7 @@
 namespace n2
 {
 
-class CompScale9 : public n0::NodeComponent
+class CompScale9 : public n0::CompAsset
 {
 public:
 	enum Scale9Type
@@ -41,11 +41,11 @@ public:
 	CompScale9();
 
 	virtual const char* Type() const override { return TYPE_NAME; }
-	virtual n0::ComponentID TypeID() const override { 
-		return n0::GetComponentTypeID<CompScale9>(); }
-	virtual std::unique_ptr<n0::NodeComponent> Clone() const override;
 
-	void Traverse(std::function<bool(const n0::SceneNodePtr&)> func) const;
+	virtual n0::AssetID AssetTypeID() const override {
+		return n0::GetAssetUniqueTypeID<CompScale9>();
+	}
+	virtual void Traverse(std::function<bool(const n0::SceneNodePtr&)> func) const;
 
 	float GetWidth() const { return m_width; }
 	float GetHeight() const { return m_height; }

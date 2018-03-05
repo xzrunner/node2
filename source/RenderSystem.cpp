@@ -44,7 +44,7 @@ protected:
 
 	virtual sm::rect GetBounding(const n0::SceneNodePtr& node) const override
 	{
-		auto& bb = node->GetComponent<n2::CompBoundingBox>();
+		auto& bb = node->GetUniqueComp<n2::CompBoundingBox>();
 		return bb.GetSize();
 	}
 
@@ -69,63 +69,63 @@ pt2::RenderReturn RenderSystem::Draw(const n0::SceneNodePtr& node, const N2_MAT&
 	pt2::RenderReturn ret = pt2::RENDER_OK;
 
 	auto mt_child = mt;
-	if (node->HasComponent<CompTransform>())
+	if (node->HasUniqueComp<CompTransform>())
 	{
-		auto& ctrans = node->GetComponent<CompTransform>();
+		auto& ctrans = node->GetUniqueComp<CompTransform>();
 		mt_child = ctrans.GetTrans().GetMatrix() * mt;
 	}
 
-	if (node->HasComponent<CompColorCommon>())
+	if (node->HasUniqueComp<CompColorCommon>())
 	{
-		auto& ccol = node->GetComponent<CompColorCommon>();
+		auto& ccol = node->GetUniqueComp<CompColorCommon>();
 		pt2::RenderSystem::SetColor(ccol.GetColor());
 	}
-	if (node->HasComponent<CompColorMap>())
+	if (node->HasUniqueComp<CompColorMap>())
 	{
-		auto& ccol = node->GetComponent<CompColorMap>();
+		auto& ccol = node->GetUniqueComp<CompColorMap>();
 		pt2::RenderSystem::SetColorMap(ccol.GetColor());
 	}
 
-	if (node->HasComponent<CompImage>())
+	if (node->HasSharedComp<CompImage>())
 	{
-		auto& cimage = node->GetComponent<CompImage>();
+		auto& cimage = node->GetSharedComp<CompImage>();
 		auto& tex = cimage.GetTexture();
 		if (tex) {
 			auto sz = tex->GetSize();
 			pt2::RenderSystem::DrawTexture(*tex, sm::rect(sz.x, sz.y), mt_child);
 		}
 	}
-	if (node->HasComponent<CompText>())
+	if (node->HasSharedComp<CompText>())
 	{
-		auto& ctext = node->GetComponent<CompText>();
+		auto& ctext = node->GetSharedComp<CompText>();
 		auto& text = ctext.GetText();
 		pt2::RenderSystem::DrawText(text, mt_child);
 	}
-	if (node->HasComponent<CompMask>())
+	if (node->HasSharedComp<CompMask>())
 	{
-		auto& cmask = node->GetComponent<CompMask>();
+		auto& cmask = node->GetSharedComp<CompMask>();
 		DrawMask draw(cmask.GetBaseNode(), cmask.GetMaskNode(), mt_child);
 		ret |= draw.Draw(nullptr);
 	}
-	if (node->HasComponent<CompScale9>())
+	if (node->HasSharedComp<CompScale9>())
 	{
-		auto& cscale9 = node->GetComponent<CompScale9>();
+		auto& cscale9 = node->GetSharedComp<CompScale9>();
 		cscale9.Traverse([&](const n0::SceneNodePtr& node)->bool {
 			n2::RenderSystem::Draw(node, mt_child);
 			return true;
 		});
 	}
 
-	if (node->HasComponent<CompSprite2>())
+	if (node->HasSharedComp<CompSprite2>())
 	{
-		auto& csprite2 = node->GetComponent<CompSprite2>();
+		auto& csprite2 = node->GetSharedComp<CompSprite2>();
 		auto& sym = csprite2.GetSymbol();
 		s2::DrawNode::Draw(*sym, s2::RenderParams(), mt_child);
 	}
 	
-	if (node->HasComponent<n0::CompComplex>())
+	if (node->HasSharedComp<n0::CompComplex>())
 	{
-		auto& ccomplex = node->GetComponent<n0::CompComplex>();
+		auto& ccomplex = node->GetSharedComp<n0::CompComplex>();
 		auto& children = ccomplex.GetAllChildren();
 		for (auto& child : children) {
 			Draw(child, mt_child);

@@ -10,11 +10,11 @@
     <Filter Include="components\color">
       <UniqueIdentifier>{bde14b73-e163-4a00-9438-aa8c926b1438}</UniqueIdentifier>
     </Filter>
-    <Filter Include="components\mesh">
-      <UniqueIdentifier>{4f6644e8-1b8b-4b85-9b50-13a72a696951}</UniqueIdentifier>
-    </Filter>
     <Filter Include="components\geo">
       <UniqueIdentifier>{36f6ead0-a4b6-4658-8e34-5898bd1711bc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="components\asset">
+      <UniqueIdentifier>{4f6644e8-1b8b-4b85-9b50-13a72a696951}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -33,28 +33,28 @@
       <Filter>components\geo</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\include\node2\CompImage.h">
-      <Filter>components\mesh</Filter>
+      <Filter>components\asset</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\include\node2\CompText.h">
-      <Filter>components\mesh</Filter>
+      <Filter>components\asset</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\include\node2\CompSprite2.h">
-      <Filter>components\mesh</Filter>
+      <Filter>components\asset</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\include\node2\CompMask.h">
-      <Filter>components\mesh</Filter>
+      <Filter>components\asset</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\include\node2\NodeHelper.h">
       <Filter>system</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\include\node2\CompMesh.h">
-      <Filter>components\mesh</Filter>
+      <Filter>components\asset</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\include\node2\RenderSystem.h">
       <Filter>system</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\include\node2\CompScale9.h">
-      <Filter>components\mesh</Filter>
+      <Filter>components\asset</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -71,28 +71,28 @@
       <Filter>components\geo</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\source\CompImage.cpp">
-      <Filter>components\mesh</Filter>
+      <Filter>components\asset</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\source\CompText.cpp">
-      <Filter>components\mesh</Filter>
+      <Filter>components\asset</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\source\CompSprite2.cpp">
-      <Filter>components\mesh</Filter>
+      <Filter>components\asset</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\source\CompMask.cpp">
-      <Filter>components\mesh</Filter>
+      <Filter>components\asset</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\source\NodeHelper.cpp">
       <Filter>system</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\source\CompMesh.cpp">
-      <Filter>components\mesh</Filter>
+      <Filter>components\asset</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\source\RenderSystem.cpp">
       <Filter>system</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\source\CompScale9.cpp">
-      <Filter>components\mesh</Filter>
+      <Filter>components\asset</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

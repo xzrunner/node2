@@ -1,18 +1,20 @@
 #pragma once
 
-#include <node0/NodeComponent.h>
+#include <node0/CompAsset.h>
 #include <painting2/Text.h>
 
 namespace n2
 {
 
-class CompText : public n0::NodeComponent
+class CompText : public n0::CompAsset
 {
 public:
 	virtual const char* Type() const override { return TYPE_NAME; }
-	virtual n0::ComponentID TypeID() const override { 
-		return n0::GetComponentTypeID<CompText>(); }
-	virtual std::unique_ptr<n0::NodeComponent> Clone() const override;
+
+	virtual n0::AssetID AssetTypeID() const override {
+		return n0::GetAssetUniqueTypeID<CompText>();
+	}
+	virtual void Traverse(std::function<bool(const n0::SceneNodePtr&)> func) const {}
 
 	const pt2::Text& GetText() const { return m_text; }
 	pt2::Text& GetText() { return m_text; }

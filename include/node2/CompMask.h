@@ -1,6 +1,6 @@
 #pragma once
 
-#include <node0/NodeComponent.h>
+#include <node0/CompAsset.h>
 #include <node0/typedef.h>
 
 #include <functional>
@@ -8,16 +8,15 @@
 namespace n2
 {
 
-class CompMask : public n0::NodeComponent
+class CompMask : public n0::CompAsset
 {
 public:
 	virtual const char* Type() const override { return TYPE_NAME; }
-	virtual n0::ComponentID TypeID() const override {
-		return n0::GetComponentTypeID<CompMask>();
-	}
-	virtual std::unique_ptr<n0::NodeComponent> Clone() const override;
 
-	void Traverse(std::function<bool(const n0::SceneNodePtr&)> func) const;
+	virtual n0::AssetID AssetTypeID() const override {
+		return n0::GetAssetUniqueTypeID<CompMask>();
+	}
+	virtual void Traverse(std::function<bool(const n0::SceneNodePtr&)> func) const;
 
 	void SetBaseNode(const n0::SceneNodePtr& base) { m_base = base; }
 	void SetMaskNode(const n0::SceneNodePtr& mask) { m_mask = mask; }

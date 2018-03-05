@@ -9,15 +9,15 @@ namespace n2
 
 void NodeHelper::SetBoundingSize(n0::SceneNode& node, const sm::rect& sz)
 {
-	if (!node.HasComponent<CompBoundingBox>()) {
+	if (!node.HasUniqueComp<CompBoundingBox>()) {
 		return;
 	}
 
-	auto& cbounding = node.GetComponent<CompBoundingBox>();
+	auto& cbounding = node.GetUniqueComp<CompBoundingBox>();
 	cbounding.SetSize(sz);
 
-	if (node.HasComponent<CompTransform>()) {
-		cbounding.Build(node.GetComponent<CompTransform>().GetTrans().GetSRT());
+	if (node.HasUniqueComp<CompTransform>()) {
+		cbounding.Build(node.GetUniqueComp<CompTransform>().GetTrans().GetSRT());
 	} else {
 		cbounding.Build(pt2::SRT());
 	}

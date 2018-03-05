@@ -111,7 +111,7 @@ pt2::RenderReturn RenderSystem::Draw(const n0::SceneNodePtr& node, const N2_MAT&
 	{
 		auto& cscale9 = node->GetSharedComp<CompScale9>();
 		cscale9.Traverse([&](const n0::SceneNodePtr& node)->bool {
-			n2::RenderSystem::Draw(node, mt_child);
+			RenderSystem::Draw(node, mt_child);
 			return true;
 		});
 	}

@@ -17,6 +17,7 @@ public:
 		return n0::GetAssetUniqueTypeID<CompImage>();
 	}
 	virtual void Traverse(std::function<bool(const n0::SceneNodePtr&)> func) const {}
+	virtual sm::rect GetBounding() const;
 
 	void SetFilepath(const std::string& filepath) { m_filepath = filepath; }
 	const std::string& GetFilepath() const { return m_filepath; }

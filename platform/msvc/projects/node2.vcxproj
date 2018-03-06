@@ -11,9 +11,11 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\..\include\node2\AABBHelper.h" />
     <ClInclude Include="..\..\..\include\node2\CompBoundingBox.h" />
     <ClInclude Include="..\..\..\include\node2\CompColorCommon.h" />
     <ClInclude Include="..\..\..\include\node2\CompColorMap.h" />
+    <ClInclude Include="..\..\..\include\node2\CompComplex.h" />
     <ClInclude Include="..\..\..\include\node2\CompMask.h" />
     <ClInclude Include="..\..\..\include\node2\CompMesh.h" />
     <ClInclude Include="..\..\..\include\node2\CompScale9.h" />
@@ -27,9 +29,11 @@
     <ClInclude Include="..\..\..\include\node2\predef.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\..\source\AABBHelper.cpp" />
     <ClCompile Include="..\..\..\source\CompBoundingBox.cpp" />
     <ClCompile Include="..\..\..\source\CompColorCommon.cpp" />
     <ClCompile Include="..\..\..\source\CompColorMap.cpp" />
+    <ClCompile Include="..\..\..\source\CompComplex.cpp" />
     <ClCompile Include="..\..\..\source\CompMask.cpp" />
     <ClCompile Include="..\..\..\source\CompMesh.cpp" />
     <ClCompile Include="..\..\..\source\CompScale9.cpp" />

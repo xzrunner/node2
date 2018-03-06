@@ -14,4 +14,9 @@ const char* const CompSprite2::TYPE_NAME = "n2_sprite2";
 //	return comp;
 //}
 
+sm::rect CompSprite2::GetBounding() const
+{
+	return sm::rect(100, 100);
+}
+
 }

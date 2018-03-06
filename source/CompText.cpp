@@ -12,4 +12,9 @@ const char* const CompText::TYPE_NAME = "n2_text";
 //	return comp;
 //}
 
+sm::rect CompText::GetBounding() const
+{
+	return sm::rect(100, 100);
+}
+
 }

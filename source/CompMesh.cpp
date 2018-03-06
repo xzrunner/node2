@@ -13,4 +13,9 @@ const char* const CompMesh::TYPE_NAME = "n2_mesh";
 //	return comp;
 //}
 
+sm::rect CompMesh::GetBounding() const
+{
+	return sm::rect(100, 100);
+}
+
 }

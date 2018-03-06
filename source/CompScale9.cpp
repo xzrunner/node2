@@ -51,6 +51,11 @@ void CompScale9::Traverse(std::function<bool(const n0::SceneNodePtr&)> func) con
 	}
 }
 
+sm::rect CompScale9::GetBounding() const
+{
+	return sm::rect(m_width, m_height);
+}
+
 void CompScale9::SetWidth(float width)
 {
 	if (m_width != width) {

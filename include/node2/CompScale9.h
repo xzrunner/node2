@@ -46,6 +46,7 @@ public:
 		return n0::GetAssetUniqueTypeID<CompScale9>();
 	}
 	virtual void Traverse(std::function<bool(const n0::SceneNodePtr&)> func) const;
+	virtual sm::rect GetBounding() const;
 
 	float GetWidth() const { return m_width; }
 	float GetHeight() const { return m_height; }

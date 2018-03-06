@@ -17,6 +17,7 @@ public:
 		return n0::GetAssetUniqueTypeID<CompMask>();
 	}
 	virtual void Traverse(std::function<bool(const n0::SceneNodePtr&)> func) const;
+	virtual sm::rect GetBounding() const;
 
 	void SetBaseNode(const n0::SceneNodePtr& base) { m_base = base; }
 	void SetMaskNode(const n0::SceneNodePtr& mask) { m_mask = mask; }

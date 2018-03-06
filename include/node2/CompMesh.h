@@ -17,6 +17,7 @@ public:
 		return n0::GetAssetUniqueTypeID<CompMesh>();
 	}
 	virtual void Traverse(std::function<bool(const n0::SceneNodePtr&)> func) const {}
+	virtual sm::rect GetBounding() const;
 
 	const std::unique_ptr<pt2::Mesh<n0::SceneNode>>& GetMesh() const { return m_mesh; }
 	std::unique_ptr<pt2::Mesh<n0::SceneNode>>& GetMesh() { return m_mesh; }

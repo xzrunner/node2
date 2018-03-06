@@ -16,6 +16,9 @@
     <Filter Include="components\asset">
       <UniqueIdentifier>{4f6644e8-1b8b-4b85-9b50-13a72a696951}</UniqueIdentifier>
     </Filter>
+    <Filter Include="tools">
+      <UniqueIdentifier>{34e8e2a3-7ae6-49fe-b6b7-1b178da40383}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\include\node2\predef.h" />
@@ -56,6 +59,12 @@
     <ClInclude Include="..\..\..\include\node2\CompScale9.h">
       <Filter>components\asset</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\include\node2\CompComplex.h">
+      <Filter>components\asset</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\node2\AABBHelper.h">
+      <Filter>tools</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\source\CompColorCommon.cpp">
@@ -93,6 +102,12 @@
     </ClCompile>
     <ClCompile Include="..\..\..\source\CompScale9.cpp">
       <Filter>components\asset</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\CompComplex.cpp">
+      <Filter>components\asset</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\AABBHelper.cpp">
+      <Filter>tools</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

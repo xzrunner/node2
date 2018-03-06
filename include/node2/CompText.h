@@ -15,6 +15,7 @@ public:
 		return n0::GetAssetUniqueTypeID<CompText>();
 	}
 	virtual void Traverse(std::function<bool(const n0::SceneNodePtr&)> func) const {}
+	virtual sm::rect GetBounding() const;
 
 	const pt2::Text& GetText() const { return m_text; }
 	pt2::Text& GetText() { return m_text; }

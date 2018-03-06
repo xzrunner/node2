@@ -1,4 +1,5 @@
 #include "node2/CompMask.h"
+#include "node2/AABBHelper.h"
 
 #include <node0/SceneNode.h>
 
@@ -23,6 +24,16 @@ void CompMask::Traverse(std::function<bool(const n0::SceneNodePtr&)> func) const
 	if (m_mask) {
 		func(m_mask);
 	}
+}
+
+sm::rect CompMask::GetBounding() const
+{
+	sm::rect aabb;
+	if (m_mask) {
+		AABBHelper::Combine(aabb, m_mask);
+	}
+	return aabb;
+
 }
 
 }

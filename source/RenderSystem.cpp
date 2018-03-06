@@ -10,7 +10,7 @@
 #include "node2/CompScale9.h"
 
 #include <node0/SceneNode.h>
-#include <node0/CompComplex.h>
+#include <node2/CompComplex.h>
 #include <painting2/RenderSystem.h>
 #include <painting2/DrawMask.h>
 #include <sprite2/DrawNode.h>
@@ -123,9 +123,9 @@ pt2::RenderReturn RenderSystem::Draw(const n0::SceneNodePtr& node, const N2_MAT&
 		s2::DrawNode::Draw(*sym, s2::RenderParams(), mt_child);
 	}
 	
-	if (node->HasSharedComp<n0::CompComplex>())
+	if (node->HasSharedComp<n2::CompComplex>())
 	{
-		auto& ccomplex = node->GetSharedComp<n0::CompComplex>();
+		auto& ccomplex = node->GetSharedComp<n2::CompComplex>();
 		auto& children = ccomplex.GetAllChildren();
 		for (auto& child : children) {
 			Draw(child, mt_child);

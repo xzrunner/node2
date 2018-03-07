@@ -253,7 +253,7 @@ void CompScale9::ResizeNode(Scale9Idx idx, const sm::vec2& center, float dst_w,
 
 	auto& ctrans = node->GetUniqueComp<CompTransform>();
 	auto& trans = ctrans.GetTrans();
-	trans.SetPosition(center);
+	ctrans.SetPosition(*node, center);
 
 	float src_w, src_h;
 	auto& cbb = node->GetUniqueComp<CompBoundingBox>();
@@ -357,12 +357,12 @@ void CompScale9::ResizeNode(Scale9Idx idx, const sm::vec2& center, float dst_w,
 	if (old_scale.y < 0) {
 		new_scale.y = -new_scale.y;
 	}
-	trans.SetScale(new_scale);
+	ctrans.SetScale(*node, new_scale);
 
 	auto& pos = trans.GetPosition();
 	auto& offset = trans.GetOffset();
 	auto  angle = trans.GetAngle();
-	trans.SetPosition(pos + sm::rotate_vector(offset, angle) - offset);
+	ctrans.SetPosition(*node, pos + sm::rotate_vector(offset, angle) - offset);
 }
 
 sm::vec2 CompScale9::GetChildSize(Scale9Idx idx) const

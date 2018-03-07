@@ -3,6 +3,8 @@
 #include <node0/NodeUniqueComp.h>
 #include <painting2/GeoTransform.h>
 
+namespace n0 { class SceneNode; }
+
 namespace n2
 {
 
@@ -13,15 +15,23 @@ public:
 	virtual n0::UniqueCompID TypeID() const override {
 		return n0::GetUniqueCompTypeID<CompTransform>(); 
 	}
-	virtual std::unique_ptr<n0::NodeUniqueComp> Clone() const override;
+	virtual std::unique_ptr<n0::NodeUniqueComp> Clone(const n0::SceneNode& node) const override;
 
-	const pt2::GeoTransform& GetTrans() const { return m_transform; }
-	pt2::GeoTransform& GetTrans() { return m_transform; }
+	const pt2::GeoTransform& GetTrans() const { return m_trans; }
+//	pt2::GeoTransform& GetTrans() { return m_trans; }
+
+	void SetPosition(const n0::SceneNode& node, const sm::vec2& pos);
+	void SetAngle(const n0::SceneNode& node, float angle);
+	void SetScale(const n0::SceneNode& node, const sm::vec2& scale);
+	void SetShear(const n0::SceneNode& node, const sm::vec2& shear);
+	void SetOffset(const n0::SceneNode& node, const sm::vec2& offset);
+
+	void SetSRT(const n0::SceneNode& node, const pt2::SRT& srt);
 
 	static const char* const TYPE_NAME;
 
 private:
-	pt2::GeoTransform m_transform;
+	pt2::GeoTransform m_trans;
 
 }; // CompTransform
 

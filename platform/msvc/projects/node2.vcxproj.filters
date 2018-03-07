@@ -50,9 +50,6 @@
     <ClInclude Include="..\..\..\include\node2\CompMask.h">
       <Filter>components\asset</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\include\node2\NodeHelper.h">
-      <Filter>system</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\include\node2\CompMesh.h">
       <Filter>components\asset</Filter>
     </ClInclude>
@@ -96,9 +93,6 @@
     </ClCompile>
     <ClCompile Include="..\..\..\source\CompMask.cpp">
       <Filter>components\asset</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\source\NodeHelper.cpp">
-      <Filter>system</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\source\CompMesh.cpp">
       <Filter>components\asset</Filter>

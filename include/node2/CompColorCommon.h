@@ -15,7 +15,7 @@ public:
 	virtual n0::UniqueCompID TypeID() const override { 
 		return n0::GetUniqueCompTypeID<CompColorCommon>(); 
 	}
-	virtual std::unique_ptr<n0::NodeUniqueComp> Clone() const override;
+	virtual std::unique_ptr<n0::NodeUniqueComp> Clone(const n0::SceneNode& node) const override;
 
 	const pt2::RenderColorCommon& GetColor() const { return m_col; }
 	pt2::RenderColorCommon& GetColor() { return m_col; }

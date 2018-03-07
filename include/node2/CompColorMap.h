@@ -13,7 +13,7 @@ public:
 	virtual n0::UniqueCompID TypeID() const override {
 		return n0::GetUniqueCompTypeID<CompColorMap>(); 
 	}
-	virtual std::unique_ptr<n0::NodeUniqueComp> Clone() const override;
+	virtual std::unique_ptr<n0::NodeUniqueComp> Clone(const n0::SceneNode& node) const override;
 
 	const pt2::RenderColorMap& GetColor() const { return m_col; }
 	pt2::RenderColorMap& GetColor() { return m_col; }

@@ -19,6 +19,9 @@
     <Filter Include="tools">
       <UniqueIdentifier>{34e8e2a3-7ae6-49fe-b6b7-1b178da40383}</UniqueIdentifier>
     </Filter>
+    <Filter Include="entity">
+      <UniqueIdentifier>{7935dc24-a438-4719-a73e-7761fef9dded}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\include\node2\predef.h" />
@@ -64,6 +67,9 @@
     </ClInclude>
     <ClInclude Include="..\..\..\include\node2\AABBHelper.h">
       <Filter>tools</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\node2\NodeFlags.h">
+      <Filter>entity</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

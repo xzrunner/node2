@@ -24,6 +24,7 @@
     <ClInclude Include="..\..\..\include\node2\CompText.h" />
     <ClInclude Include="..\..\..\include\node2\CompTransform.h" />
     <ClInclude Include="..\..\..\include\node2\config.h" />
+    <ClInclude Include="..\..\..\include\node2\NodeFlags.h" />
     <ClInclude Include="..\..\..\include\node2\RenderSystem.h" />
     <ClInclude Include="..\..\..\include\node2\NodeHelper.h" />
     <ClInclude Include="..\..\..\include\node2\predef.h" />

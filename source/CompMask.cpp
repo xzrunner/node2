@@ -19,10 +19,14 @@ const char* const CompMask::TYPE_NAME = "n2_mask";
 void CompMask::Traverse(std::function<bool(const n0::SceneNodePtr&)> func) const
 {
 	if (m_base) {
-		func(m_base);
+		if (!func(m_base)) {
+			return;
+		}
 	}
 	if (m_mask) {
-		func(m_mask);
+		if (!func(m_mask)) {
+			return;
+		}
 	}
 }
 

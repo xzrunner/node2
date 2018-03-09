@@ -45,7 +45,7 @@ public:
 	virtual n0::AssetID AssetTypeID() const override {
 		return n0::GetAssetUniqueTypeID<CompScale9>();
 	}
-	virtual void Traverse(std::function<bool(const n0::SceneNodePtr&)> func) const override;
+	virtual void Traverse(std::function<bool(const n0::SceneNodePtr&)> func) const override {}
 	virtual sm::rect GetBounding() const override;
 	virtual void InitNodeCount() const { m_node_count = 1; }
 

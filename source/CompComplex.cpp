@@ -22,7 +22,9 @@ const char* const CompComplex::TYPE_NAME = "n2_complex";
 void CompComplex::Traverse(std::function<bool(const n0::SceneNodePtr&)> func) const
 {
 	for (auto& child : m_children) {
-		func(child);
+		if (!func(child)) {
+			break;
+		}
 	}
 }
 

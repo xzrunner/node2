@@ -42,15 +42,6 @@ CompScale9::CompScale9()
 //	return comp;
 //}
 
-void CompScale9::Traverse(std::function<bool(const n0::SceneNodePtr&)> func) const
-{
-	for (int i = 0; i < 9; ++i) {
-		if (m_grids[i]) {
-			func(m_grids[i]);
-		}
-	}
-}
-
 sm::rect CompScale9::GetBounding() const
 {
 	return sm::rect(m_width, m_height);

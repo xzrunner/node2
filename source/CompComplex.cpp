@@ -35,6 +35,17 @@ sm::rect CompComplex::GetBounding() const
 	return aabb;
 }
 
+void CompComplex::InitNodeCount() const
+{
+	size_t count = 1;
+	for (auto& child : m_children)
+	{
+		auto& casset = child->GetSharedComp<n0::CompAsset>();
+		count += casset.GetNodeCount();
+	}
+	m_node_count = count;
+}
+
 void CompComplex::AddChild(const std::shared_ptr<n0::SceneNode>& child)
 {
 	m_children.push_back(child);

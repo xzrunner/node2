@@ -16,8 +16,9 @@ public:
 	virtual n0::AssetID AssetTypeID() const override {
 		return n0::GetAssetUniqueTypeID<CompMask>();
 	}
-	virtual void Traverse(std::function<bool(const n0::SceneNodePtr&)> func) const;
-	virtual sm::rect GetBounding() const;
+	virtual void Traverse(std::function<bool(const n0::SceneNodePtr&)> func) const override;
+	virtual sm::rect GetBounding() const override;
+	virtual void InitNodeCount() const;
 
 	void SetBaseNode(const n0::SceneNodePtr& base) { m_base = base; }
 	void SetMaskNode(const n0::SceneNodePtr& mask) { m_mask = mask; }

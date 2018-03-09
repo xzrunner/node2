@@ -33,7 +33,22 @@ sm::rect CompMask::GetBounding() const
 		AABBHelper::Combine(aabb, m_mask);
 	}
 	return aabb;
+}
 
+void CompMask::InitNodeCount() const
+{
+	size_t count = 1;
+	if (m_base)
+	{
+		auto& casset = m_base->GetSharedComp<n0::CompAsset>();
+		count += casset.GetNodeCount();
+	}
+	if (m_mask)
+	{
+		auto& casset = m_mask->GetSharedComp<n0::CompAsset>();
+		count += casset.GetNodeCount();
+	}
+	m_node_count = count;
 }
 
 }

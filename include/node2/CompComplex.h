@@ -18,7 +18,8 @@ public:
 		return n0::GetAssetUniqueTypeID<CompComplex>();
 	}
 	virtual void Traverse(std::function<bool(const n0::SceneNodePtr&)> func) const override;
-	virtual sm::rect GetBounding() const;
+	virtual sm::rect GetBounding() const override;
+	virtual void InitNodeCount() const;
 
 	void AddChild(const std::shared_ptr<n0::SceneNode>& child);
 	bool RemoveChild(const std::shared_ptr<n0::SceneNode>& child);

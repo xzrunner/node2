@@ -23,8 +23,12 @@
     <ClInclude Include="..\..\..\include\node2\CompImage.h" />
     <ClInclude Include="..\..\..\include\node2\CompText.h" />
     <ClInclude Include="..\..\..\include\node2\CompTransform.h" />
+    <ClInclude Include="..\..\..\include\node2\CompNodePatch.h" />
     <ClInclude Include="..\..\..\include\node2\config.h" />
+    <ClInclude Include="..\..\..\include\node2\EditOpFunc.h" />
+    <ClInclude Include="..\..\..\include\node2\EditOpList.h" />
     <ClInclude Include="..\..\..\include\node2\NodeFlags.h" />
+    <ClInclude Include="..\..\..\include\node2\EditOp.h" />
     <ClInclude Include="..\..\..\include\node2\RenderSystem.h" />
     <ClInclude Include="..\..\..\include\node2\predef.h" />
   </ItemGroup>
@@ -41,6 +45,9 @@
     <ClCompile Include="..\..\..\source\CompImage.cpp" />
     <ClCompile Include="..\..\..\source\CompText.cpp" />
     <ClCompile Include="..\..\..\source\CompTransform.cpp" />
+    <ClCompile Include="..\..\..\source\CompNodePatch.cpp" />
+    <ClCompile Include="..\..\..\source\EditOpFunc.cpp" />
+    <ClCompile Include="..\..\..\source\EditOpList.cpp" />
     <ClCompile Include="..\..\..\source\RenderSystem.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">

@@ -10,10 +10,13 @@
 namespace n2
 {
 
+class CompNodePatch;
+
 class RenderSystem
 {
 public:
-	static pt2::RenderReturn Draw(const n0::SceneNodePtr& node, const N2_MAT& mt);
+	static pt2::RenderReturn Draw(const n0::SceneNodePtr& node, const N2_MAT& mt, 
+		CompNodePatch* patch, size_t node_id);
 
 }; // RenderSystem
 

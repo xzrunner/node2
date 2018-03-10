@@ -8,9 +8,11 @@
 #include "node2/CompSprite2.h"
 #include "node2/CompBoundingBox.h"
 #include "node2/CompScale9.h"
+#include "node2/CompComplex.h"
+#include "node2/CompNodePatch.h"
+#include "node2/EditOp.h"
 
 #include <node0/SceneNode.h>
-#include <node2/CompComplex.h>
 #include <painting2/RenderSystem.h>
 #include <painting2/DrawMask.h>
 #include <sprite2/DrawNode.h>
@@ -35,11 +37,11 @@ public:
 protected:
 	virtual pt2::RenderReturn DrawBaseNode(const n0::SceneNodePtr& node, const sm::Matrix2D& mt) const override
 	{
-		return n2::RenderSystem::Draw(node, sm::Matrix2D());
+		return n2::RenderSystem::Draw(node, sm::Matrix2D(), nullptr, 0);
 	}
 	virtual pt2::RenderReturn DrawMaskNode(const n0::SceneNodePtr& node, const sm::Matrix2D& mt) const override
 	{
-		return n2::RenderSystem::Draw(node, sm::Matrix2D());
+		return n2::RenderSystem::Draw(node, sm::Matrix2D(), nullptr, 0);
 	}
 
 	virtual sm::rect GetBounding(const n0::SceneNodePtr& node) const override
@@ -60,10 +62,15 @@ protected:
 namespace n2
 {
 
-pt2::RenderReturn RenderSystem::Draw(const n0::SceneNodePtr& node, const N2_MAT& mt)
+pt2::RenderReturn RenderSystem::Draw(const n0::SceneNodePtr& node, const N2_MAT& mt,
+	                                 CompNodePatch* patch, size_t node_id)
 {
 	if (!node) {
 		return pt2::RENDER_NO_DATA;
+	}
+
+	if (patch) {
+		patch->Seek(node_id);
 	}
 
 	pt2::RenderReturn ret = pt2::RENDER_OK;
@@ -73,6 +80,13 @@ pt2::RenderReturn RenderSystem::Draw(const n0::SceneNodePtr& node, const N2_MAT&
 	{
 		auto& ctrans = node->GetUniqueComp<CompTransform>();
 		mt_child = ctrans.GetTrans().GetMatrix() * mt;
+	}
+	if (patch && patch->HasUniqueOp(node_id)) {
+		auto& op_list = patch->GetUniqueOp(node_id);
+		if (op_list.HasEditOp(EditOpID::SetTransformOp)) {
+			auto& op = static_cast<const SetTransformOp&>(op_list.GetEditOp(EditOpID::SetTransformOp));
+			mt_child = op.mat * mt;
+		}
 	}
 
 	if (node->HasUniqueComp<CompColorCommon>())
@@ -111,7 +125,7 @@ pt2::RenderReturn RenderSystem::Draw(const n0::SceneNodePtr& node, const N2_MAT&
 	{
 		auto& cscale9 = node->GetSharedComp<CompScale9>();
 		cscale9.Traverse([&](const n0::SceneNodePtr& node)->bool {
-			RenderSystem::Draw(node, mt_child);
+			RenderSystem::Draw(node, mt_child, patch, node_id);
 			return true;
 		});
 	}
@@ -127,8 +141,12 @@ pt2::RenderReturn RenderSystem::Draw(const n0::SceneNodePtr& node, const N2_MAT&
 	{
 		auto& ccomplex = node->GetSharedComp<n2::CompComplex>();
 		auto& children = ccomplex.GetAllChildren();
-		for (auto& child : children) {
-			Draw(child, mt_child);
+		node_id += 1;
+		for (auto& child : children) 
+		{
+			Draw(child, mt_child, patch, node_id);
+			auto& casset = child->GetSharedComp<n0::CompAsset>();
+			node_id += casset.GetNodeCount();
 		}
 	}
 

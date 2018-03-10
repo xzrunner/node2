@@ -22,6 +22,12 @@
     <Filter Include="entity">
       <UniqueIdentifier>{7935dc24-a438-4719-a73e-7761fef9dded}</UniqueIdentifier>
     </Filter>
+    <Filter Include="components\patch">
+      <UniqueIdentifier>{8e053f54-194b-4237-b0c7-37e25da1d665}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="edit">
+      <UniqueIdentifier>{fd8c97b0-076d-455c-b851-aee9ba3a1f12}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\include\node2\predef.h" />
@@ -68,6 +74,18 @@
     <ClInclude Include="..\..\..\include\node2\NodeFlags.h">
       <Filter>entity</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\include\node2\CompNodePatch.h">
+      <Filter>components\patch</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\node2\EditOpFunc.h">
+      <Filter>edit</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\node2\EditOp.h">
+      <Filter>edit</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\node2\EditOpList.h">
+      <Filter>edit</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\source\CompColorCommon.cpp">
@@ -108,6 +126,15 @@
     </ClCompile>
     <ClCompile Include="..\..\..\source\AABBHelper.cpp">
       <Filter>tools</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\CompNodePatch.cpp">
+      <Filter>components\patch</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\EditOpFunc.cpp">
+      <Filter>edit</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\EditOpList.cpp">
+      <Filter>edit</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

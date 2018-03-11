@@ -43,6 +43,13 @@ std::unique_ptr<n0::NodeUniqueComp> CompNodePatch::Clone(const n0::SceneNode& no
 	return comp;
 }
 
+void CompNodePatch::Clear()
+{
+	m_unique_ptr = -1;
+
+	m_unique_op.clear();
+}
+
 void CompNodePatch::AddUniqueOp(size_t node_id, std::unique_ptr<EditOp>& op)
 {
 	auto itr = std::lower_bound(m_unique_op.begin(), m_unique_op.end(), node_id, EditOpListLessThan());

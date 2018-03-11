@@ -45,6 +45,8 @@ struct SetTransformOp : EditOp
 
 	sm::Matrix2D mat;
 
+	static const char* const TYPE_NAME;
+
 }; // SetTransformOp
 
 }

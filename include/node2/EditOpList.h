@@ -12,6 +12,7 @@ struct EditOp;
 class EditOpList
 {
 public:
+	EditOpList(size_t node_id);
 	EditOpList(size_t node_id, std::unique_ptr<EditOp>& op);
 	EditOpList(const EditOpList& list);
 	EditOpList& operator = (const EditOpList& list);
@@ -23,6 +24,9 @@ public:
 	void AddEditOp(std::unique_ptr<EditOp>& op);
 
 	const EditOp& GetEditOp(uint32_t id) const;
+
+	const std::vector<std::unique_ptr<EditOp>>& 
+		GetAllEditOp() const { return m_list; }
 
 private:
 	EditOp& GetEditOp(uint32_t id);

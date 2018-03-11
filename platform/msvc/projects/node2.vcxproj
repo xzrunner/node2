@@ -25,7 +25,7 @@
     <ClInclude Include="..\..\..\include\node2\CompTransform.h" />
     <ClInclude Include="..\..\..\include\node2\CompNodePatch.h" />
     <ClInclude Include="..\..\..\include\node2\config.h" />
-    <ClInclude Include="..\..\..\include\node2\EditOpFunc.h" />
+    <ClInclude Include="..\..\..\include\node2\EditOpMem.h" />
     <ClInclude Include="..\..\..\include\node2\EditOpList.h" />
     <ClInclude Include="..\..\..\include\node2\NodeFlags.h" />
     <ClInclude Include="..\..\..\include\node2\EditOp.h" />
@@ -46,7 +46,8 @@
     <ClCompile Include="..\..\..\source\CompText.cpp" />
     <ClCompile Include="..\..\..\source\CompTransform.cpp" />
     <ClCompile Include="..\..\..\source\CompNodePatch.cpp" />
-    <ClCompile Include="..\..\..\source\EditOpFunc.cpp" />
+    <ClCompile Include="..\..\..\source\EditOp.cpp" />
+    <ClCompile Include="..\..\..\source\EditOpMem.cpp" />
     <ClCompile Include="..\..\..\source\EditOpList.cpp" />
     <ClCompile Include="..\..\..\source\RenderSystem.cpp" />
   </ItemGroup>

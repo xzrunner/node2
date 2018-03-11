@@ -77,13 +77,13 @@
     <ClInclude Include="..\..\..\include\node2\CompNodePatch.h">
       <Filter>components\patch</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\include\node2\EditOpFunc.h">
-      <Filter>edit</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\include\node2\EditOp.h">
       <Filter>edit</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\include\node2\EditOpList.h">
+      <Filter>edit</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\node2\EditOpMem.h">
       <Filter>edit</Filter>
     </ClInclude>
   </ItemGroup>
@@ -130,10 +130,13 @@
     <ClCompile Include="..\..\..\source\CompNodePatch.cpp">
       <Filter>components\patch</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\source\EditOpFunc.cpp">
+    <ClCompile Include="..\..\..\source\EditOpList.cpp">
       <Filter>edit</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\source\EditOpList.cpp">
+    <ClCompile Include="..\..\..\source\EditOpMem.cpp">
+      <Filter>edit</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\EditOp.cpp">
       <Filter>edit</Filter>
     </ClCompile>
   </ItemGroup>

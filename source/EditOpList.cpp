@@ -1,6 +1,6 @@
 #include "node2/EditOpList.h"
 #include "node2/EditOp.h"
-#include "node2/EditOpFunc.h"
+#include "node2/EditOpMem.h"
 
 #include <guard/check.h>
 
@@ -30,6 +30,11 @@ struct EditOpLessThan
 namespace n2
 {
 
+EditOpList::EditOpList(size_t node_id)
+	: m_node_id(node_id)
+{
+}
+
 EditOpList::EditOpList(size_t node_id, std::unique_ptr<EditOp>& op)
 	: m_node_id(node_id)
 {
@@ -43,7 +48,7 @@ EditOpList::EditOpList(const EditOpList& list)
 {
 	m_list.reserve(list.m_list.size());
 	for (auto& op : list.m_list) {
-		m_list.push_back(EditOpFunc::Clone(*op));
+		m_list.push_back(EditOpMem::Clone(*op));
 	}
 }
 
@@ -58,7 +63,7 @@ EditOpList& EditOpList::operator = (const EditOpList& list)
 	m_list.clear();
 	m_list.reserve(list.m_list.size());
 	for (auto& op : list.m_list) {
-		m_list.push_back(EditOpFunc::Clone(*op));
+		m_list.push_back(EditOpMem::Clone(*op));
 	}
 
 	m_op_bitset = list.m_op_bitset;
@@ -76,8 +81,8 @@ void EditOpList::AddEditOp(std::unique_ptr<EditOp>& op)
 	if (HasEditOp(op->id)) 
 	{
 		auto& old_op = GetEditOp(op->id);
-		EditOpFunc::Copy(old_op, *op);
-		memcpy(&old_op, op.get(), EditOpFunc::Size(*op));
+		EditOpMem::Copy(old_op, *op);
+		memcpy(&old_op, op.get(), EditOpMem::Size(*op));
 	}
 	else
 	{

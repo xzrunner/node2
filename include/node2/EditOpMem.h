@@ -1,13 +1,13 @@
 #pragma once
 
-#include "node2/EditOp.h"
-
 #include <memory>
 
 namespace n2
 {
 
-class EditOpFunc
+struct EditOp;
+
+class EditOpMem
 {
 public:
 	static size_t Size(const EditOp& op);
@@ -16,6 +16,6 @@ public:
 
 	static void Copy(EditOp& dst, const EditOp& src);
 
-}; // EditOpFunc
+}; // EditOpMem
 
 }

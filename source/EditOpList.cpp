@@ -81,6 +81,7 @@ void EditOpList::AddEditOp(std::unique_ptr<EditOp>& op)
 	}
 	else
 	{
+		m_op_bitset[op->id] = true;
 		m_list.insert(
 			std::upper_bound(m_list.begin(), m_list.end(), op, EditOpLessThan()),
 			std::move(op)

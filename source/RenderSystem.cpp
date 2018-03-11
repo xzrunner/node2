@@ -9,7 +9,7 @@
 #include "node2/CompBoundingBox.h"
 #include "node2/CompScale9.h"
 #include "node2/CompComplex.h"
-#include "node2/CompNodePatch.h"
+#include "node2/CompUniquePatch.h"
 #include "node2/EditOp.h"
 
 #include <node0/SceneNode.h>
@@ -63,7 +63,7 @@ namespace n2
 {
 
 pt2::RenderReturn RenderSystem::Draw(const n0::SceneNodePtr& node, const N2_MAT& mt,
-	                                 CompNodePatch* patch, size_t node_id)
+	                                 CompUniquePatch* patch, size_t node_id)
 {
 	if (!node) {
 		return pt2::RENDER_NO_DATA;

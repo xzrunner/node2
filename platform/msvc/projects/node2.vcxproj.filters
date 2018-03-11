@@ -74,9 +74,6 @@
     <ClInclude Include="..\..\..\include\node2\NodeFlags.h">
       <Filter>entity</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\include\node2\CompNodePatch.h">
-      <Filter>components\patch</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\include\node2\EditOp.h">
       <Filter>edit</Filter>
     </ClInclude>
@@ -85,6 +82,9 @@
     </ClInclude>
     <ClInclude Include="..\..\..\include\node2\EditOpMem.h">
       <Filter>edit</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\node2\CompUniquePatch.h">
+      <Filter>components\patch</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -127,9 +127,6 @@
     <ClCompile Include="..\..\..\source\AABBHelper.cpp">
       <Filter>tools</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\source\CompNodePatch.cpp">
-      <Filter>components\patch</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\source\EditOpList.cpp">
       <Filter>edit</Filter>
     </ClCompile>
@@ -138,6 +135,9 @@
     </ClCompile>
     <ClCompile Include="..\..\..\source\EditOp.cpp">
       <Filter>edit</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\CompUniquePatch.cpp">
+      <Filter>components\patch</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

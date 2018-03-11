@@ -11,14 +11,14 @@ namespace n2
 
 struct EditOp;
 
-class CompNodePatch : public n0::NodeUniqueComp
+class CompUniquePatch : public n0::NodeUniqueComp
 {
 public:
-	CompNodePatch();
+	CompUniquePatch();
 
 	virtual const char* Type() const override { return TYPE_NAME; }
 	virtual n0::UniqueCompID TypeID() const override {
-		return n0::GetUniqueCompTypeID<CompNodePatch>();
+		return n0::GetUniqueCompTypeID<CompUniquePatch>();
 	}
 	virtual std::unique_ptr<n0::NodeUniqueComp> Clone(const n0::SceneNode& node) const override;
 
@@ -26,9 +26,9 @@ public:
 
 	void AddUniqueOp(size_t node_id, std::unique_ptr<EditOp>& op);
 
-	const std::vector<EditOpList>& GetAllUniqueOP() const { return m_unique_op; }
-	void SetAllUniqueOP(const std::vector<EditOpList>& unique_op) {
-		m_unique_op = unique_op;
+	const std::vector<EditOpList>& GetAllOperators() const { return m_operators; }
+	void SetAllOperators(const std::vector<EditOpList>& operators) {
+		m_operators = operators;
 	}
 
 	bool HasUniqueOp(size_t node_id) const;
@@ -40,9 +40,9 @@ public:
 	static const char* const TYPE_NAME;
 
 private:
-	std::vector<EditOpList> m_unique_op;
+	std::vector<EditOpList> m_operators;
 	int m_unique_ptr;
 
-}; // CompNodePatch
+}; // CompUniquePatch
 
 }

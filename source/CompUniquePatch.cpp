@@ -5,27 +5,6 @@
 
 #include <algorithm>
 
-namespace
-{
-
-struct EditOpListLessThan
-{
-    bool operator() (const n2::EditOpList& left, const n2::EditOpList& right)
-    {
-        return left.GetNodeID() < right.GetNodeID();
-    }
-    bool operator() (const n2::EditOpList& left, uint32_t right)
-    {
-        return left.GetNodeID() < right;
-    }
-    bool operator() (uint32_t left, const n2::EditOpList& right)
-    {
-        return left < right.GetNodeID();
-    }
-};
-
-}
-
 namespace n2
 {
 
@@ -39,7 +18,7 @@ CompUniquePatch::CompUniquePatch()
 std::unique_ptr<n0::NodeUniqueComp> CompUniquePatch::Clone(const n0::SceneNode& node) const
 {
 	auto comp = std::make_unique<CompUniquePatch>();
-	comp->m_operators = m_operators;
+	comp->m_edit_ops = m_edit_ops;
 	return comp;
 }
 
@@ -47,31 +26,31 @@ void CompUniquePatch::Clear()
 {
 	m_unique_ptr = -1;
 
-	m_operators.clear();
+	m_edit_ops.clear();
 }
 
-void CompUniquePatch::AddUniqueOp(size_t node_id, std::unique_ptr<EditOp>& op)
+void CompUniquePatch::AddEditOp(size_t node_id, std::unique_ptr<EditOp>& op)
 {
-	auto itr = std::lower_bound(m_operators.begin(), m_operators.end(), node_id, EditOpListLessThan());
-	if (itr == m_operators.end()) {
-		m_operators.push_back(EditOpList(node_id, op));
+	auto itr = std::lower_bound(m_edit_ops.begin(), m_edit_ops.end(), node_id, EditOpListLessThan());
+	if (itr == m_edit_ops.end()) {
+		m_edit_ops.push_back(EditOpList(node_id, op));
 	} else if (node_id < itr->GetNodeID()) {
-		m_operators.insert(itr, EditOpList(node_id, op));
+		m_edit_ops.insert(itr, EditOpList(node_id, op));
 	} else {
 		itr->AddEditOp(op);
 	}
 }
 
-bool CompUniquePatch::HasUniqueOp(size_t node_id) const
+bool CompUniquePatch::HasEditOp(size_t node_id) const
 {
-	return m_unique_ptr >= 0 && static_cast<size_t>(m_unique_ptr) < m_operators.size()
-		&& m_operators[m_unique_ptr].GetNodeID() == node_id;
+	return m_unique_ptr >= 0 && static_cast<size_t>(m_unique_ptr) < m_edit_ops.size()
+		&& m_edit_ops[m_unique_ptr].GetNodeID() == node_id;
 }
 
-const EditOpList& CompUniquePatch::GetUniqueOp(size_t node_id)
+const EditOpList& CompUniquePatch::GetEditOp(size_t node_id)
 {
-	GD_ASSERT(m_unique_ptr >= 0 && static_cast<size_t>(m_unique_ptr) < m_operators.size() && m_operators[m_unique_ptr].GetNodeID() == node_id, "not exists");
-	return m_operators[m_unique_ptr];
+	GD_ASSERT(m_unique_ptr >= 0 && static_cast<size_t>(m_unique_ptr) < m_edit_ops.size() && m_edit_ops[m_unique_ptr].GetNodeID() == node_id, "not exists");
+	return m_edit_ops[m_unique_ptr];
 }
 
 void CompUniquePatch::Rewind()
@@ -81,7 +60,7 @@ void CompUniquePatch::Rewind()
 
 void CompUniquePatch::Seek(size_t node_id)
 {
-	if (m_operators.empty()) {
+	if (m_edit_ops.empty()) {
 		m_unique_ptr = -1;
 		return;
 	}
@@ -89,15 +68,15 @@ void CompUniquePatch::Seek(size_t node_id)
 	if (m_unique_ptr == -1) {
 		m_unique_ptr = 0;
 	}
-	GD_ASSERT(m_unique_ptr >= 0 && static_cast<size_t>(m_unique_ptr) < m_operators.size(), "not exists");
-	while (m_operators[m_unique_ptr].GetNodeID() < node_id) 
+	GD_ASSERT(m_unique_ptr >= 0 && static_cast<size_t>(m_unique_ptr) < m_edit_ops.size(), "not exists");
+	while (m_edit_ops[m_unique_ptr].GetNodeID() < node_id) 
 	{
 		++m_unique_ptr;
-		if (m_unique_ptr == m_operators.size()) {
+		if (m_unique_ptr == m_edit_ops.size()) {
 			break;
 		}
 	}
-	if (static_cast<size_t>(m_unique_ptr) >= m_operators.size()) {
+	if (static_cast<size_t>(m_unique_ptr) >= m_edit_ops.size()) {
 		m_unique_ptr = -1;
 	}
 }

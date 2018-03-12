@@ -41,4 +41,20 @@ private:
 
 }; // EditOpList
 
+struct EditOpListLessThan
+{
+	bool operator() (const EditOpList& left, const EditOpList& right)
+	{
+		return left.GetNodeID() < right.GetNodeID();
+	}
+	bool operator() (const EditOpList& left, uint32_t right)
+	{
+		return left.GetNodeID() < right;
+	}
+	bool operator() (uint32_t left, const EditOpList& right)
+	{
+		return left < right.GetNodeID();
+	}
+}; // EditOpListLessThan
+
 }

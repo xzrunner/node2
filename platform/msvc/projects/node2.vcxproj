@@ -19,6 +19,7 @@
     <ClInclude Include="..\..\..\include\node2\CompMask.h" />
     <ClInclude Include="..\..\..\include\node2\CompMesh.h" />
     <ClInclude Include="..\..\..\include\node2\CompScale9.h" />
+    <ClInclude Include="..\..\..\include\node2\CompSharedPatch.h" />
     <ClInclude Include="..\..\..\include\node2\CompSprite2.h" />
     <ClInclude Include="..\..\..\include\node2\CompImage.h" />
     <ClInclude Include="..\..\..\include\node2\CompText.h" />
@@ -41,6 +42,7 @@
     <ClCompile Include="..\..\..\source\CompMask.cpp" />
     <ClCompile Include="..\..\..\source\CompMesh.cpp" />
     <ClCompile Include="..\..\..\source\CompScale9.cpp" />
+    <ClCompile Include="..\..\..\source\CompSharedPatch.cpp" />
     <ClCompile Include="..\..\..\source\CompSprite2.cpp" />
     <ClCompile Include="..\..\..\source\CompImage.cpp" />
     <ClCompile Include="..\..\..\source\CompText.cpp" />

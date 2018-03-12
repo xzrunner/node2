@@ -81,10 +81,10 @@ pt2::RenderReturn RenderSystem::Draw(const n0::SceneNodePtr& node, const N2_MAT&
 		auto& ctrans = node->GetUniqueComp<CompTransform>();
 		mt_child = ctrans.GetTrans().GetMatrix() * mt;
 	}
-	if (patch && patch->HasUniqueOp(node_id)) {
-		auto& op_list = patch->GetUniqueOp(node_id);
-		if (op_list.HasEditOp(EditOpID::SetTransformOp)) {
-			auto& op = static_cast<const SetTransformOp&>(op_list.GetEditOp(EditOpID::SetTransformOp));
+	if (patch && patch->HasEditOp(node_id)) {
+		auto& op_list = patch->GetEditOp(node_id);
+		if (op_list.HasEditOp(EditOpID::SetTransformMatOp)) {
+			auto& op = static_cast<const SetTransformMatOp&>(op_list.GetEditOp(EditOpID::SetTransformMatOp));
 			mt_child = op.mat * mt;
 		}
 	}

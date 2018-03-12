@@ -41,6 +41,11 @@ void CompUniquePatch::AddEditOp(size_t node_id, std::unique_ptr<EditOp>& op)
 	}
 }
 
+void CompUniquePatch::SetAllEditOp(const std::vector<EditOpList>& ops)
+{
+	m_edit_ops = ops;
+}
+
 bool CompUniquePatch::HasEditOp(size_t node_id) const
 {
 	return m_unique_ptr >= 0 && static_cast<size_t>(m_unique_ptr) < m_edit_ops.size()

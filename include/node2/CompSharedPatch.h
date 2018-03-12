@@ -22,9 +22,7 @@ public:
 	void AddEditOp(size_t node_id, std::unique_ptr<EditOp>& op);
 
 	const std::vector<EditOpList>& GetAllEditOp() const { return m_edit_ops; }
-	void SetAllEditOp(const std::vector<EditOpList>& ops) {
-		m_edit_ops = ops;
-	}
+	void SetAllEditOp(const std::vector<EditOpList>& ops);
 
 	void PatchToNode(const n0::SceneNodePtr& node);
 

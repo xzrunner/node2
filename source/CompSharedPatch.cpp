@@ -30,6 +30,11 @@ void CompSharedPatch::AddEditOp(size_t node_id, std::unique_ptr<EditOp>& op)
 	}
 }
 
+void CompSharedPatch::SetAllEditOp(const std::vector<EditOpList>& ops)
+{
+	m_edit_ops = ops;
+}
+
 void CompSharedPatch::PatchToNode(const n0::SceneNodePtr& node)
 {
 	if (m_edit_ops.empty()) {

@@ -9,8 +9,6 @@
 namespace n2
 {
 
-struct EditOp;
-
 class CompUniquePatch : public n0::NodeUniqueComp
 {
 public:
@@ -27,9 +25,7 @@ public:
 	void AddEditOp(size_t node_id, std::unique_ptr<EditOp>& op);
 
 	const std::vector<EditOpList>& GetAllEditOp() const { return m_edit_ops; }
-	void SetAllEditOp(const std::vector<EditOpList>& ops) {
-		m_edit_ops = ops;
-	}
+	void SetAllEditOp(const std::vector<EditOpList>& ops);
 
 	bool HasEditOp(size_t node_id) const;
 	const EditOpList& GetEditOp(size_t node_id);

@@ -16,7 +16,7 @@ const char* const CompMask::TYPE_NAME = "n2_mask";
 //	return comp;
 //}
 
-void CompMask::Traverse(std::function<bool(const n0::SceneNodePtr&)> func) const
+void CompMask::Traverse(std::function<bool(const n0::SceneNodePtr&)> func, bool inverse) const
 {
 	if (m_base) {
 		if (!func(m_base)) {

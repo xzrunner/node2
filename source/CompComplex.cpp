@@ -19,11 +19,22 @@ const char* const CompComplex::TYPE_NAME = "n2_complex";
 //	return comp;
 //}
 
-void CompComplex::Traverse(std::function<bool(const n0::SceneNodePtr&)> func) const
+void CompComplex::Traverse(std::function<bool(const n0::SceneNodePtr&)> func, bool inverse) const
 {
-	for (auto& child : m_children) {
-		if (!func(child)) {
-			break;
+	if (inverse)
+	{
+		for (auto& itr = m_children.rbegin(); itr != m_children.rend(); ++itr) {
+			if (!func(*itr)) {
+				break;
+			}
+		}
+	}
+	else
+	{
+		for (auto& child : m_children) {
+			if (!func(child)) {
+				break;
+			}
 		}
 	}
 }

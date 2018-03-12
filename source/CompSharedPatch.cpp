@@ -1,6 +1,8 @@
 #include "node2/CompSharedPatch.h"
 #include "node2/EditOp.h"
+#include "node2/CompTransform.h"
 
+#include <guard/check.h>
 #include <node0/CompAsset.h>
 #include <node0/SceneNode.h>
 
@@ -41,30 +43,72 @@ void CompSharedPatch::PatchToNode(const n0::SceneNodePtr& node)
 		return;
 	}
 
-	size_t node_id = 0;
-	auto ptr = m_edit_ops.begin();
-
-	if (node_id == ptr->GetNodeID()) {
-		PatchToNode(*ptr, node);
-		++ptr;
-	}
-	node_id += 1;
-
-	auto& casset = node->GetSharedComp<n0::CompAsset>();
-	casset.Traverse([&](const n0::SceneNodePtr& node)->bool 
+	size_t curr_id = 0;
+	auto curr_node = node;
+	auto ptr_op = m_edit_ops.begin();
+	while (ptr_op != m_edit_ops.end())
 	{
-		auto& _casset = node->GetSharedComp<n0::CompAsset>();
-		if (node_id == ptr->GetNodeID()) {
-			PatchToNode(*ptr, node);
-		}
-
-		node_id += 1;
-	});
+		auto& casset = curr_node->GetSharedComp<n0::CompAsset>();
+		curr_id += 1;
+		casset.Traverse([&](const n0::SceneNodePtr& node)->bool
+		{
+			auto& _casset = node->GetSharedComp<n0::CompAsset>();
+			if (ptr_op->GetNodeID() == curr_id)
+			{
+				PatchToNode(*ptr_op, node);
+				++ptr_op;
+				curr_node = node;
+				return false;
+			}
+			else if (ptr_op->GetNodeID() < curr_id + _casset.GetNodeCount())
+			{
+				curr_node = node;
+				return false;
+			}
+			else
+			{
+				curr_id += _casset.GetNodeCount();
+				return true;
+			}
+		});
+	}
 }
 
 void CompSharedPatch::PatchToNode(const EditOpList& op_list, const n0::SceneNodePtr& node)
 {
-
+	auto& ops = op_list.GetAllEditOp();
+	for (auto& op : ops)
+	{
+		switch (op->id)
+		{
+		case EditOpID::SetPositionOp:
+			{
+				auto& ctrans = node->GetUniqueComp<CompTransform>();
+				ctrans.SetPosition(*node, static_cast<SetPositionOp&>(*op.get()).pos);
+			}
+			break;
+		case EditOpID::SetAngleOp:
+			{
+				auto& ctrans = node->GetUniqueComp<CompTransform>();
+				ctrans.SetAngle(*node, static_cast<SetAngleOp&>(*op.get()).angle);
+			}
+			break;
+		case EditOpID::SetScaleOp:
+			{
+				auto& ctrans = node->GetUniqueComp<CompTransform>();
+				ctrans.SetScale(*node, static_cast<SetScaleOp&>(*op.get()).scale);
+			}
+			break;
+		case EditOpID::SetShearOp:
+			{
+				auto& ctrans = node->GetUniqueComp<CompTransform>();
+				ctrans.SetShear(*node, static_cast<SetShearOp&>(*op.get()).shear);
+			}
+			break;
+		default:
+			GD_REPORT_ASSERT("unknowno edit op type.");
+		}
+	}
 }
 
 }

@@ -30,8 +30,9 @@ static_assert(EditOpID::SetTransformMatOp == 0,
 
 #define SUPER(Type) EditOp(EditOpID::Type)
 
-struct EditOp
+class EditOp
 {
+public:
 	EditOp(unsigned int id) : id(id) {}
 
 	const uint32_t id;
@@ -42,8 +43,9 @@ struct EditOp
 /* transform                                                            */
 /************************************************************************/
 
-struct SetTransformMatOp : EditOp
+class SetTransformMatOp : public EditOp
 {
+public:
 	SetTransformMatOp(const sm::Matrix2D& mat)
 		: SUPER(SetTransformMatOp)
 		, mat(mat) {}
@@ -54,8 +56,9 @@ struct SetTransformMatOp : EditOp
 
 }; // SetTransformMatOp
 
-struct SetPositionOp : EditOp
+class SetPositionOp : public EditOp
 {
+public:
 	SetPositionOp(const sm::vec2& pos)
 		: SUPER(SetPositionOp)
 		, pos(pos) {}
@@ -66,8 +69,9 @@ struct SetPositionOp : EditOp
 
 }; // SetPositionOp
 
-struct SetAngleOp : EditOp
+class SetAngleOp : public EditOp
 {
+public:
 	SetAngleOp(float angle)
 		: SUPER(SetAngleOp)
 		, angle(angle) {}
@@ -78,8 +82,9 @@ struct SetAngleOp : EditOp
 
 }; // SetAngleOp
 
-struct SetScaleOp : EditOp
+class SetScaleOp : public EditOp
 {
+public:
 	SetScaleOp(const sm::vec2& scale)
 		: SUPER(SetScaleOp)
 		, scale(scale) {}
@@ -90,8 +95,9 @@ struct SetScaleOp : EditOp
 
 }; // SetScaleOp
 
-struct SetShearOp : EditOp
+class SetShearOp : public EditOp
 {
+public:
 	SetShearOp(const sm::vec2& shear)
 		: SUPER(SetShearOp)
 		, shear(shear) {}

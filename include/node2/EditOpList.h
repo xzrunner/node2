@@ -7,7 +7,7 @@
 namespace n2
 {
 
-struct EditOp;
+class EditOp;
 
 class EditOpList
 {

@@ -62,6 +62,7 @@ void CompComplex::InitNodeCount() const
 void CompComplex::AddChild(const std::shared_ptr<n0::SceneNode>& child)
 {
 	m_children.push_back(child);
+	++m_node_count;
 }
 
 bool CompComplex::RemoveChild(const std::shared_ptr<n0::SceneNode>& child)
@@ -70,6 +71,7 @@ bool CompComplex::RemoveChild(const std::shared_ptr<n0::SceneNode>& child)
 	{
 		if (*itr == child) {
 			m_children.erase(itr);
+			--m_node_count;
 			return true;
 		}
 	}
@@ -79,6 +81,7 @@ bool CompComplex::RemoveChild(const std::shared_ptr<n0::SceneNode>& child)
 void CompComplex::RemoveAllChildren()
 {
 	m_children.clear();
+	m_node_count = 1;
 }
 
 }

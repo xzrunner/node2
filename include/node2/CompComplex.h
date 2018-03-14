@@ -20,8 +20,7 @@ public:
 	virtual void Traverse(std::function<bool(const n0::SceneNodePtr&)> func,
 		bool inverse = false) const override;
 	virtual sm::rect GetBounding() const override;
-	virtual void InitNodeCount() const;
-
+	
 	void AddChild(const std::shared_ptr<n0::SceneNode>& child);
 	bool RemoveChild(const std::shared_ptr<n0::SceneNode>& child);
 	void RemoveAllChildren();
@@ -29,9 +28,7 @@ public:
 	const std::vector<n0::SceneNodePtr>& GetAllChildren() const {
 		return m_children;
 	}
-	void SetChildren(const std::vector<n0::SceneNodePtr>& children) {
-		m_children = children;
-	}
+	void SetChildren(const std::vector<n0::SceneNodePtr>& children);
 
 	static const char* const TYPE_NAME;
 

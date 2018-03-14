@@ -19,7 +19,6 @@ public:
 	virtual void Traverse(std::function<bool(const n0::SceneNodePtr&)> func,
 		bool inverse = false) const override {}
 	virtual sm::rect GetBounding() const override;
-	virtual void InitNodeCount() const { m_node_count = 1; }
 
 	void SetFilepath(const std::string& filepath) { m_filepath = filepath; }
 	const std::string& GetFilepath() const { return m_filepath; }

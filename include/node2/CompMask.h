@@ -19,15 +19,17 @@ public:
 	virtual void Traverse(std::function<bool(const n0::SceneNodePtr&)> func,
 		bool inverse = false) const override;
 	virtual sm::rect GetBounding() const override;
-	virtual void InitNodeCount() const;
 
-	void SetBaseNode(const n0::SceneNodePtr& base) { m_base = base; }
-	void SetMaskNode(const n0::SceneNodePtr& mask) { m_mask = mask; }
+	void SetBaseNode(const n0::SceneNodePtr& base);
+	void SetMaskNode(const n0::SceneNodePtr& mask);
 	const n0::SceneNodePtr& GetBaseNode() const { return m_base; }
 	const n0::SceneNodePtr& GetMaskNode() const { return m_mask; }
 
 	static const char* const TYPE_NAME;
 
+private:
+	int CalcNodeCount() const;
+	
 private:
 	n0::SceneNodePtr m_base = nullptr, m_mask = nullptr;
 

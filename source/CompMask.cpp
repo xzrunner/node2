@@ -39,7 +39,19 @@ sm::rect CompMask::GetBounding() const
 	return aabb;
 }
 
-void CompMask::InitNodeCount() const
+void CompMask::SetBaseNode(const n0::SceneNodePtr& base) 
+{ 
+	m_base = base; 
+	m_node_count = CalcNodeCount();
+}
+
+void CompMask::SetMaskNode(const n0::SceneNodePtr& mask) 
+{ 
+	m_mask = mask; 
+	m_node_count = CalcNodeCount();
+}
+
+int CompMask::CalcNodeCount() const
 {
 	size_t count = 1;
 	if (m_base)
@@ -52,7 +64,7 @@ void CompMask::InitNodeCount() const
 		auto& casset = m_mask->GetSharedComp<n0::CompAsset>();
 		count += casset.GetNodeCount();
 	}
-	m_node_count = count;
+	return count;
 }
 
 }

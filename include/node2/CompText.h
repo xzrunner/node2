@@ -17,7 +17,6 @@ public:
 	virtual void Traverse(std::function<bool(const n0::SceneNodePtr&)> func,
 		bool inverse = false) const override {}
 	virtual sm::rect GetBounding() const override;
-	virtual void InitNodeCount() const { m_node_count = 1; }
 
 	const pt2::Text& GetText() const { return m_text; }
 	pt2::Text& GetText() { return m_text; }

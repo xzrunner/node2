@@ -32,6 +32,7 @@
     <ClInclude Include="..\..\..\include\node2\EditOp.h" />
     <ClInclude Include="..\..\..\include\node2\RenderSystem.h" />
     <ClInclude Include="..\..\..\include\node2\predef.h" />
+    <ClInclude Include="..\..\..\include\node2\SceneTreeHelper.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\source\AABBHelper.cpp" />
@@ -52,6 +53,7 @@
     <ClCompile Include="..\..\..\source\EditOpMem.cpp" />
     <ClCompile Include="..\..\..\source\EditOpList.cpp" />
     <ClCompile Include="..\..\..\source\RenderSystem.cpp" />
+    <ClCompile Include="..\..\..\source\SceneTreeHelper.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectName>3.node2</ProjectName>

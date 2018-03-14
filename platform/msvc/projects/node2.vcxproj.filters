@@ -89,6 +89,9 @@
     <ClInclude Include="..\..\..\include\node2\CompSharedPatch.h">
       <Filter>components\patch</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\include\node2\SceneTreeHelper.h">
+      <Filter>entity</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\source\CompColorCommon.cpp">
@@ -144,6 +147,9 @@
     </ClCompile>
     <ClCompile Include="..\..\..\source\CompSharedPatch.cpp">
       <Filter>components\patch</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\SceneTreeHelper.cpp">
+      <Filter>entity</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

@@ -5,6 +5,7 @@
 #include "painting2/RenderReturn.h"
 
 #include <SM_Matrix.h>
+#include <SM_Rect.h>
 #include <node0/typedef.h>
 
 namespace n2
@@ -39,6 +40,8 @@ class RenderSystem
 public:
 	static pt2::RenderReturn Draw(const n0::SceneNodePtr& node, 
 		const RenderParams& rp = RenderParams());
+
+	static void DrawScissorRect(const sm::rect& rect, const N2_MAT& mt);
 
 }; // RenderSystem
 

@@ -185,12 +185,7 @@ pt2::RenderReturn RenderSystem::Draw(const n0::SceneNodePtr& node,
 		if (rp.is_edit_mode)
 		{
 			auto& cscissor = node->GetUniqueComp<n2::CompScissor>();
-			auto& rect = cscissor.GetRect();
-			pt2::PrimitiveDraw::SetColor(pt2::Color(0, 204, 0));
-			pt2::PrimitiveDraw::LineWidth(2);
-			auto min = mt_child * sm::vec2(rect.xmin, rect.ymin);
-			auto max = mt_child * sm::vec2(rect.xmax, rect.ymax);
-			pt2::PrimitiveDraw::Rect(nullptr, min, max, false);
+			DrawScissorRect(cscissor.GetRect(), mt_child);
 		}
 		else
 		{
@@ -200,6 +195,15 @@ pt2::RenderReturn RenderSystem::Draw(const n0::SceneNodePtr& node,
 	}
 
 	return ret;
+}
+
+void RenderSystem::DrawScissorRect(const sm::rect& rect, const N2_MAT& mt)
+{
+	pt2::PrimitiveDraw::SetColor(pt2::Color(0, 204, 0));
+	pt2::PrimitiveDraw::LineWidth(2);
+	auto min = mt * sm::vec2(rect.xmin, rect.ymin);
+	auto max = mt * sm::vec2(rect.xmax, rect.ymax);
+	pt2::PrimitiveDraw::Rect(nullptr, min, max, false);
 }
 
 }

@@ -11,6 +11,7 @@
 #include "node2/CompComplex.h"
 #include "node2/CompUniquePatch.h"
 #include "node2/CompScissor.h"
+#include "node2/CompScript.h"
 #include "node2/EditOp.h"
 
 #include <node0/SceneNode.h>
@@ -18,6 +19,8 @@
 #include <painting2/DrawMask.h>
 #include <painting2/PrimitiveDraw.h>
 #include <sprite2/DrawNode.h>
+#include <dust/LuaVM.h>
+#include <dust/Blackboard.h>
 
 namespace
 {
@@ -177,6 +180,13 @@ pt2::RenderReturn RenderSystem::Draw(const n0::SceneNodePtr& node,
 				rp_child.node_id += casset.GetNodeCount();
 			}
 		}
+	}
+
+	// script
+	if (node->HasUniqueComp<n2::CompScript>())
+	{
+//		auto& cscript = node->GetUniqueComp<n2::CompScript>();
+//		dust::Blackboard::Instance()->vm->DoFunc(cscript.GetFilepath().c_str(), "draw");
 	}
 
 	// end scissor

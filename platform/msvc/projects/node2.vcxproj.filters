@@ -31,6 +31,9 @@
     <Filter Include="components\render">
       <UniqueIdentifier>{f5f6e5aa-a217-4f52-8f3f-ed7fcf2e7d53}</UniqueIdentifier>
     </Filter>
+    <Filter Include="components\script">
+      <UniqueIdentifier>{b68d7f60-22bc-48d8-9dcb-fcfd539ab3cb}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\include\node2\predef.h" />
@@ -98,6 +101,9 @@
     <ClInclude Include="..\..\..\include\node2\CompScissor.h">
       <Filter>components\render</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\include\node2\CompScript.h">
+      <Filter>components\script</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\source\CompColorCommon.cpp">
@@ -159,6 +165,9 @@
     </ClCompile>
     <ClCompile Include="..\..\..\source\CompScissor.cpp">
       <Filter>components\render</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\CompScript.cpp">
+      <Filter>components\script</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

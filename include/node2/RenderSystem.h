@@ -23,6 +23,8 @@ public:
 
 	void SetEditMode(bool edit) { is_edit_mode = edit; }
 
+	void SetMatrix(const N2_MAT& mt) { this->mt = mt; }
+
 private:
 	N2_MAT mt;
 

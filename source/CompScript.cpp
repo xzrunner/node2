@@ -21,9 +21,9 @@ void CompScript::SetFilepath(const std::string& filepath, const n0::SceneNodePtr
 	m_script.LoadScript(m_filepath, node);
 }
 
-void CompScript::Reload()
+void CompScript::Reload(const n0::SceneNodePtr& node)
 {
-//	m_script.LoadScript(m_filepath);
+	m_script.LoadScript(m_filepath, node);
 }
 
 }

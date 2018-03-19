@@ -24,7 +24,7 @@ public:
 	void Update() const { m_script.OnUpdate(); }
 	void Draw() const { m_script.OnDraw(); }
 
-	void Reload();
+	void Reload(const n0::SceneNodePtr& node);
 
 	static const char* const TYPE_NAME;
 

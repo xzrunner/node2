@@ -2,7 +2,7 @@
 
 #include <node0/NodeUniqueComp.h>
 #include <node0/typedef.h>
-#include <dust/SceneNodeScript.h>
+#include <moon/SceneNodeScript.h>
 
 #include <string>
 
@@ -31,7 +31,7 @@ public:
 private:
 	std::string m_filepath;
 
-	dust::SceneNodeScript m_script;
+	moon::SceneNodeScript m_script;
 
 }; // CompScript
 

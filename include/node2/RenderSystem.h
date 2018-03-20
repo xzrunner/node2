@@ -17,13 +17,15 @@ class RenderParams
 {
 public:
 	RenderParams()
-		: patch(nullptr), node_id(0), is_edit_mode(true) {}
+		: patch(nullptr), node_id(0), is_edit_mode(true), m_quad_base_left_top(false) {}
 
 	void SetPatch(CompUniquePatch* patch) { this->patch = patch; }
 
 	void SetEditMode(bool edit) { is_edit_mode = edit; }
 
 	void SetMatrix(const N2_MAT& mt) { this->mt = mt; }
+
+	void QuadBaseLeftTop(bool left_top) { m_quad_base_left_top = left_top; }
 
 private:
 	N2_MAT mt;
@@ -32,6 +34,8 @@ private:
 	size_t node_id;
 
 	bool is_edit_mode;
+
+	bool m_quad_base_left_top;
 
 	friend class RenderSystem;
 

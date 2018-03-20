@@ -13,7 +13,6 @@
 #include "node2/CompScissor.h"
 #include "node2/CompScript.h"
 #include "node2/EditOp.h"
-#include "node2/config.h"
 
 #include <node0/SceneNode.h>
 #include <painting2/RenderSystem.h>
@@ -126,13 +125,20 @@ pt2::RenderReturn RenderSystem::Draw(const n0::SceneNodePtr& node,
 	{
 		auto& cimage = node->GetSharedComp<CompImage>();
 		auto& tex = cimage.GetTexture();
-		if (tex) {
+		if (tex) 
+		{
 			auto sz = tex->GetSize();
-#ifdef N2_QUAD_DRAW_CENTER
-			pt2::RenderSystem::DrawTexture(*tex, sm::rect(sz.x, sz.y), mt_child);
-#else
-			pt2::RenderSystem::DrawTexture(*tex, sm::rect(0, 0, sz.x, sz.y), mt_child);
-#endif // N2_QUAD_DRAW_CENTER
+			if (rp.m_quad_base_left_top)
+			{ 
+				sm::rect r;
+				r.xmin = 0; r.xmax = sz.x;
+				r.ymin = -sz.y; r.ymax = 0;
+				pt2::RenderSystem::DrawTexture(*tex, r, mt_child);
+			}
+			else
+			{
+				pt2::RenderSystem::DrawTexture(*tex, sm::rect(sz.x, sz.y), mt_child);
+			}
 		}
 	}
 	if (node->HasSharedComp<CompText>())

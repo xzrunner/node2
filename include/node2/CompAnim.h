@@ -21,6 +21,7 @@ public:
 
 	public:
 		Frame() : index(0), tween(false) {}
+		~Frame() = default;
 
 	}; // Frame
 
@@ -32,9 +33,14 @@ public:
 		std::string name;
 		std::vector<FramePtr> frames;
 
+		bool editable, visible;
+
 	public:
 		int GetCurrFrame(int index) const;
 		int GetNextFrame(int index) const;
+
+		Layer() : editable(true), visible(true) {}
+		~Layer() = default;
 
 	}; // Layer
 
@@ -51,6 +57,9 @@ public:
 	virtual sm::rect GetBounding() const override;
 
 	void AddLayer(LayerPtr& layer) { m_layers.push_back(std::move(layer)); }
+	void SwapLayers(int idx0, int idx1) { 
+		std::iter_swap(m_layers.begin() + idx0, m_layers.begin() + idx1);
+	}
 
 	const std::vector<LayerPtr>& GetAllLayers() const { return m_layers; }
 

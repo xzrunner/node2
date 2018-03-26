@@ -12,6 +12,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\include\node2\AABBHelper.h" />
+    <ClInclude Include="..\..\..\include\node2\CompAnim.h" />
     <ClInclude Include="..\..\..\include\node2\CompBoundingBox.h" />
     <ClInclude Include="..\..\..\include\node2\CompColorCommon.h" />
     <ClInclude Include="..\..\..\include\node2\CompColorMap.h" />
@@ -38,6 +39,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\source\AABBHelper.cpp" />
+    <ClCompile Include="..\..\..\source\CompAnim.cpp" />
     <ClCompile Include="..\..\..\source\CompBoundingBox.cpp" />
     <ClCompile Include="..\..\..\source\CompColorCommon.cpp" />
     <ClCompile Include="..\..\..\source\CompColorMap.cpp" />

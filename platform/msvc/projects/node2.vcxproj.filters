@@ -104,6 +104,9 @@
     <ClInclude Include="..\..\..\include\node2\CompScript.h">
       <Filter>components\script</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\include\node2\CompAnim.h">
+      <Filter>components\asset</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\source\CompColorCommon.cpp">
@@ -168,6 +171,9 @@
     </ClCompile>
     <ClCompile Include="..\..\..\source\CompScript.cpp">
       <Filter>components\script</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\CompAnim.cpp">
+      <Filter>components\asset</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

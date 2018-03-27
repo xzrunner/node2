@@ -9,6 +9,7 @@
 #include "node2/CompBoundingBox.h"
 #include "node2/CompScale9.h"
 #include "node2/CompComplex.h"
+#include "node2/CompAnim.h"
 #include "node2/CompUniquePatch.h"
 #include "node2/CompScissor.h"
 #include "node2/CompScript.h"
@@ -19,6 +20,8 @@
 #include <painting2/DrawMask.h>
 #include <painting2/PrimitiveDraw.h>
 #include <sprite2/DrawNode.h>
+#include <anim/Layer.h>
+#include <anim/KeyFrame.h>
 
 namespace
 {
@@ -190,6 +193,29 @@ pt2::RenderReturn RenderSystem::Draw(const n0::SceneNodePtr& node,
 			}
 		}
 	}
+
+	//if (node->HasSharedComp<n2::CompAnim>())
+	//{
+	//	auto& canim = node->GetSharedComp<n2::CompAnim>();
+	//	auto& layers = canim.GetAllLayers();
+	//	int frame_idx = canim.GetCurrFrameIdx();
+
+	//	RenderParams rp_child(rp);
+	//	rp_child.mt = mt_child;
+	//	rp_child.node_id += 1;
+
+	//	for (auto& layer : layers)
+	//	{
+	//		auto frame = layer->GetCurrKeyFrame(frame_idx);
+	//		if (frame)
+	//		{
+	//			auto& nodes = frame->GetAllNodes();
+	//			for (auto& node : nodes) {
+	//				Draw(node, rp_child);
+	//			}
+	//		}
+	//	}
+	//}
 
 	// script
 	if (node->HasUniqueComp<n2::CompScript>())

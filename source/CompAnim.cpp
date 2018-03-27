@@ -1,5 +1,8 @@
 #include "node2/CompAnim.h"
 
+#include <anim/KeyFrame.h>
+#include <anim/Layer.h>
+
 namespace n2
 {
 
@@ -7,22 +10,33 @@ const char* const CompAnim::TYPE_NAME = "n2_anim";
 
 void CompAnim::Traverse(std::function<bool(const n0::SceneNodePtr&)> func, bool inverse) const
 {
-	//if (inverse)
-	//{
-	//	for (auto& itr = m_children.rbegin(); itr != m_children.rend(); ++itr) {
-	//		if (!func(*itr)) {
-	//			break;
-	//		}
-	//	}
-	//}
-	//else
-	//{
-	//	for (auto& child : m_children) {
-	//		if (!func(child)) {
-	//			break;
-	//		}
-	//	}
-	//}
+	auto& layers = GetAllLayers();
+	int frame_idx = m_ctrl.GetFrame();
+	for (auto& layer : layers)
+	{
+		auto frame = layer->GetCurrKeyFrame(frame_idx);
+		if (frame)
+		{
+			auto& nodes = frame->GetAllNodes();
+
+			if (inverse)
+			{
+				for (auto& itr = nodes.rbegin(); itr != nodes.rend(); ++itr) {
+					if (!func(*itr)) {
+						break;
+					}
+				}
+			}
+			else
+			{
+				for (auto& node : nodes) {
+					if (!func(node)) {
+						break;
+					}
+				}
+			}
+		}
+	}
 }
 
 sm::rect CompAnim::GetBounding() const
@@ -36,51 +50,24 @@ sm::rect CompAnim::GetBounding() const
 	return sm::rect(100, 100);
 }
 
-/************************************************************************/
-/* class AnimSymbol::Layer                                              */
-/************************************************************************/
-
-int CompAnim::Layer::GetCurrFrame(int index) const
-{
-	if (frames.empty()) {
-		return -1;
-	}
-
-	int prev = -1, curr = -1;
-	int idx = 0;
-	for (auto& frame : frames)
-	{
-		if (frame->index >= index) {
-			curr = idx;
-			break;
-		} else {
-			prev = idx;
-		}
-		++idx;
-	}
-	
-	if (curr < 0) {
-		return -1;
-	} else if (curr == index) {
-		return curr;
-	} else if (prev < 0) {
-		return -1;
-	} else {
-		assert(prev <= index);
-		return prev;
-	}
+void CompAnim::AddLayer(anim::LayerPtr& layer) 
+{ 
+	m_layers.push_back(std::move(layer)); 
 }
 
-int CompAnim::Layer::GetNextFrame(int index) const
+void CompAnim::SwapLayers(int idx0, int idx1) 
 {
-	int idx = 0;
-	for (auto& frame : frames) {
-		if (frame->index > index) {
-			return idx;
-		}
-		++idx;
-	}
-	return -1;
+	std::iter_swap(m_layers.begin() + idx0, m_layers.begin() + idx1);
+}
+
+//int CompAnim::GetCurrFrameIdx() const
+//{
+//	return m_ctrl.GetFrame();
+//}
+
+void CompAnim::SetCurrFrameIdx(int frame)
+{
+	m_ctrl.SetFrame(frame);
 }
 
 }

@@ -34,10 +34,9 @@ public:
 
 	uint32_t GetFPS() const { return m_fps; }
 
-	static const char* const TYPE_NAME;
-
-private:
 	int GetMaxFrame() const;
+
+	static const char* const TYPE_NAME;
 
 private:
 	std::vector<anim::LayerPtr> m_layers;

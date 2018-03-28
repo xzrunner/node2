@@ -8,10 +8,20 @@ namespace n2
 
 const char* const CompAnim::TYPE_NAME = "n2_anim";
 
+CompAnim::CompAnim()
+	: m_fps(30)
+{
+}
+
 void CompAnim::Traverse(std::function<bool(const n0::SceneNodePtr&)> func, bool inverse) const
 {
+	int frame_idx = static_cast<int>((m_ctrl.GetCurrTime() - m_ctrl.GetStartTime()) * m_fps);
+	int max_frame = GetMaxFrame();
+	if (max_frame > 0) {
+		frame_idx = frame_idx % max_frame;
+	}
+
 	auto& layers = GetAllLayers();
-	int frame_idx = m_ctrl.GetFrame();
 	for (auto& layer : layers)
 	{
 		auto frame = layer->GetCurrKeyFrame(frame_idx);
@@ -60,14 +70,25 @@ void CompAnim::SwapLayers(int idx0, int idx1)
 	std::iter_swap(m_layers.begin() + idx0, m_layers.begin() + idx1);
 }
 
-//int CompAnim::GetCurrFrameIdx() const
-//{
-//	return m_ctrl.GetFrame();
-//}
+bool CompAnim::RemoveAllLayers() 
+{ 
+	bool dirty = !m_layers.empty();
+	m_layers.clear(); 
+	return dirty;
+}
 
-void CompAnim::SetCurrFrameIdx(int frame)
+int CompAnim::GetMaxFrame() const
 {
-	m_ctrl.SetFrame(frame);
+	int max_frame = -1;
+	auto& layers = GetAllLayers();
+	for (auto& layer : layers) 
+	{
+		auto& frames = layer->GetAllKeyFrames();
+		if (!frames.empty()) {
+			max_frame = std::max(max_frame, frames.back()->GetFrameIdx());
+		}
+	}
+	return max_frame;
 }
 
 }

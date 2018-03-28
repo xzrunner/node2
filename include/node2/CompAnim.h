@@ -12,6 +12,8 @@ namespace n2
 class CompAnim : public n0::CompAsset
 {
 public:
+	CompAnim();
+
 	virtual const char* Type() const override { return TYPE_NAME; }
 
 	virtual n0::AssetID AssetTypeID() const override {
@@ -23,19 +25,27 @@ public:
 
 	void AddLayer(anim::LayerPtr& layer);
 	void SwapLayers(int idx0, int idx1);
+	bool RemoveAllLayers();
 
 	const std::vector<anim::LayerPtr>& GetAllLayers() const { return m_layers; }
 
-//	int GetCurrFrameIdx() const;
-	void SetCurrFrameIdx(int frame);
-	
+	const anim::PlayCtrl& GetPlayCtrl() const { return m_ctrl; }
+	anim::PlayCtrl& GetPlayCtrl() { return m_ctrl; }
+
+	uint32_t GetFPS() const { return m_fps; }
+
 	static const char* const TYPE_NAME;
+
+private:
+	int GetMaxFrame() const;
 
 private:
 	std::vector<anim::LayerPtr> m_layers;
 
 	anim::PlayCtrl m_ctrl;
 
+	uint32_t m_fps;
+	
 }; // CompAnim
 
 }

@@ -194,28 +194,32 @@ pt2::RenderReturn RenderSystem::Draw(const n0::SceneNodePtr& node,
 		}
 	}
 
-	//if (node->HasSharedComp<n2::CompAnim>())
-	//{
-	//	auto& canim = node->GetSharedComp<n2::CompAnim>();
-	//	auto& layers = canim.GetAllLayers();
-	//	int frame_idx = canim.GetCurrFrameIdx();
+	if (node->HasSharedComp<n2::CompAnim>())
+	{
+		auto& canim = node->GetSharedComp<n2::CompAnim>();
+		int frame_idx = canim.GetPlayCtrl().GetFrame(canim.GetFPS());
+		int max_frame = canim.GetMaxFrame();
+		if (max_frame > 0) {
+			frame_idx = frame_idx % (max_frame + 1);
+		}
 
-	//	RenderParams rp_child(rp);
-	//	rp_child.mt = mt_child;
-	//	rp_child.node_id += 1;
+		RenderParams rp_child(rp);
+		rp_child.mt = mt_child;
+		rp_child.node_id += 1;
 
-	//	for (auto& layer : layers)
-	//	{
-	//		auto frame = layer->GetCurrKeyFrame(frame_idx);
-	//		if (frame)
-	//		{
-	//			auto& nodes = frame->GetAllNodes();
-	//			for (auto& node : nodes) {
-	//				Draw(node, rp_child);
-	//			}
-	//		}
-	//	}
-	//}
+		auto& layers = canim.GetAllLayers();
+		for (auto& layer : layers)
+		{
+			auto frame = layer->GetCurrKeyFrame(frame_idx);
+			if (frame)
+			{
+				auto& nodes = frame->GetAllNodes();
+				for (auto& node : nodes) {
+					Draw(node, rp_child);
+				}
+			}
+		}
+	}
 
 	// script
 	if (node->HasUniqueComp<n2::CompScript>())

@@ -15,10 +15,10 @@ CompAnim::CompAnim()
 
 void CompAnim::Traverse(std::function<bool(const n0::SceneNodePtr&)> func, bool inverse) const
 {
-	int frame_idx = static_cast<int>((m_ctrl.GetCurrTime() - m_ctrl.GetStartTime()) * m_fps);
+	int frame_idx = m_ctrl.GetFrame(m_fps);
 	int max_frame = GetMaxFrame();
 	if (max_frame > 0) {
-		frame_idx = frame_idx % max_frame;
+		frame_idx = frame_idx % (max_frame + 1);
 	}
 
 	auto& layers = GetAllLayers();

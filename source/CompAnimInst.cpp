@@ -27,6 +27,11 @@ std::unique_ptr<n0::NodeUniqueComp> CompAnimInst::Clone(const n0::SceneNode& nod
 	return comp;
 }
 
+void CompAnimInst::Refresh()
+{
+	m_inst->Refresh();
+}
+
 bool CompAnimInst::Update()
 {
 	return m_inst->Update(m_loop, m_interval, m_fps);
@@ -40,6 +45,16 @@ bool CompAnimInst::SetFrame(int frame_idx)
 void CompAnimInst::TraverseCurrNodes(std::function<bool(const n0::SceneNodePtr&)> func) const
 {
 	m_inst->TraverseCurrNodes(func);
+}
+
+anim::PlayCtrl& CompAnimInst::GetPlayCtrl()
+{
+	return m_inst->GetPlayCtrl();
+}
+
+const anim::PlayCtrl& CompAnimInst::GetPlayCtrl() const
+{
+	return m_inst->GetPlayCtrl();
 }
 
 }

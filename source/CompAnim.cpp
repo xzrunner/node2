@@ -65,7 +65,7 @@ bool CompAnim::RemoveAllLayers()
 { 
 	bool dirty = !m_layers.empty();
 	m_layers.clear(); 
-	m_anim_temp.reset();
+	m_anim_temp->Clear();
 	return dirty;
 }
 

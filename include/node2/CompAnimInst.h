@@ -17,10 +17,15 @@ public:
 	}
 	virtual std::unique_ptr<n0::NodeUniqueComp> Clone(const n0::SceneNode& node) const override;
 
+	void Refresh();
+
 	bool Update();
 	bool SetFrame(int frame_idx);
 
 	void TraverseCurrNodes(std::function<bool(const n0::SceneNodePtr&)> func) const;
+
+	anim::PlayCtrl& GetPlayCtrl();
+	const anim::PlayCtrl& GetPlayCtrl() const;
 
 	static const char* const TYPE_NAME;
 

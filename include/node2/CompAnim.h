@@ -6,6 +6,8 @@
 
 #include <vector>
 
+namespace anim { class AnimTemplate; }
+
 namespace n2
 {
 
@@ -29,21 +31,20 @@ public:
 
 	const std::vector<anim::LayerPtr>& GetAllLayers() const { return m_layers; }
 
-	const anim::PlayCtrl& GetPlayCtrl() const { return m_ctrl; }
-	anim::PlayCtrl& GetPlayCtrl() { return m_ctrl; }
-
 	uint32_t GetFPS() const { return m_fps; }
 
-	int GetMaxFrame() const;
+	const std::shared_ptr<anim::AnimTemplate>& GetAnimTemplate() const {
+		return m_anim_temp;
+	}
 
 	static const char* const TYPE_NAME;
 
 private:
 	std::vector<anim::LayerPtr> m_layers;
 
-	anim::PlayCtrl m_ctrl;
-
 	uint32_t m_fps;
+
+	std::shared_ptr<anim::AnimTemplate> m_anim_temp = nullptr;
 	
 }; // CompAnim
 

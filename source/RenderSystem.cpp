@@ -10,6 +10,7 @@
 #include "node2/CompScale9.h"
 #include "node2/CompComplex.h"
 #include "node2/CompAnim.h"
+#include "node2/CompAnimInst.h"
 #include "node2/CompUniquePatch.h"
 #include "node2/CompScissor.h"
 #include "node2/CompScript.h"
@@ -196,29 +197,17 @@ pt2::RenderReturn RenderSystem::Draw(const n0::SceneNodePtr& node,
 
 	if (node->HasSharedComp<n2::CompAnim>())
 	{
-		auto& canim = node->GetSharedComp<n2::CompAnim>();
-		int frame_idx = canim.GetPlayCtrl().GetFrame(canim.GetFPS());
-		int max_frame = canim.GetMaxFrame();
-		if (max_frame > 0) {
-			frame_idx = frame_idx % (max_frame + 1);
-		}
+		auto& canim = node->GetUniqueComp<n2::CompAnimInst>();
 
 		RenderParams rp_child(rp);
 		rp_child.mt = mt_child;
 		rp_child.node_id += 1;
 
-		auto& layers = canim.GetAllLayers();
-		for (auto& layer : layers)
+		canim.TraverseCurrNodes([&](const n0::SceneNodePtr& node)->bool
 		{
-			auto frame = layer->GetCurrKeyFrame(frame_idx);
-			if (frame)
-			{
-				auto& nodes = frame->GetAllNodes();
-				for (auto& node : nodes) {
-					Draw(node, rp_child);
-				}
-			}
-		}
+			Draw(node, rp_child);
+			return true;
+		});	
 	}
 
 	// script

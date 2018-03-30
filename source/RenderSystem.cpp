@@ -197,13 +197,13 @@ pt2::RenderReturn RenderSystem::Draw(const n0::SceneNodePtr& node,
 
 	if (node->HasSharedComp<n2::CompAnim>())
 	{
-		auto& canim = node->GetUniqueComp<n2::CompAnimInst>();
+		auto& canim_inst = node->GetUniqueComp<n2::CompAnimInst>();
 
 		RenderParams rp_child(rp);
 		rp_child.mt = mt_child;
 		rp_child.node_id += 1;
 
-		canim.TraverseCurrNodes([&](const n0::SceneNodePtr& node)->bool
+		canim_inst.TraverseCurrNodes([&](const n0::SceneNodePtr& node)->bool
 		{
 			Draw(node, rp_child);
 			return true;

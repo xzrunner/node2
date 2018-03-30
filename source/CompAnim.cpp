@@ -52,20 +52,17 @@ sm::rect CompAnim::GetBounding() const
 void CompAnim::AddLayer(anim::LayerPtr& layer) 
 { 
 	m_layers.push_back(std::move(layer)); 
-	m_anim_temp->Build(m_layers);
 }
 
 void CompAnim::SwapLayers(int idx0, int idx1) 
 {
 	std::iter_swap(m_layers.begin() + idx0, m_layers.begin() + idx1);
-	m_anim_temp->Build(m_layers);
 }
 
 bool CompAnim::RemoveAllLayers() 
 { 
 	bool dirty = !m_layers.empty();
 	m_layers.clear(); 
-	m_anim_temp->Clear();
 	return dirty;
 }
 

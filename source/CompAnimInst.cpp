@@ -1,45 +1,42 @@
 #include "node2/CompAnimInst.h"
 
 #include <anim/AnimInstance.h>
+#include <anim/AnimTemplate.h>
 
 namespace n2
 {
 
 const char* const CompAnimInst::TYPE_NAME = "n2_anim_inst";
 
-CompAnimInst::CompAnimInst(const std::shared_ptr<const anim::AnimTemplate>& anim_temp)
+CompAnimInst::CompAnimInst(const std::shared_ptr<anim::AnimTemplate>& anim_temp)
 	: m_loop(true)
 	, m_interval(0)
-	, m_fps(30)
 	, m_start_random(false)
 {
-	m_inst = std::make_unique<anim::AnimInstance>(anim_temp);
+	m_inst = std::make_shared<anim::AnimInstance>(anim_temp);
+	anim_temp->AddInstance(m_inst);
 }
 
 std::unique_ptr<n0::NodeUniqueComp> CompAnimInst::Clone(const n0::SceneNode& node) const
 {
-	auto comp = std::make_unique<CompAnimInst>(m_inst->GetAnimTemplate());
+	auto& temp = m_inst->GetAnimTemplate();
+	auto comp = std::make_unique<CompAnimInst>(temp);
 	comp->m_loop         = m_loop;
 	comp->m_interval     = m_interval;
-	comp->m_fps          = m_fps;
 	comp->m_start_random = m_start_random;
-	comp->m_inst = std::make_unique<anim::AnimInstance>(*m_inst);
+	comp->m_inst = std::make_shared<anim::AnimInstance>(temp);
+	temp->AddInstance(comp->m_inst);
 	return comp;
-}
-
-void CompAnimInst::Refresh()
-{
-	m_inst->Refresh();
 }
 
 bool CompAnimInst::Update()
 {
-	return m_inst->Update(m_loop, m_interval, m_fps);
+	return m_inst->Update(m_loop, m_interval);
 }
 
 bool CompAnimInst::SetFrame(int frame_idx)
 {
-	return m_inst->SetFrame(frame_idx, m_fps);
+	return m_inst->SetFrame(frame_idx);
 }
 
 void CompAnimInst::TraverseCurrNodes(std::function<bool(const n0::SceneNodePtr&)> func) const

@@ -57,4 +57,9 @@ void CompTransform::SetSRT(const n0::SceneNode& node, const pt2::SRT& srt)
 	}
 }
 
+void CompTransform::SetSRT(const pt2::SRT& srt)
+{
+	m_trans.SetSRT(srt);
+}
+
 }

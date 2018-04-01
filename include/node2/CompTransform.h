@@ -27,6 +27,7 @@ public:
 	void SetOffset(const n0::SceneNode& node, const sm::vec2& offset);
 
 	void SetSRT(const n0::SceneNode& node, const pt2::SRT& srt);
+	void SetSRT(const pt2::SRT& srt);
 
 	static const char* const TYPE_NAME;
 

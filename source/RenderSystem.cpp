@@ -5,12 +5,13 @@
 #include "node2/CompColorMap.h"
 #include "node2/CompText.h"
 #include "node2/CompMask.h"
-#include "node2/CompSprite2.h"
 #include "node2/CompBoundingBox.h"
 #include "node2/CompScale9.h"
 #include "node2/CompComplex.h"
 #include "node2/CompAnim.h"
 #include "node2/CompAnimInst.h"
+#include "node2/CompParticle3d.h"
+#include "node2/CompParticle3dInst.h"
 #include "node2/CompUniquePatch.h"
 #include "node2/CompScissor.h"
 #include "node2/CompScript.h"
@@ -20,7 +21,6 @@
 #include <painting2/RenderSystem.h>
 #include <painting2/DrawMask.h>
 #include <painting2/PrimitiveDraw.h>
-#include <sprite2/DrawNode.h>
 #include <anim/Layer.h>
 #include <anim/KeyFrame.h>
 
@@ -125,7 +125,9 @@ pt2::RenderReturn RenderSystem::Draw(const n0::SceneNodePtr& node,
 		pt2::RenderSystem::SetColorMap(ccol.GetColor());
 	}
 
-	if (node->HasSharedComp<CompImage>())
+	auto& casset = node->GetSharedComp<n0::CompAsset>();
+	auto asset_type = casset.AssetTypeID();
+	if (asset_type == n0::GetAssetUniqueTypeID<n2::CompImage>())
 	{
 		auto& cimage = node->GetSharedComp<CompImage>();
 		auto& tex = cimage.GetTexture();
@@ -145,19 +147,19 @@ pt2::RenderReturn RenderSystem::Draw(const n0::SceneNodePtr& node,
 			}
 		}
 	}
-	if (node->HasSharedComp<CompText>())
+	else if (asset_type == n0::GetAssetUniqueTypeID<n2::CompText>())
 	{
 		auto& ctext = node->GetSharedComp<CompText>();
 		auto& text = ctext.GetText();
 		pt2::RenderSystem::DrawText(text, mt_child);
 	}
-	if (node->HasSharedComp<CompMask>())
+	else if (asset_type == n0::GetAssetUniqueTypeID<n2::CompMask>())
 	{
 		auto& cmask = node->GetSharedComp<CompMask>();
 		DrawMask draw(cmask.GetBaseNode(), cmask.GetMaskNode(), mt_child);
 		ret |= draw.Draw(nullptr);
 	}
-	if (node->HasSharedComp<CompScale9>())
+	else if (asset_type == n0::GetAssetUniqueTypeID<n2::CompScale9>())
 	{
 		RenderParams rp_child(rp);
 		rp_child.mt = mt_child;
@@ -168,15 +170,7 @@ pt2::RenderReturn RenderSystem::Draw(const n0::SceneNodePtr& node,
 			return true;
 		});
 	}
-
-	if (node->HasSharedComp<CompSprite2>())
-	{
-		auto& csprite2 = node->GetSharedComp<CompSprite2>();
-		auto& sym = csprite2.GetSymbol();
-		s2::DrawNode::Draw(*sym, s2::RenderParams(), mt_child);
-	}
-	
-	if (node->HasSharedComp<n2::CompComplex>())
+	else if (asset_type == n0::GetAssetUniqueTypeID<n2::CompComplex>())
 	{
 		auto& ccomplex = node->GetSharedComp<n2::CompComplex>();
 		auto& children = ccomplex.GetAllChildren();
@@ -194,20 +188,27 @@ pt2::RenderReturn RenderSystem::Draw(const n0::SceneNodePtr& node,
 			}
 		}
 	}
-
-	if (node->HasSharedComp<n2::CompAnim>())
+	else if (asset_type == n0::GetAssetUniqueTypeID<n2::CompAnim>())
 	{
-		auto& canim_inst = node->GetUniqueComp<n2::CompAnimInst>();
-
 		RenderParams rp_child(rp);
 		rp_child.mt = mt_child;
 		rp_child.node_id += 1;
 
+		auto& canim_inst = node->GetUniqueComp<n2::CompAnimInst>();
 		canim_inst.TraverseCurrNodes([&](const n0::SceneNodePtr& node)->bool
 		{
 			Draw(node, rp_child);
 			return true;
 		});	
+	}
+	else if (asset_type == n0::GetAssetUniqueTypeID<n2::CompParticle3d>())
+	{
+		RenderParams rp_child(rp);
+		rp_child.mt = mt_child;
+		rp_child.node_id += 1;
+
+		auto& cp3d_inst = node->GetUniqueComp<n2::CompParticle3dInst>();
+		cp3d_inst.Draw(rp_child);
 	}
 
 	// script
@@ -229,6 +230,44 @@ pt2::RenderReturn RenderSystem::Draw(const n0::SceneNodePtr& node,
 		{
 			auto& pt2_rc = pt2::Blackboard::Instance()->GetRenderContext();
 			pt2_rc.GetScissor().Pop();
+		}
+	}
+
+	return ret;
+}
+
+pt2::RenderReturn RenderSystem::Draw(const n0::CompAsset& casset,
+	                                 const sm::vec2& pos,
+	                                 float angle,
+	                                 const sm::vec2& scale,
+	                                 const sm::vec2& shear,
+	                                 const RenderParams& rp)
+{
+	pt2::RenderReturn ret = pt2::RENDER_OK;
+
+	sm::Matrix2D mat;
+	mat.SetTransformation(pos.x, pos.y, angle, scale.x, scale.y, 0, 0, shear.x, shear.y);
+	mat = mat * rp.mt;
+
+	auto asset_type = casset.AssetTypeID();
+	if (asset_type == n0::GetAssetUniqueTypeID<n2::CompImage>())
+	{
+		auto& cimage = static_cast<const n2::CompImage&>(casset);
+		auto& tex = cimage.GetTexture();
+		if (tex)
+		{
+			auto sz = tex->GetSize();
+			if (rp.m_quad_base_left_top)
+			{
+				sm::rect r;
+				r.xmin = 0; r.xmax = sz.x;
+				r.ymin = -sz.y; r.ymax = 0;
+				pt2::RenderSystem::DrawTexture(*tex, r, mat);
+			}
+			else
+			{
+				pt2::RenderSystem::DrawTexture(*tex, sm::rect(sz.x, sz.y), mat);
+			}
 		}
 	}
 

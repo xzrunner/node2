@@ -52,11 +52,11 @@
     <Filter Include="components\asset\scale9">
       <UniqueIdentifier>{9a4ec7cd-ee93-49ed-9e28-40594854503c}</UniqueIdentifier>
     </Filter>
-    <Filter Include="components\asset\sprite2">
-      <UniqueIdentifier>{ba391ed3-690e-4c63-a856-779e7fb1fb1e}</UniqueIdentifier>
-    </Filter>
     <Filter Include="components\asset\text">
       <UniqueIdentifier>{4998d2bf-7bec-48ae-9b0c-787f20a997c3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="components\asset\particle3d">
+      <UniqueIdentifier>{ae7cf5c4-1ee2-47c7-bc69-d50c1ccc74e9}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -131,11 +131,14 @@
     <ClInclude Include="..\..\..\include\node2\CompScale9.h">
       <Filter>components\asset\scale9</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\include\node2\CompSprite2.h">
-      <Filter>components\asset\sprite2</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\include\node2\CompText.h">
       <Filter>components\asset\text</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\node2\CompParticle3d.h">
+      <Filter>components\asset\particle3d</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\node2\CompParticle3dInst.h">
+      <Filter>components\asset\particle3d</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -205,11 +208,14 @@
     <ClCompile Include="..\..\..\source\CompScale9.cpp">
       <Filter>components\asset\scale9</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\source\CompSprite2.cpp">
-      <Filter>components\asset\sprite2</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\source\CompText.cpp">
       <Filter>components\asset\text</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\CompParticle3d.cpp">
+      <Filter>components\asset\particle3d</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\CompParticle3dInst.cpp">
+      <Filter>components\asset\particle3d</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

@@ -1,7 +1,11 @@
 #pragma once
 
 #include <node0/NodeUniqueComp.h>
-#include <anim/AnimInstance.h>
+#include <node0/typedef.h>
+
+#include <functional>
+
+namespace anim { class AnimInstance; class AnimTemplate; class PlayCtrl; }
 
 namespace n2
 {

@@ -67,6 +67,9 @@ public:
 
 	static void DrawScissorRect(const sm::rect& rect, const N2_MAT& mt);
 
+private:
+	static pt2::RenderReturn DrawAsset(const n0::CompAsset& casset, RenderParams& rp);
+
 }; // RenderSystem
 
 }

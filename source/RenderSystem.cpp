@@ -82,18 +82,19 @@ pt2::RenderReturn RenderSystem::Draw(const n0::SceneNodePtr& node,
 
 	pt2::RenderReturn ret = pt2::RENDER_OK;
 
+	RenderParams rp_child(rp);
+
 	// matrix
-	auto mt_child = rp.mt;
 	if (node->HasUniqueComp<CompTransform>())
 	{
 		auto& ctrans = node->GetUniqueComp<CompTransform>();
-		mt_child = ctrans.GetTrans().GetMatrix() * rp.mt;
+		rp_child.mt = ctrans.GetTrans().GetMatrix() * rp.mt;
 	}
 	if (rp.patch && rp.patch->HasEditOp(rp.node_id)) {
 		auto& op_list = rp.patch->GetEditOp(rp.node_id);
 		if (op_list.HasEditOp(EditOpID::SetTransformMatOp)) {
 			auto& op = static_cast<const SetTransformMatOp&>(op_list.GetEditOp(EditOpID::SetTransformMatOp));
-			mt_child = op.mat * rp.mt;
+			rp_child.mt = op.mat * rp.mt;
 		}
 	}
 
@@ -102,8 +103,8 @@ pt2::RenderReturn RenderSystem::Draw(const n0::SceneNodePtr& node,
 	{
 		auto& cscissor = node->GetUniqueComp<n2::CompScissor>();
 		auto& rect = cscissor.GetRect();
-		auto min = mt_child * sm::vec2(rect.xmin, rect.ymin);
-		auto max = mt_child * sm::vec2(rect.xmax, rect.ymax);
+		auto min = rp_child.mt * sm::vec2(rect.xmin, rect.ymin);
+		auto max = rp_child.mt * sm::vec2(rect.xmax, rect.ymax);
 		if (min.x > max.x) {
 			std::swap(min.x, max.x);
 		}
@@ -113,11 +114,16 @@ pt2::RenderReturn RenderSystem::Draw(const n0::SceneNodePtr& node,
 		auto& pt2_rc = pt2::Blackboard::Instance()->GetRenderContext();
 		pt2_rc.GetScissor().Push(min.x, min.y, max.x - min.x, max.y - min.y, true, false);
 	}
-
+	
+	// color
 	if (node->HasUniqueComp<CompColorCommon>())
 	{
 		auto& ccol = node->GetUniqueComp<CompColorCommon>();
-		pt2::RenderSystem::SetColor(ccol.GetColor());
+		pt2::RenderSystem::SetColor(rp.GetColor() * ccol.GetColor());
+	}
+	else
+	{
+		pt2::RenderSystem::SetColor(rp.GetColor());
 	}
 	if (node->HasUniqueComp<CompColorMap>())
 	{
@@ -125,73 +131,12 @@ pt2::RenderReturn RenderSystem::Draw(const n0::SceneNodePtr& node,
 		pt2::RenderSystem::SetColorMap(ccol.GetColor());
 	}
 
+	// asset
 	auto& casset = node->GetSharedComp<n0::CompAsset>();
+	ret |= DrawAsset(casset, rp_child);
 	auto asset_type = casset.AssetTypeID();
-	if (asset_type == n0::GetAssetUniqueTypeID<n2::CompImage>())
+	if (asset_type == n0::GetAssetUniqueTypeID<n2::CompAnim>())
 	{
-		auto& cimage = node->GetSharedComp<CompImage>();
-		auto& tex = cimage.GetTexture();
-		if (tex) 
-		{
-			auto sz = tex->GetSize();
-			if (rp.m_quad_base_left_top)
-			{ 
-				sm::rect r;
-				r.xmin = 0; r.xmax = sz.x;
-				r.ymin = -sz.y; r.ymax = 0;
-				pt2::RenderSystem::DrawTexture(*tex, r, mt_child);
-			}
-			else
-			{
-				pt2::RenderSystem::DrawTexture(*tex, sm::rect(sz.x, sz.y), mt_child);
-			}
-		}
-	}
-	else if (asset_type == n0::GetAssetUniqueTypeID<n2::CompText>())
-	{
-		auto& ctext = node->GetSharedComp<CompText>();
-		auto& text = ctext.GetText();
-		pt2::RenderSystem::DrawText(text, mt_child);
-	}
-	else if (asset_type == n0::GetAssetUniqueTypeID<n2::CompMask>())
-	{
-		auto& cmask = node->GetSharedComp<CompMask>();
-		DrawMask draw(cmask.GetBaseNode(), cmask.GetMaskNode(), mt_child);
-		ret |= draw.Draw(nullptr);
-	}
-	else if (asset_type == n0::GetAssetUniqueTypeID<n2::CompScale9>())
-	{
-		RenderParams rp_child(rp);
-		rp_child.mt = mt_child;
-
-		auto& cscale9 = node->GetSharedComp<CompScale9>();
-		cscale9.Traverse([&](const n0::SceneNodePtr& node)->bool {
-			RenderSystem::Draw(node, rp_child);
-			return true;
-		});
-	}
-	else if (asset_type == n0::GetAssetUniqueTypeID<n2::CompComplex>())
-	{
-		auto& ccomplex = node->GetSharedComp<n2::CompComplex>();
-		auto& children = ccomplex.GetAllChildren();
-		if (!children.empty())
-		{
-			RenderParams rp_child(rp);
-			rp_child.mt = mt_child;
-			rp_child.node_id += 1;
-
-			for (auto& child : children)
-			{
-				Draw(child, rp_child);
-				auto& casset = child->GetSharedComp<n0::CompAsset>();
-				rp_child.node_id += casset.GetNodeCount();
-			}
-		}
-	}
-	else if (asset_type == n0::GetAssetUniqueTypeID<n2::CompAnim>())
-	{
-		RenderParams rp_child(rp);
-		rp_child.mt = mt_child;
 		rp_child.node_id += 1;
 
 		auto& canim_inst = node->GetUniqueComp<n2::CompAnimInst>();
@@ -199,12 +144,10 @@ pt2::RenderReturn RenderSystem::Draw(const n0::SceneNodePtr& node,
 		{
 			Draw(node, rp_child);
 			return true;
-		});	
+		});
 	}
 	else if (asset_type == n0::GetAssetUniqueTypeID<n2::CompParticle3d>())
 	{
-		RenderParams rp_child(rp);
-		rp_child.mt = mt_child;
 		rp_child.node_id += 1;
 
 		auto& cp3d_inst = node->GetUniqueComp<n2::CompParticle3dInst>();
@@ -224,7 +167,7 @@ pt2::RenderReturn RenderSystem::Draw(const n0::SceneNodePtr& node,
 		if (rp.is_edit_mode)
 		{
 			auto& cscissor = node->GetUniqueComp<n2::CompScissor>();
-			DrawScissorRect(cscissor.GetRect(), mt_child);
+			DrawScissorRect(cscissor.GetRect(), rp_child.mt);
 		}
 		else
 		{
@@ -243,12 +186,30 @@ pt2::RenderReturn RenderSystem::Draw(const n0::CompAsset& casset,
 	                                 const sm::vec2& shear,
 	                                 const RenderParams& rp)
 {
-	pt2::RenderReturn ret = pt2::RENDER_OK;
-
 	sm::Matrix2D mat;
 	mat.SetTransformation(pos.x, pos.y, angle, scale.x, scale.y, 0, 0, shear.x, shear.y);
 	mat = mat * rp.mt;
 
+	RenderParams rp_child(rp);
+	rp_child.mt = mat;
+
+	pt2::RenderSystem::SetColor(rp.GetColor());
+
+	return DrawAsset(casset, rp_child);
+}
+
+void RenderSystem::DrawScissorRect(const sm::rect& rect, const N2_MAT& mt)
+{
+	pt2::PrimitiveDraw::SetColor(pt2::Color(0, 204, 0));
+	pt2::PrimitiveDraw::LineWidth(2);
+	auto min = mt * sm::vec2(rect.xmin, rect.ymin);
+	auto max = mt * sm::vec2(rect.xmax, rect.ymax);
+	pt2::PrimitiveDraw::Rect(nullptr, min, max, false);
+}
+
+pt2::RenderReturn RenderSystem::DrawAsset(const n0::CompAsset& casset, RenderParams& rp)
+{
+	pt2::RenderReturn ret = pt2::RENDER_OK;
 	auto asset_type = casset.AssetTypeID();
 	if (asset_type == n0::GetAssetUniqueTypeID<n2::CompImage>())
 	{
@@ -262,25 +223,52 @@ pt2::RenderReturn RenderSystem::Draw(const n0::CompAsset& casset,
 				sm::rect r;
 				r.xmin = 0; r.xmax = sz.x;
 				r.ymin = -sz.y; r.ymax = 0;
-				pt2::RenderSystem::DrawTexture(*tex, r, mat);
+				pt2::RenderSystem::DrawTexture(*tex, r, rp.mt);
 			}
 			else
 			{
-				pt2::RenderSystem::DrawTexture(*tex, sm::rect(sz.x, sz.y), mat);
+				pt2::RenderSystem::DrawTexture(*tex, sm::rect(sz.x, sz.y), rp.mt);
+			}
+		}
+	}
+	else if (asset_type == n0::GetAssetUniqueTypeID<n2::CompText>())
+	{
+		auto& ctext = static_cast<const CompText&>(casset);
+		auto& text = ctext.GetText();
+		pt2::RenderSystem::DrawText(text, rp.mt);
+	}
+	else if (asset_type == n0::GetAssetUniqueTypeID<n2::CompMask>())
+	{
+		auto& cmask = static_cast<const CompMask&>(casset);
+		DrawMask draw(cmask.GetBaseNode(), cmask.GetMaskNode(), rp.mt);
+		ret |= draw.Draw(nullptr);
+	}
+	else if (asset_type == n0::GetAssetUniqueTypeID<n2::CompScale9>())
+	{
+		auto& cscale9 = static_cast<const CompScale9&>(casset);
+		cscale9.Traverse([&](const n0::SceneNodePtr& node)->bool {
+			RenderSystem::Draw(node, rp);
+			return true;
+		});
+	}
+	else if (asset_type == n0::GetAssetUniqueTypeID<n2::CompComplex>())
+	{
+		auto& ccomplex = static_cast<const CompComplex&>(casset);
+		auto& children = ccomplex.GetAllChildren();
+		if (!children.empty())
+		{
+			rp.node_id += 1;
+
+			for (auto& child : children)
+			{
+				Draw(child, rp);
+				auto& casset = child->GetSharedComp<n0::CompAsset>();
+				rp.node_id += casset.GetNodeCount();
 			}
 		}
 	}
 
 	return ret;
-}
-
-void RenderSystem::DrawScissorRect(const sm::rect& rect, const N2_MAT& mt)
-{
-	pt2::PrimitiveDraw::SetColor(pt2::Color(0, 204, 0));
-	pt2::PrimitiveDraw::LineWidth(2);
-	auto min = mt * sm::vec2(rect.xmin, rect.ymin);
-	auto max = mt * sm::vec2(rect.xmax, rect.ymax);
-	pt2::PrimitiveDraw::Rect(nullptr, min, max, false);
 }
 
 }

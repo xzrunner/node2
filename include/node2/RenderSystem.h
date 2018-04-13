@@ -2,8 +2,8 @@
 
 #include "predef.h"
 #include N2_MAT_HEADER
-#include "painting2/RenderReturn.h"
-#include "painting2/RenderColorCommon.h"
+#include <painting2/RenderReturn.h>
+#include <painting2/RenderColorCommon.h>
 
 #include <SM_Matrix.h>
 #include <SM_Rect.h>

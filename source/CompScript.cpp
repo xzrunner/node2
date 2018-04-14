@@ -13,18 +13,9 @@ std::unique_ptr<n0::NodeUniqueComp> CompScript::Clone(const n0::SceneNode& node)
 	return comp;
 }
 
-void CompScript::SetFilepath(const std::string& filepath)
-{
-	if (m_filepath != filepath) {
-		m_filepath = filepath;
-		m_dirty = true;
-	}
-}
-
 void CompScript::Reload(const n0::SceneNodePtr& node)
 {
 	m_script.LoadScript(m_filepath, node);
-	m_dirty = false;
 }
 
 }

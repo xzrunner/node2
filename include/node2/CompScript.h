@@ -19,7 +19,7 @@ public:
 	virtual std::unique_ptr<n0::NodeUniqueComp> Clone(const n0::SceneNode& node) const override;
 
 	const std::string& GetFilepath() const { return m_filepath; }
-	void SetFilepath(const std::string& filepath);
+	void SetFilepath(const std::string& filepath) { m_filepath = filepath; }
 
 	void Update() const { m_script.OnUpdate(); }
 	void Draw() const { m_script.OnDraw(); }
@@ -32,8 +32,6 @@ private:
 	std::string m_filepath;
 
 	moon::SceneNodeScript m_script;
-
-	bool m_dirty;
 
 }; // CompScript
 

@@ -198,6 +198,16 @@ pt2::RenderReturn RenderSystem::Draw(const n0::CompAsset& casset,
 	return DrawAsset(casset, rp_child);
 }
 
+pt2::RenderReturn RenderSystem::Draw(const n0::CompAsset& casset, const sm::Matrix2D& mat)
+{
+	RenderParams rp;
+	rp.mt = mat;
+
+	pt2::RenderSystem::SetColor(rp.GetColor());
+
+	return DrawAsset(casset, rp);
+}
+
 void RenderSystem::DrawScissorRect(const sm::rect& rect, const N2_MAT& mt)
 {
 	pt2::PrimitiveDraw::SetColor(pt2::Color(0, 204, 0));

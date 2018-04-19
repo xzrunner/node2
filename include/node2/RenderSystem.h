@@ -64,6 +64,7 @@ public:
 		const sm::vec2& shear = sm::vec2(0, 0),
 		const RenderParams& rp = RenderParams()
 	);
+	static pt2::RenderReturn Draw(const n0::CompAsset& casset, const sm::Matrix2D& mat);
 
 	static void DrawScissorRect(const sm::rect& rect, const N2_MAT& mt);
 

@@ -14,12 +14,4 @@ const char* const CompImage::TYPE_NAME = "n2_image";
 //	return comp;
 //}
 
-sm::rect CompImage::GetBounding() const
-{
-	return sm::rect(
-		static_cast<float>(m_tex->GetWidth()), 
-		static_cast<float>(m_tex->GetHeight())
-	);
-}
-
 }

@@ -42,11 +42,6 @@ CompScale9::CompScale9()
 //	return comp;
 //}
 
-sm::rect CompScale9::GetBounding() const
-{
-	return sm::rect(m_width, m_height);
-}
-
 void CompScale9::SetWidth(float width)
 {
 	if (m_width != width) {

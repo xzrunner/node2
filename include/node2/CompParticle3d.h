@@ -20,7 +20,6 @@ public:
 	}
 	virtual void Traverse(std::function<bool(const n0::SceneNodePtr&)> func,
 		bool inverse = false) const override;
-	virtual sm::rect GetBounding() const override;
 
 	const et::P3dTemplate& GetP3DTemp() const { return *m_p3d_temp; }
 	et::P3dTemplate& GetP3DTemp() { return *m_p3d_temp; }

@@ -18,7 +18,6 @@ public:
 	}
 	virtual void Traverse(std::function<bool(const n0::SceneNodePtr&)> func,
 		bool inverse = false) const override;
-	virtual sm::rect GetBounding() const override;
 
 	void SetBaseNode(const n0::SceneNodePtr& base);
 	void SetMaskNode(const n0::SceneNodePtr& mask);

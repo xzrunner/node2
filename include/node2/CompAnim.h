@@ -23,7 +23,6 @@ public:
 	}
 	virtual void Traverse(std::function<bool(const n0::SceneNodePtr&)> func,
 		bool inverse = false) const override;
-	virtual sm::rect GetBounding() const override;
 
 	void AddLayer(anim::LayerPtr& layer);
 	void SwapLayers(int idx0, int idx1);

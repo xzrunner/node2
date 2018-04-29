@@ -1,5 +1,5 @@
 #include "node2/CompAnim.h"
-#include "node2/AABBHelper.h"
+#include "node2/AABBSystem.h"
 
 #include <guard/check.h>
 #include <anim/KeyFrame.h>
@@ -37,16 +37,6 @@ void CompAnim::Traverse(std::function<bool(const n0::SceneNodePtr&)> func, bool 
 			}
 		}
 	}
-}
-
-sm::rect CompAnim::GetBounding() const
-{
-	sm::rect aabb;
-	auto& slots = m_anim_temp->GetAllSlots();
-	for (auto& child : slots) {
-		AABBHelper::Combine(aabb, child);
-	}
-	return aabb;
 }
 
 void CompAnim::AddLayer(anim::LayerPtr& layer) 

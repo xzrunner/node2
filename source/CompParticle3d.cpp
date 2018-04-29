@@ -14,12 +14,6 @@ CompParticle3d::CompParticle3d(int max_sym_count)
 
 void CompParticle3d::Traverse(std::function<bool(const n0::SceneNodePtr&)> func, bool inverse) const
 {
-
-}
-
-sm::rect CompParticle3d::GetBounding() const
-{
-	return sm::rect(100, 100);
 }
 
 }

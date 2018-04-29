@@ -16,9 +16,6 @@
     <Filter Include="components\asset">
       <UniqueIdentifier>{4f6644e8-1b8b-4b85-9b50-13a72a696951}</UniqueIdentifier>
     </Filter>
-    <Filter Include="tools">
-      <UniqueIdentifier>{34e8e2a3-7ae6-49fe-b6b7-1b178da40383}</UniqueIdentifier>
-    </Filter>
     <Filter Include="entity">
       <UniqueIdentifier>{7935dc24-a438-4719-a73e-7761fef9dded}</UniqueIdentifier>
     </Filter>
@@ -36,9 +33,6 @@
     </Filter>
     <Filter Include="components\asset\anim">
       <UniqueIdentifier>{1f353cd3-3d70-43a0-aca9-d99a669f01ef}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="components\asset\compledx">
-      <UniqueIdentifier>{24cd2542-2c1e-451c-9c9a-a67633627789}</UniqueIdentifier>
     </Filter>
     <Filter Include="components\asset\image">
       <UniqueIdentifier>{34cbe8eb-280b-4189-9646-b1f9c739fcdc}</UniqueIdentifier>
@@ -77,9 +71,6 @@
     <ClInclude Include="..\..\..\include\node2\RenderSystem.h">
       <Filter>system</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\include\node2\AABBHelper.h">
-      <Filter>tools</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\include\node2\NodeFlags.h">
       <Filter>entity</Filter>
     </ClInclude>
@@ -116,9 +107,6 @@
     <ClInclude Include="..\..\..\include\node2\CompAnimInst.h">
       <Filter>components\asset\anim</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\include\node2\CompComplex.h">
-      <Filter>components\asset\compledx</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\include\node2\CompImage.h">
       <Filter>components\asset\image</Filter>
     </ClInclude>
@@ -140,6 +128,9 @@
     <ClInclude Include="..\..\..\include\node2\CompParticle3dInst.h">
       <Filter>components\asset\particle3d</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\include\node2\AABBSystem.h">
+      <Filter>system</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\source\CompColorCommon.cpp">
@@ -156,9 +147,6 @@
     </ClCompile>
     <ClCompile Include="..\..\..\source\RenderSystem.cpp">
       <Filter>system</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\source\AABBHelper.cpp">
-      <Filter>tools</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\source\EditOpList.cpp">
       <Filter>edit</Filter>
@@ -193,9 +181,6 @@
     <ClCompile Include="..\..\..\source\CompAnimInst.cpp">
       <Filter>components\asset\anim</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\source\CompComplex.cpp">
-      <Filter>components\asset\compledx</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\source\CompImage.cpp">
       <Filter>components\asset\image</Filter>
     </ClCompile>
@@ -216,6 +201,9 @@
     </ClCompile>
     <ClCompile Include="..\..\..\source\CompParticle3dInst.cpp">
       <Filter>components\asset\particle3d</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\AABBSystem.cpp">
+      <Filter>system</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

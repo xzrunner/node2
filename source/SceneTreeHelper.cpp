@@ -1,6 +1,6 @@
 #include "node2/SceneTreeHelper.h"
 #include "node2/CompBoundingBox.h"
-#include "node2/AABBHelper.h"
+#include "node2/AABBSystem.h"
 #include "node2/CompTransform.h"
 
 #include <node0/SceneNode.h>
@@ -16,7 +16,7 @@ void SceneTreeHelper::UpdateAABB(const n0::SceneNodePtr& node,
 	                             size_t node_id)
 {
 	sm::rect new_aabb;
-	AABBHelper::Combine(new_aabb, node);
+	AABBSystem::Combine(new_aabb, node);
 	auto& cbb = node->GetUniqueComp<CompBoundingBox>();
 	if (cbb.GetBounding(*node).GetSize() == new_aabb) {
 		return;
@@ -29,7 +29,7 @@ void SceneTreeHelper::UpdateAABB(const n0::SceneNodePtr& node,
 		auto& node = *itr;
 
 		sm::rect new_aabb;
-		AABBHelper::Combine(new_aabb, node);
+		AABBSystem::Combine(new_aabb, node);
 		auto& cbb = node->GetUniqueComp<CompBoundingBox>();
 		if (cbb.GetBounding(*node).GetSize() == new_aabb) {
 			break;

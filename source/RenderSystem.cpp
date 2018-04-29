@@ -7,7 +7,6 @@
 #include "node2/CompMask.h"
 #include "node2/CompBoundingBox.h"
 #include "node2/CompScale9.h"
-#include "node2/CompComplex.h"
 #include "node2/CompAnim.h"
 #include "node2/CompAnimInst.h"
 #include "node2/CompParticle3d.h"
@@ -18,6 +17,7 @@
 #include "node2/EditOp.h"
 
 #include <node0/SceneNode.h>
+#include <node0/CompComplex.h>
 #include <painting2/RenderSystem.h>
 #include <painting2/DrawMask.h>
 #include <painting2/PrimitiveDraw.h>
@@ -261,9 +261,9 @@ pt2::RenderReturn RenderSystem::DrawAsset(const n0::CompAsset& casset, RenderPar
 			return true;
 		});
 	}
-	else if (asset_type == n0::GetAssetUniqueTypeID<n2::CompComplex>())
+	else if (asset_type == n0::GetAssetUniqueTypeID<n0::CompComplex>())
 	{
-		auto& ccomplex = static_cast<const CompComplex&>(casset);
+		auto& ccomplex = static_cast<const n0::CompComplex&>(casset);
 		auto& children = ccomplex.GetAllChildren();
 		if (!children.empty())
 		{

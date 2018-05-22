@@ -6,6 +6,7 @@
 #include <painting2/OBB.h>
 #include <painting2/SRT.h>
 #include <node0/SceneNode.h>
+#include <node0/NodeFlagsHelper.h>
 
 namespace n2
 {
@@ -23,7 +24,7 @@ std::unique_ptr<n0::NodeUniqueComp> CompBoundingBox::Clone(const n0::SceneNode& 
 void CompBoundingBox::SetSize(const n0::SceneNode& node, const sm::rect& size)
 {
 	m_size = size;
-	node.SetFlag<n2::NodeBoundingDirty>(true);
+	n0::NodeFlagsHelper::SetFlag<NodeBoundingDirty>(node, true);
 }
 
 void CompBoundingBox::Build(const n0::SceneNode& node, const pt2::SRT& srt) const
@@ -32,14 +33,14 @@ void CompBoundingBox::Build(const n0::SceneNode& node, const pt2::SRT& srt) cons
 		m_bounding = std::make_unique<pt2::OBB>();
 	}
 	m_bounding->Build(m_size, srt.position, srt.angle, srt.scale, srt.shear, srt.offset);
-	node.SetFlag<n2::NodeBoundingDirty>(false);
+	n0::NodeFlagsHelper::SetFlag<NodeBoundingDirty>(node, false);
 }
 
 const pt2::BoundingBox& CompBoundingBox::GetBounding(const n0::SceneNode& node) const
 {
-	if (!m_bounding || node.GetFlag<n2::NodeBoundingDirty>())
+	if (!m_bounding || n0::NodeFlagsHelper::GetFlag<NodeBoundingDirty>(node))
 	{
-		auto& ctrans = node.GetUniqueComp<n2::CompTransform>();
+		auto& ctrans = node.GetUniqueComp<CompTransform>();
 		Build(node, ctrans.GetTrans().GetSRT());
 	}
 	return *m_bounding;

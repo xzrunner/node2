@@ -71,9 +71,6 @@
     <ClInclude Include="..\..\..\include\node2\RenderSystem.h">
       <Filter>system</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\include\node2\NodeFlags.h">
-      <Filter>entity</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\include\node2\EditOp.h">
       <Filter>edit</Filter>
     </ClInclude>
@@ -130,6 +127,9 @@
     </ClInclude>
     <ClInclude Include="..\..\..\include\node2\AABBSystem.h">
       <Filter>system</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\node2\NodeFlags.h">
+      <Filter>components</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

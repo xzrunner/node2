@@ -1,6 +1,6 @@
 #pragma once
 
-#include <node0/NodeUniqueComp.h>
+#include <node0/NodeComp.h>
 #include <node0/typedef.h>
 #include <moon/SceneNodeScript.h>
 
@@ -9,14 +9,14 @@
 namespace n2
 {
 
-class CompScript : public n0::NodeUniqueComp
+class CompScript : public n0::NodeComp
 {
 public:
 	virtual const char* Type() const override { return TYPE_NAME; }
-	virtual n0::UniqueCompID TypeID() const override {
-		return n0::GetUniqueCompTypeID<CompScript>(); 
+	virtual n0::CompID TypeID() const override {
+		return n0::GetCompTypeID<CompScript>(); 
 	}
-	virtual std::unique_ptr<n0::NodeUniqueComp> Clone(const n0::SceneNode& node) const override;
+	virtual std::unique_ptr<n0::NodeComp> Clone(const n0::SceneNode& node) const override;
 
 	const std::string& GetFilepath() const { return m_filepath; }
 	void SetFilepath(const std::string& filepath) { m_filepath = filepath; }

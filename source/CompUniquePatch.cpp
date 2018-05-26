@@ -15,7 +15,7 @@ CompUniquePatch::CompUniquePatch()
 {
 }
 
-std::unique_ptr<n0::NodeUniqueComp> CompUniquePatch::Clone(const n0::SceneNode& node) const
+std::unique_ptr<n0::NodeComp> CompUniquePatch::Clone(const n0::SceneNode& node) const
 {
 	auto comp = std::make_unique<CompUniquePatch>();
 	comp->m_edit_ops = m_edit_ops;

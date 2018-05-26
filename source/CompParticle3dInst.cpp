@@ -16,7 +16,7 @@ CompParticle3dInst::CompParticle3dInst(const std::shared_ptr<CompParticle3d>& cp
 	m_p3d_inst = std::make_unique<et::P3dInstance>(cp3d->GetP3DTemp());
 }
 
-std::unique_ptr<n0::NodeUniqueComp> CompParticle3dInst::Clone(const n0::SceneNode& node) const
+std::unique_ptr<n0::NodeComp> CompParticle3dInst::Clone(const n0::SceneNode& node) const
 {
 	auto comp = std::make_unique<CompParticle3dInst>(m_cp3d);
 	return comp;

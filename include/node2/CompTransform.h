@@ -1,6 +1,6 @@
 #pragma once
 
-#include <node0/NodeUniqueComp.h>
+#include <node0/NodeComp.h>
 #include <painting2/GeoTransform.h>
 
 namespace n0 { class SceneNode; }
@@ -8,14 +8,14 @@ namespace n0 { class SceneNode; }
 namespace n2
 {
 
-class CompTransform : public n0::NodeUniqueComp
+class CompTransform : public n0::NodeComp
 {
 public:
 	virtual const char* Type() const override { return TYPE_NAME; }
-	virtual n0::UniqueCompID TypeID() const override {
-		return n0::GetUniqueCompTypeID<CompTransform>(); 
+	virtual n0::CompID TypeID() const override {
+		return n0::GetCompTypeID<CompTransform>(); 
 	}
-	virtual std::unique_ptr<n0::NodeUniqueComp> Clone(const n0::SceneNode& node) const override;
+	virtual std::unique_ptr<n0::NodeComp> Clone(const n0::SceneNode& node) const override;
 
 	const pt2::GeoTransform& GetTrans() const { return m_trans; }
 //	pt2::GeoTransform& GetTrans() { return m_trans; }

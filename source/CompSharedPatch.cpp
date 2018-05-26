@@ -13,7 +13,7 @@ namespace n2
 
 const char* const CompSharedPatch::TYPE_NAME = "n2_shared_patch";
 
-std::unique_ptr<n0::NodeUniqueComp> CompSharedPatch::Clone(const n0::SceneNode& node) const
+std::unique_ptr<n0::NodeComp> CompSharedPatch::Clone(const n0::SceneNode& node) const
 {
 	auto comp = std::make_unique<CompSharedPatch>();
 	comp->m_edit_ops = m_edit_ops;

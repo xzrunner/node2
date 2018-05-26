@@ -1,19 +1,19 @@
 #pragma once
 
-#include <node0/NodeUniqueComp.h>
+#include <node0/NodeComp.h>
 #include <SM_Rect.h>
 
 namespace n2
 {
 
-class CompScissor : public n0::NodeUniqueComp
+class CompScissor : public n0::NodeComp
 {
 public:
 	virtual const char* Type() const override { return TYPE_NAME; }
-	virtual n0::UniqueCompID TypeID() const override {
-		return n0::GetUniqueCompTypeID<CompScissor>();
+	virtual n0::CompID TypeID() const override {
+		return n0::GetCompTypeID<CompScissor>();
 	}
-	virtual std::unique_ptr<n0::NodeUniqueComp> Clone(const n0::SceneNode& node) const override;
+	virtual std::unique_ptr<n0::NodeComp> Clone(const n0::SceneNode& node) const override;
 
 	void SetRect(const sm::rect& r) { m_rect = r; }
 	const sm::rect& GetRect() const { return m_rect; }

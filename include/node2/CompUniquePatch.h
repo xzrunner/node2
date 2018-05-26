@@ -2,23 +2,23 @@
 
 #include "node2/EditOpList.h"
 
-#include <node0/NodeUniqueComp.h>
+#include <node0/NodeComp.h>
 
 #include <vector>
 
 namespace n2
 {
 
-class CompUniquePatch : public n0::NodeUniqueComp
+class CompUniquePatch : public n0::NodeComp
 {
 public:
 	CompUniquePatch();
 
 	virtual const char* Type() const override { return TYPE_NAME; }
-	virtual n0::UniqueCompID TypeID() const override {
-		return n0::GetUniqueCompTypeID<CompUniquePatch>();
+	virtual n0::CompID TypeID() const override {
+		return n0::GetCompTypeID<CompUniquePatch>();
 	}
-	virtual std::unique_ptr<n0::NodeUniqueComp> Clone(const n0::SceneNode& node) const override;
+	virtual std::unique_ptr<n0::NodeComp> Clone(const n0::SceneNode& node) const override;
 
 	void Clear();
 

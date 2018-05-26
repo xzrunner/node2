@@ -2,7 +2,7 @@
 
 #include "node2/EditOpList.h"
 
-#include <node0/NodeUniqueComp.h>
+#include <node0/NodeComp.h>
 #include <node0/typedef.h>
 
 #include <vector>
@@ -10,14 +10,14 @@
 namespace n2
 {
 
-class CompSharedPatch : public n0::NodeUniqueComp
+class CompSharedPatch : public n0::NodeComp
 {
 public:
 	virtual const char* Type() const override { return TYPE_NAME; }
-	virtual n0::UniqueCompID TypeID() const override {
-		return n0::GetUniqueCompTypeID<CompSharedPatch>();
+	virtual n0::CompID TypeID() const override {
+		return n0::GetCompTypeID<CompSharedPatch>();
 	}
-	virtual std::unique_ptr<n0::NodeUniqueComp> Clone(const n0::SceneNode& node) const override;
+	virtual std::unique_ptr<n0::NodeComp> Clone(const n0::SceneNode& node) const override;
 
 	void AddEditOp(size_t node_id, std::unique_ptr<EditOp>& op);
 

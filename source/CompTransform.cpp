@@ -9,7 +9,7 @@ namespace n2
 
 const char* const CompTransform::TYPE_NAME = "n2_transform";
 
-std::unique_ptr<n0::NodeUniqueComp> CompTransform::Clone(const n0::SceneNode& node) const
+std::unique_ptr<n0::NodeComp> CompTransform::Clone(const n0::SceneNode& node) const
 {
 	auto comp = std::make_unique<CompTransform>();
 	comp->m_trans = m_trans;

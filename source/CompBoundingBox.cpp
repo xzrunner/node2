@@ -13,7 +13,7 @@ namespace n2
 
 const char* const CompBoundingBox::TYPE_NAME = "n2_bounding_box";
 
-std::unique_ptr<n0::NodeUniqueComp> CompBoundingBox::Clone(const n0::SceneNode& node) const
+std::unique_ptr<n0::NodeComp> CompBoundingBox::Clone(const n0::SceneNode& node) const
 {
 	auto comp = std::make_unique<CompBoundingBox>();
 	comp->m_size = m_size;

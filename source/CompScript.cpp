@@ -7,7 +7,7 @@ namespace n2
 
 const char* const CompScript::TYPE_NAME = "n2_script";
 
-std::unique_ptr<n0::NodeUniqueComp> CompScript::Clone(const n0::SceneNode& node) const
+std::unique_ptr<n0::NodeComp> CompScript::Clone(const n0::SceneNode& node) const
 {
 	auto comp = std::make_unique<CompScript>();
 	return comp;

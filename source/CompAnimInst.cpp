@@ -17,7 +17,7 @@ CompAnimInst::CompAnimInst(const std::shared_ptr<anim::AnimTemplate>& anim_temp)
 	anim_temp->AddInstance(m_inst);
 }
 
-std::unique_ptr<n0::NodeUniqueComp> CompAnimInst::Clone(const n0::SceneNode& node) const
+std::unique_ptr<n0::NodeComp> CompAnimInst::Clone(const n0::SceneNode& node) const
 {
 	auto& temp = m_inst->GetAnimTemplate();
 	auto comp = std::make_unique<CompAnimInst>(temp);

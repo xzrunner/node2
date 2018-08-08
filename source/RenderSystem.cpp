@@ -44,11 +44,11 @@ public:
 protected:
 	virtual pt2::RenderReturn DrawBaseNode(const n0::SceneNodePtr& node, const sm::Matrix2D& mt) const override
 	{
-		return n2::RenderSystem::Draw(node);
+		return n2::RenderSystem::Instance()->Draw(node);
 	}
 	virtual pt2::RenderReturn DrawMaskNode(const n0::SceneNodePtr& node, const sm::Matrix2D& mt) const override
 	{
-		return n2::RenderSystem::Draw(node);
+		return n2::RenderSystem::Instance()->Draw(node);
 	}
 
 	virtual sm::rect GetBounding(const n0::SceneNodePtr& node) const override
@@ -69,7 +69,13 @@ protected:
 namespace n2
 {
 
-pt2::RenderReturn RenderSystem::Draw(const n0::SceneNodePtr& node, 
+CU_SINGLETON_DEFINITION(RenderSystem);
+
+RenderSystem::RenderSystem()
+{
+}
+
+pt2::RenderReturn RenderSystem::Draw(const n0::SceneNodePtr& node,
 	                                 const RenderParams& rp)
 {
 	if (!node) {
@@ -114,7 +120,7 @@ pt2::RenderReturn RenderSystem::Draw(const n0::SceneNodePtr& node,
 		auto& pt2_rc = pt2::Blackboard::Instance()->GetRenderContext();
 		pt2_rc.GetScissor().Push(min.x, min.y, max.x - min.x, max.y - min.y, true, false);
 	}
-	
+
 	// color
 	if (node->HasUniqueComp<CompColorCommon>())
 	{
@@ -217,6 +223,14 @@ void RenderSystem::DrawScissorRect(const sm::rect& rect, const N2_MAT& mt)
 	pt2::PrimitiveDraw::Rect(nullptr, min, max, false);
 }
 
+void RenderSystem::AddDrawAssetFunc(n0::AssetID id, std::function<void(const n0::CompAsset&, const n2::RenderParams&)> func)
+{
+	if (id >= m_draw_asset_funcs.size()) {
+		m_draw_asset_funcs.resize(id + 1);
+	}
+	m_draw_asset_funcs[id] = func;
+}
+
 pt2::RenderReturn RenderSystem::DrawAsset(const n0::CompAsset& casset, RenderParams& rp)
 {
 	pt2::RenderReturn ret = pt2::RENDER_OK;
@@ -275,6 +289,12 @@ pt2::RenderReturn RenderSystem::DrawAsset(const n0::CompAsset& casset, RenderPar
 				auto& casset = child->GetSharedComp<n0::CompAsset>();
 				rp.node_id += casset.GetNodeCount();
 			}
+		}
+	}
+	else
+	{
+		if (m_draw_asset_funcs[asset_type]) {
+			m_draw_asset_funcs[asset_type](casset, rp);
 		}
 	}
 

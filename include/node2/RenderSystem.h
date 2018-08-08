@@ -4,10 +4,14 @@
 #include N2_MAT_HEADER
 #include <painting2/RenderReturn.h>
 #include <painting2/RenderColorCommon.h>
-
+#include <cu/cu_macro.h>
 #include <SM_Matrix.h>
 #include <SM_Rect.h>
 #include <node0/typedef.h>
+#include <node0/CompAsset.h>
+
+#include <functional>
+#include <vector>
 
 namespace n0 { class CompAsset; }
 
@@ -53,23 +57,30 @@ private:
 class RenderSystem
 {
 public:
-	static pt2::RenderReturn Draw(const n0::SceneNodePtr& node, 
+	pt2::RenderReturn Draw(const n0::SceneNodePtr& node,
 		const RenderParams& rp = RenderParams());
 
-	static pt2::RenderReturn Draw(
-		const n0::CompAsset& casset, 
+	pt2::RenderReturn Draw(
+		const n0::CompAsset& casset,
 		const sm::vec2& pos = sm::vec2(0, 0),
 		float angle = 0,
 		const sm::vec2& scale = sm::vec2(1, 1),
 		const sm::vec2& shear = sm::vec2(0, 0),
 		const RenderParams& rp = RenderParams()
 	);
-	static pt2::RenderReturn Draw(const n0::CompAsset& casset, const sm::Matrix2D& mat);
+	pt2::RenderReturn Draw(const n0::CompAsset& casset, const sm::Matrix2D& mat);
 
-	static void DrawScissorRect(const sm::rect& rect, const N2_MAT& mt);
+	void DrawScissorRect(const sm::rect& rect, const N2_MAT& mt);
+
+	void AddDrawAssetFunc(n0::AssetID id, std::function<void(const n0::CompAsset&, const n2::RenderParams&)> func);
 
 private:
-	static pt2::RenderReturn DrawAsset(const n0::CompAsset& casset, RenderParams& rp);
+	pt2::RenderReturn DrawAsset(const n0::CompAsset& casset, RenderParams& rp);
+
+private:
+	std::vector<std::function<void(const n0::CompAsset&, const n2::RenderParams&)>> m_draw_asset_funcs;
+
+	CU_SINGLETON_DECLARATION(RenderSystem)
 
 }; // RenderSystem
 

@@ -259,7 +259,8 @@ pt2::RenderReturn RenderSystem::DrawAsset(const n0::CompAsset& casset, RenderPar
 	{
 		auto& ctext = static_cast<const CompText&>(casset);
 		auto& text = ctext.GetText();
-		pt2::RenderSystem::DrawText(text, rp.mt, rp.GetColor());
+		auto& col = rp.GetColor();
+		pt2::RenderSystem::DrawText(text.text, text.tb, rp.mt, col.mul, col.add);
 	}
 	else if (asset_type == n0::GetAssetUniqueTypeID<n2::CompMask>())
 	{

@@ -294,7 +294,8 @@ pt2::RenderReturn RenderSystem::DrawAsset(const n0::CompAsset& casset, RenderPar
 	}
 	else
 	{
-		if (m_draw_asset_funcs[asset_type]) {
+		if (asset_type < m_draw_asset_funcs.size() && 
+			m_draw_asset_funcs[asset_type]) {
 			m_draw_asset_funcs[asset_type](casset, rp);
 		}
 	}

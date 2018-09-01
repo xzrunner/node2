@@ -27,8 +27,8 @@ sm::rect AABBSystem::GetBounding(const n0::CompAsset& casset)
 		auto& cimage = static_cast<const CompImage&>(casset);
 		auto& tex = cimage.GetTexture();
 		return sm::rect(
-			static_cast<float>(tex->GetWidth()),
-			static_cast<float>(tex->GetHeight())
+			static_cast<float>(tex->Width()),
+			static_cast<float>(tex->Height())
 		);
 	}
 	else if (type == n0::GetAssetUniqueTypeID<CompMask>())
@@ -49,7 +49,7 @@ sm::rect AABBSystem::GetBounding(const n0::CompAsset& casset)
 		auto& slots = temp->GetAllSlots();
 		for (auto& child : slots) {
 			Combine(rect, child);
-		}		
+		}
 	}
 	else if (type == n0::GetAssetUniqueTypeID<CompParticle3d>())
 	{

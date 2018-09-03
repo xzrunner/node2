@@ -78,6 +78,10 @@ sm::rect AABBSystem::GetBounding(const n0::CompAsset& casset)
 
 void AABBSystem::Combine(sm::rect& aabb, const n0::SceneNodePtr& child)
 {
+	if (!child->HasSharedComp<n0::CompAsset>()) {
+		return;
+	}
+
 	auto& casset = child->GetSharedComp<n0::CompAsset>();
 	auto c_aabb = GetBounding(casset);
 	if (!c_aabb.IsValid()) {

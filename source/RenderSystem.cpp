@@ -137,27 +137,35 @@ pt2::RenderReturn RenderSystem::Draw(const n0::SceneNodePtr& node,
 		pt2::RenderSystem::SetColorMap(ccol.GetColor());
 	}
 
-	// asset
-	auto& casset = node->GetSharedComp<n0::CompAsset>();
-	ret |= DrawAsset(casset, rp_child);
-	auto asset_type = casset.AssetTypeID();
-	if (asset_type == n0::GetAssetUniqueTypeID<n2::CompAnim>())
-	{
-		rp_child.node_id += 1;
-
-		auto& canim_inst = node->GetUniqueComp<n2::CompAnimInst>();
-		canim_inst.TraverseCurrNodes([&](const n0::SceneNodePtr& node)->bool
-		{
-			Draw(node, rp_child);
-			return true;
-		});
+	// ext comp
+	for (auto& func : m_draw_comp_funcs) {
+		func(*node, rp_child);
 	}
-	else if (asset_type == n0::GetAssetUniqueTypeID<n2::CompParticle3d>())
-	{
-		rp_child.node_id += 1;
 
-		auto& cp3d_inst = node->GetUniqueComp<n2::CompParticle3dInst>();
-		cp3d_inst.Draw(rp_child);
+	// asset
+	if (node->HasSharedComp<n0::CompAsset>())
+	{
+		auto& casset = node->GetSharedComp<n0::CompAsset>();
+		ret |= DrawAsset(casset, rp_child);
+		auto asset_type = casset.AssetTypeID();
+		if (asset_type == n0::GetAssetUniqueTypeID<n2::CompAnim>())
+		{
+			rp_child.node_id += 1;
+
+			auto& canim_inst = node->GetUniqueComp<n2::CompAnimInst>();
+			canim_inst.TraverseCurrNodes([&](const n0::SceneNodePtr& node)->bool
+			{
+				Draw(node, rp_child);
+				return true;
+			});
+		}
+		else if (asset_type == n0::GetAssetUniqueTypeID<n2::CompParticle3d>())
+		{
+			rp_child.node_id += 1;
+
+			auto& cp3d_inst = node->GetUniqueComp<n2::CompParticle3dInst>();
+			cp3d_inst.Draw(rp_child);
+		}
 	}
 
 	// script
@@ -231,6 +239,11 @@ void RenderSystem::AddDrawAssetFunc(n0::AssetID id, std::function<void(const n0:
 	m_draw_asset_funcs[id] = func;
 }
 
+void RenderSystem::AddDrawCompFunc(std::function<void(const n0::SceneNode&, const n2::RenderParams&)> func)
+{
+	m_draw_comp_funcs.push_back(func);
+}
+
 pt2::RenderReturn RenderSystem::DrawAsset(const n0::CompAsset& casset, RenderParams& rp)
 {
 	pt2::RenderReturn ret = pt2::RENDER_OK;
@@ -294,7 +307,7 @@ pt2::RenderReturn RenderSystem::DrawAsset(const n0::CompAsset& casset, RenderPar
 	}
 	else
 	{
-		if (asset_type < m_draw_asset_funcs.size() && 
+		if (asset_type < m_draw_asset_funcs.size() &&
 			m_draw_asset_funcs[asset_type]) {
 			m_draw_asset_funcs[asset_type](casset, rp);
 		}

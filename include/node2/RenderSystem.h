@@ -73,12 +73,14 @@ public:
 	void DrawScissorRect(const sm::rect& rect, const N2_MAT& mt);
 
 	void AddDrawAssetFunc(n0::AssetID id, std::function<void(const n0::CompAsset&, const n2::RenderParams&)> func);
+	void AddDrawCompFunc(std::function<void(const n0::SceneNode&, const n2::RenderParams&)> func);
 
 private:
 	pt2::RenderReturn DrawAsset(const n0::CompAsset& casset, RenderParams& rp);
 
 private:
 	std::vector<std::function<void(const n0::CompAsset&, const n2::RenderParams&)>> m_draw_asset_funcs;
+	std::vector<std::function<void(const n0::SceneNode&, const n2::RenderParams&)>> m_draw_comp_funcs;
 
 	CU_SINGLETON_DECLARATION(RenderSystem)
 

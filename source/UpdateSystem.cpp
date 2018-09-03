@@ -9,6 +9,12 @@
 namespace n2
 {
 
+CU_SINGLETON_DEFINITION(UpdateSystem);
+
+UpdateSystem::UpdateSystem()
+{
+}
+
 bool UpdateSystem::Update(const n0::SceneNodePtr& node)
 {
 	if (!node) {
@@ -17,24 +23,41 @@ bool UpdateSystem::Update(const n0::SceneNodePtr& node)
 
 	bool dirty = false;
 
-	auto& casset = node->GetSharedComp<n0::CompAsset>();
-	auto asset_type = casset.AssetTypeID();
-	if (asset_type == n0::GetAssetUniqueTypeID<n2::CompAnim>())
+	if (node->HasSharedComp<n0::CompAsset>())
 	{
-		auto& canim = node->GetUniqueComp<n2::CompAnimInst>();
-		if (canim.Update()) {
-			dirty = true;
+		auto& casset = node->GetSharedComp<n0::CompAsset>();
+		auto asset_type = casset.AssetTypeID();
+		if (asset_type == n0::GetAssetUniqueTypeID<n2::CompAnim>())
+		{
+			auto& canim = node->GetUniqueComp<n2::CompAnimInst>();
+			if (canim.Update()) {
+				dirty = true;
+			}
 		}
+		else if (asset_type == n0::GetAssetUniqueTypeID<n2::CompParticle3d>())
+		{
+			auto& cp3d = node->GetUniqueComp<n2::CompParticle3dInst>();
+			if (cp3d.Update()) {
+				dirty = true;
+			}
+		}
+
+		return dirty;
 	}
-	else if (asset_type == n0::GetAssetUniqueTypeID<n2::CompParticle3d>())
-	{
-		auto& cp3d = node->GetUniqueComp<n2::CompParticle3dInst>();
-		if (cp3d.Update()) {
+
+	// ext comp
+	for (auto& func : m_update_comp_funcs) {
+		if (func(*node)) {
 			dirty = true;
 		}
 	}
 
 	return dirty;
+}
+
+void UpdateSystem::AddUpdateCompFunc(std::function<bool(const n0::SceneNode&)> func)
+{
+	m_update_comp_funcs.push_back(func);
 }
 
 }

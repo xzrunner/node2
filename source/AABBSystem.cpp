@@ -17,6 +17,12 @@
 namespace n2
 {
 
+CU_SINGLETON_DEFINITION(AABBSystem);
+
+AABBSystem::AABBSystem()
+{
+}
+
 sm::rect AABBSystem::GetBounding(const n0::CompAsset& casset)
 {
 	sm::rect rect;
@@ -94,6 +100,26 @@ void AABBSystem::Combine(sm::rect& aabb, const n0::SceneNodePtr& child)
 	aabb.Combine(mat * sm::vec2(c_aabb.xmax, c_aabb.ymin));
 	aabb.Combine(mat * sm::vec2(c_aabb.xmax, c_aabb.ymax));
 	aabb.Combine(mat * sm::vec2(c_aabb.xmin, c_aabb.ymax));
+}
+
+sm::rect AABBSystem::GetBounding(const n0::SceneNode& node)
+{
+	if (node.HasSharedComp<n0::CompAsset>()) {
+		return GetBounding(node.GetSharedComp<n0::CompAsset>());
+	} else {
+		for (auto& func : m_get_bound_funcs) {
+			sm::rect bound;
+			if (func(node, bound)) {
+				return bound;
+			}
+		}
+		return sm::rect();
+	}
+}
+
+void AABBSystem::AddGetBoundFunc(std::function<bool(const n0::SceneNode&, sm::rect& bound)> func)
+{
+	m_get_bound_funcs.push_back(func);
 }
 
 }

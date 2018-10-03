@@ -15,7 +15,7 @@ std::unique_ptr<n0::NodeComp> CompScript::Clone(const n0::SceneNode& node) const
 
 void CompScript::Reload(const n0::SceneNodePtr& node)
 {
-	m_script.LoadScript(m_filepath, node);
+	m_script.Reload(m_filepath, node);
 }
 
 }

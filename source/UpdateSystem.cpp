@@ -3,6 +3,7 @@
 #include "node2/CompAnimInst.h"
 #include "node2/CompParticle3d.h"
 #include "node2/CompParticle3dInst.h"
+#include "node2/CompScript.h"
 
 #include <node0/SceneNode.h>
 
@@ -43,6 +44,13 @@ bool UpdateSystem::Update(const n0::SceneNodePtr& node)
 		}
 
 		return dirty;
+	}
+
+	// script
+	if (node->HasUniqueComp<n2::CompScript>())
+	{
+		auto& cscript = node->GetUniqueComp<n2::CompScript>();
+		cscript.Update();
 	}
 
 	// ext comp

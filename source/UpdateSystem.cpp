@@ -50,7 +50,7 @@ bool UpdateSystem::Update(const n0::SceneNodePtr& node)
 	if (node->HasUniqueComp<n2::CompScript>())
 	{
 		auto& cscript = node->GetUniqueComp<n2::CompScript>();
-		cscript.Update();
+		cscript.GetImpl().Update();
 	}
 
 	// ext comp

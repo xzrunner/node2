@@ -172,7 +172,7 @@ pt2::RenderReturn RenderSystem::Draw(const n0::SceneNodePtr& node,
 	if (node->HasUniqueComp<n2::CompScript>())
 	{
 		auto& cscript = node->GetUniqueComp<n2::CompScript>();
-		cscript.Draw();
+		cscript.GetImpl().Draw();
 	}
 
 	// end scissor

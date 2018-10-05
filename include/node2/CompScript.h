@@ -21,9 +21,7 @@ public:
 	const std::string& GetFilepath() const { return m_filepath; }
 	void SetFilepath(const std::string& filepath) { m_filepath = filepath; }
 
-	void Init() const   { m_script.Init(); }
-	void Update() const { m_script.Update(); }
-	void Draw() const   { m_script.Draw(); }
+	auto& GetImpl() const { return m_script; }
 
 	void Reload(const n0::SceneNodePtr& node);
 
@@ -33,6 +31,8 @@ private:
 	std::string m_filepath;
 
 	moon::SceneNodeScript m_script;
+
+	
 
 }; // CompScript
 

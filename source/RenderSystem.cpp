@@ -14,6 +14,7 @@
 #include "node2/CompUniquePatch.h"
 #include "node2/CompScissor.h"
 #include "node2/CompScript.h"
+#include "node2/CompShape.h"
 #include "node2/EditOp.h"
 
 #include <node0/SceneNode.h>
@@ -166,6 +167,24 @@ pt2::RenderReturn RenderSystem::Draw(const n0::SceneNodePtr& node,
 			auto& cp3d_inst = node->GetUniqueComp<n2::CompParticle3dInst>();
 			cp3d_inst.Draw(rp_child);
 		}
+	}
+
+	// shape
+	if (node->HasUniqueComp<n2::CompShape>())
+	{
+		auto& cshape = node->GetUniqueComp<n2::CompShape>();
+		auto& shape = cshape.GetShape();
+		assert(shape);
+
+		auto src = rp_child.mt.x;
+		sm::mat4 dst;
+		dst.x[0]  = src[0];
+		dst.x[1]  = src[1];
+		dst.x[4]  = src[2];
+		dst.x[5]  = src[3];
+		dst.x[12] = src[4];
+		dst.x[13] = src[5];
+		pt2::RenderSystem::DrawShape(*shape, dst);
 	}
 
 	// script

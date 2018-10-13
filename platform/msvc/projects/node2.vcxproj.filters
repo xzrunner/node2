@@ -52,6 +52,9 @@
     <Filter Include="components\asset\particle3d">
       <UniqueIdentifier>{ae7cf5c4-1ee2-47c7-bc69-d50c1ccc74e9}</UniqueIdentifier>
     </Filter>
+    <Filter Include="components\asset\shape">
+      <UniqueIdentifier>{38b285ec-b200-4536-9088-2a24a2b7c638}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\include\node2\predef.h" />
@@ -131,6 +134,9 @@
     <ClInclude Include="..\..\..\include\node2\NodeFlags.h">
       <Filter>components</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\include\node2\CompShape.h">
+      <Filter>components\asset\shape</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\source\CompColorCommon.cpp">
@@ -204,6 +210,9 @@
     </ClCompile>
     <ClCompile Include="..\..\..\source\AABBSystem.cpp">
       <Filter>system</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\CompShape.cpp">
+      <Filter>components\asset\shape</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

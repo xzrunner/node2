@@ -184,7 +184,7 @@ pt2::RenderReturn RenderSystem::Draw(const n0::SceneNodePtr& node,
 		dst.x[5]  = src[3];
 		dst.x[12] = src[4];
 		dst.x[13] = src[5];
-		pt2::RenderSystem::DrawShape(*shape, dst);
+		pt2::RenderSystem::Instance()->DrawShape(*shape, dst);
 	}
 
 	// script

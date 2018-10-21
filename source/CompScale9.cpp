@@ -131,7 +131,7 @@ void CompScale9::SetSize(float width, float height)
 		{
 			float w0 = GetLeftWidth(),
 				  w2 = GetRightWidth(),
-				  w1 = width - w0 - w2; 
+				  w1 = width - w0 - w2;
 
 			ResizeNode(S9_MID_LEFT, sm::vec2(-w0*0.5f-w1*0.5f, 0.0f), w0, height, true, true);
 			ResizeNode(S9_MID_CENTER, sm::vec2(0.0f, 0.0f), w1, height, false, true);
@@ -159,7 +159,7 @@ void CompScale9::Build(Scale9Type type, float w, float h, n0::SceneNodePtr grids
 {
 	m_type = type;
 	m_width = m_height = 0;
-	for (int i = 0; i < 9; ++i) 
+	for (int i = 0; i < 9; ++i)
 	{
 		auto& src = grids[i];
 		if (src) {
@@ -214,7 +214,7 @@ CompScale9::Scale9Type CompScale9::CheckType(const n0::SceneNodePtr grids[9])
 
 		// S9_3GRID_HORI
 		if (grids[3] && grids[4] && grids[5]) {
-			type = S9_3GRID_HORI;			
+			type = S9_3GRID_HORI;
 		}
 
 		// S9_3GRID_VERT
@@ -225,7 +225,7 @@ CompScale9::Scale9Type CompScale9::CheckType(const n0::SceneNodePtr grids[9])
 	return type;
 }
 
-void CompScale9::ResizeNode(Scale9Idx idx, const sm::vec2& center, float dst_w, 
+void CompScale9::ResizeNode(Scale9Idx idx, const sm::vec2& center, float dst_w,
 	                          float dst_h, bool no_scale_w, bool no_scale_h)
 {
 	if (idx < 0 || idx >= 9 || !m_grids[idx]) {
@@ -329,7 +329,7 @@ void CompScale9::ResizeNode(Scale9Idx idx, const sm::vec2& center, float dst_w,
 	}
 
 	const sm::vec2& old_scale = trans.GetScale();
-	sm::vec2 new_scale;	
+	sm::vec2 new_scale;
 	if (rotate) {
 		new_scale.x = no_scale_h ? 1 : dst_h / src_w;
 		new_scale.y = no_scale_w ? 1 : dst_w / src_h;

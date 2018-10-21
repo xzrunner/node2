@@ -11,8 +11,8 @@
 namespace n2
 {
 
-void SceneTreeHelper::UpdateAABB(const n0::SceneNodePtr& node, 
-	                             const n0::SceneNodePtr& root, 
+void SceneTreeHelper::UpdateAABB(const n0::SceneNodePtr& node,
+	                             const n0::SceneNodePtr& root,
 	                             size_t node_id)
 {
 	sm::rect new_aabb;

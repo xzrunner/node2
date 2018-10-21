@@ -27,7 +27,7 @@ public:
 
 	void SetSize(const n0::SceneNode& node, const sm::rect& size);
 	const sm::rect& GetSize() const { return m_size; }
-	
+
 	void Build(const n0::SceneNode& node, const pt2::SRT& srt) const;
 
 	const pt2::BoundingBox& GetBounding(const n0::SceneNode& node) const;

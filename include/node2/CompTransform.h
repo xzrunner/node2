@@ -13,7 +13,7 @@ class CompTransform : public n0::NodeComp
 public:
 	virtual const char* Type() const override { return TYPE_NAME; }
 	virtual n0::CompID TypeID() const override {
-		return n0::GetCompTypeID<CompTransform>(); 
+		return n0::GetCompTypeID<CompTransform>();
 	}
 	virtual std::unique_ptr<n0::NodeComp> Clone(const n0::SceneNode& node) const override;
 

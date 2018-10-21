@@ -11,7 +11,7 @@ class CompColorMap : public n0::NodeComp
 public:
 	virtual const char* Type() const override { return TYPE_NAME; }
 	virtual n0::CompID TypeID() const override {
-		return n0::GetCompTypeID<CompColorMap>(); 
+		return n0::GetCompTypeID<CompColorMap>();
 	}
 	virtual std::unique_ptr<n0::NodeComp> Clone(const n0::SceneNode& node) const override;
 
@@ -26,7 +26,7 @@ public:
 
 private:
 	pt2::RenderColorMap m_col;
-	
+
 }; // CompColorMap
 
 }

@@ -39,20 +39,20 @@ void CompAnim::Traverse(std::function<bool(const n0::SceneNodePtr&)> func, bool 
 	}
 }
 
-void CompAnim::AddLayer(anim::LayerPtr& layer) 
-{ 
-	m_layers.push_back(std::move(layer)); 
+void CompAnim::AddLayer(anim::LayerPtr& layer)
+{
+	m_layers.push_back(std::move(layer));
 }
 
-void CompAnim::SwapLayers(int idx0, int idx1) 
+void CompAnim::SwapLayers(int idx0, int idx1)
 {
 	std::iter_swap(m_layers.begin() + idx0, m_layers.begin() + idx1);
 }
 
-bool CompAnim::RemoveAllLayers() 
-{ 
+bool CompAnim::RemoveAllLayers()
+{
 	bool dirty = !m_layers.empty();
-	m_layers.clear(); 
+	m_layers.clear();
 	return dirty;
 }
 

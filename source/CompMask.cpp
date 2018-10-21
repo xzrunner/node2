@@ -30,15 +30,15 @@ void CompMask::Traverse(std::function<bool(const n0::SceneNodePtr&)> func, bool 
 	}
 }
 
-void CompMask::SetBaseNode(const n0::SceneNodePtr& base) 
-{ 
-	m_base = base; 
+void CompMask::SetBaseNode(const n0::SceneNodePtr& base)
+{
+	m_base = base;
 	m_node_count = CalcNodeCount();
 }
 
-void CompMask::SetMaskNode(const n0::SceneNodePtr& mask) 
-{ 
-	m_mask = mask; 
+void CompMask::SetMaskNode(const n0::SceneNodePtr& mask)
+{
+	m_mask = mask;
 	m_node_count = CalcNodeCount();
 }
 

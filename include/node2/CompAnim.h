@@ -44,7 +44,7 @@ private:
 	uint32_t m_fps;
 
 	std::shared_ptr<anim::AnimTemplate> m_anim_temp = nullptr;
-	
+
 }; // CompAnim
 
 }

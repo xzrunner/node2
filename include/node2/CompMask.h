@@ -28,7 +28,7 @@ public:
 
 private:
 	int CalcNodeCount() const;
-	
+
 private:
 	n0::SceneNodePtr m_base = nullptr, m_mask = nullptr;
 

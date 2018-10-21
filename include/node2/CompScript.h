@@ -32,7 +32,7 @@ private:
 
 	moon::SceneNodeScript m_script;
 
-	
+
 
 }; // CompScript
 

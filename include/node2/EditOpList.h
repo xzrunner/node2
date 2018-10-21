@@ -25,7 +25,7 @@ public:
 
 	const EditOp& GetEditOp(uint32_t id) const;
 
-	const std::vector<std::unique_ptr<EditOp>>& 
+	const std::vector<std::unique_ptr<EditOp>>&
 		GetAllEditOp() const { return m_list; }
 
 private:

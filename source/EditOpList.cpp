@@ -78,7 +78,7 @@ bool EditOpList::HasEditOp(uint32_t id) const
 
 void EditOpList::AddEditOp(std::unique_ptr<EditOp>& op)
 {
-	if (HasEditOp(op->id)) 
+	if (HasEditOp(op->id))
 	{
 		auto& old_op = GetEditOp(op->id);
 		EditOpMem::Copy(old_op, *op);

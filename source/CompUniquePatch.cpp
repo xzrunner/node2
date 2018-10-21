@@ -74,7 +74,7 @@ void CompUniquePatch::Seek(size_t node_id)
 		m_unique_ptr = 0;
 	}
 	GD_ASSERT(m_unique_ptr >= 0 && static_cast<size_t>(m_unique_ptr) < m_edit_ops.size(), "not exists");
-	while (m_edit_ops[m_unique_ptr].GetNodeID() < node_id) 
+	while (m_edit_ops[m_unique_ptr].GetNodeID() < node_id)
 	{
 		++m_unique_ptr;
 		if (m_unique_ptr == m_edit_ops.size()) {

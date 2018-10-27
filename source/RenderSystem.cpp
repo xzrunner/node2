@@ -21,7 +21,6 @@
 #include <node0/CompComplex.h>
 #include <painting2/RenderSystem.h>
 #include <painting2/DrawMask.h>
-#include <painting2/PrimitiveDraw.h>
 #include <anim/Layer.h>
 #include <anim/KeyFrame.h>
 #include <tessellation/Painter.h>
@@ -214,7 +213,7 @@ pt2::RenderReturn RenderSystem::Draw(const n0::SceneNodePtr& node,
 		if (rp.is_edit_mode)
 		{
 			auto& cscissor = node->GetUniqueComp<n2::CompScissor>();
-			DrawScissorRect(cscissor.GetRect(), rp_child.mt);
+			DrawScissorRect(cscissor.GetRect(), 2.0f, rp_child.mt);
 		}
 		else
 		{
@@ -255,13 +254,14 @@ pt2::RenderReturn RenderSystem::Draw(const n0::CompAsset& casset, const sm::Matr
 	return DrawAsset(casset, rp);
 }
 
-void RenderSystem::DrawScissorRect(const sm::rect& rect, const N2_MAT& mt)
+void RenderSystem::DrawScissorRect(const sm::rect& rect, float line_width, const N2_MAT& mt)
 {
-	pt2::PrimitiveDraw::SetColor(pt2::Color(0, 204, 0));
-	pt2::PrimitiveDraw::LineWidth(2);
 	auto min = mt * sm::vec2(rect.xmin, rect.ymin);
 	auto max = mt * sm::vec2(rect.xmax, rect.ymax);
-	pt2::PrimitiveDraw::Rect(nullptr, min, max, false);
+
+	tess::Painter pt;
+	pt.AddRect(min, max, 0xff00cc00, line_width);
+	pt2::RenderSystem::DrawPainter(pt);
 }
 
 void RenderSystem::AddDrawAssetFunc(n0::AssetID id, std::function<void(const n0::CompAsset&, const n2::RenderParams&)> func)

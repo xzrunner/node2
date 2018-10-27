@@ -70,7 +70,7 @@ public:
 	);
 	pt2::RenderReturn Draw(const n0::CompAsset& casset, const sm::Matrix2D& mat);
 
-	void DrawScissorRect(const sm::rect& rect, const N2_MAT& mt);
+	void DrawScissorRect(const sm::rect& rect, float line_width, const N2_MAT& mt);
 
 	void AddDrawAssetFunc(n0::AssetID id, std::function<void(const n0::CompAsset&, const n2::RenderParams&)> func);
 	void AddDrawCompFunc(std::function<void(const n0::SceneNode&, const n2::RenderParams&)> func);

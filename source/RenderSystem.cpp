@@ -196,7 +196,7 @@ pt2::RenderReturn RenderSystem::Draw(const n0::SceneNodePtr& node,
 		dst.x[12] = src[4];
 		dst.x[13] = src[5];
 		tess::Painter pt;
-		pt2::RenderSystem::DrawShape(pt, *shape, color);
+		pt2::RenderSystem::DrawShape(pt, *shape, color, rp_child.GetCamScale());
 		pt2::RenderSystem::DrawPainter(pt, dst);
 	}
 

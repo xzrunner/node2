@@ -38,6 +38,9 @@ public:
 	const pt2::RenderColorCommon& GetColor() const { return m_color; }
 	void SetColor(const pt2::RenderColorCommon& color) { m_color = color; }
 
+	void SetCamScale(float s) { m_cam_scale = s; }
+	float GetCamScale() const { return m_cam_scale; }
+
 private:
 	N2_MAT mt;
 
@@ -49,6 +52,8 @@ private:
 	bool m_quad_base_left_top;
 
 	pt2::RenderColorCommon m_color;
+
+	float m_cam_scale = 1.0f;
 
 	friend class RenderSystem;
 

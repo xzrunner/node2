@@ -5,6 +5,7 @@
 #include "node2/CompColorMap.h"
 #include "node2/CompText.h"
 #include "node2/CompMask.h"
+#include "node2/CompMesh.h"
 #include "node2/CompBoundingBox.h"
 #include "node2/CompScale9.h"
 #include "node2/CompAnim.h"
@@ -21,6 +22,7 @@
 #include <node0/CompComplex.h>
 #include <painting2/RenderSystem.h>
 #include <painting2/DrawMask.h>
+#include <painting2/DrawMesh.h>
 #include <anim/Layer.h>
 #include <anim/KeyFrame.h>
 #include <tessellation/Painter.h>
@@ -47,6 +49,7 @@ protected:
 	{
 		return n2::RenderSystem::Instance()->Draw(node);
 	}
+
 	virtual pt2::RenderReturn DrawMaskNode(const n0::SceneNodePtr& node, const sm::Matrix2D& mt) const override
 	{
 		return n2::RenderSystem::Instance()->Draw(node);
@@ -58,12 +61,45 @@ protected:
 		return bb.GetSize();
 	}
 
-	const sm::Matrix2D& GetMat(const sm::Matrix2D& mt) const override
+	virtual const sm::Matrix2D& GetMat(const sm::Matrix2D& mt) const override
 	{
 		return mt;
 	}
 
 }; // DrawMask
+
+class DrawMesh : public pt2::DrawMesh<n0::SceneNodePtr, sm::Matrix2D>
+{
+public:
+	DrawMesh(const pt2::Mesh<n0::SceneNodePtr>& mesh)
+		: pt2::DrawMesh<n0::SceneNodePtr, sm::Matrix2D>(mesh) {}
+
+protected:
+	virtual pt2::RenderReturn DrawNode(const n0::SceneNodePtr& node, const sm::Matrix2D& mt) const override {
+		return n2::RenderSystem::Instance()->Draw(node);
+	}
+
+	virtual bool IsNodeImage(const n0::SceneNodePtr& node) const override {
+		return node->HasSharedComp<n2::CompImage>();
+	}
+
+	virtual pt2::RenderReturn PrepareDrawOnePass(cooking::DisplayList* dlist,
+		const n0::SceneNodePtr& node, const sm::Matrix2D& mt, float* texcoords, int* tex_id) const {
+		assert(node->HasSharedComp<n2::CompImage>());
+		auto& cimg = node->GetSharedComp<n2::CompImage>();
+		*tex_id = cimg.GetTexture()->TexID();
+		texcoords[0] = 0; texcoords[1] = 0;
+		texcoords[2] = 1; texcoords[3] = 0;
+		texcoords[4] = 1; texcoords[5] = 1;
+		texcoords[6] = 0; texcoords[7] = 1;
+		return pt2::RENDER_OK;
+	}
+
+	virtual const sm::Matrix2D& GetMat(const sm::Matrix2D& mt) const override {
+		return mt;
+	}
+
+}; // DrawMesh
 
 }
 
@@ -313,6 +349,15 @@ pt2::RenderReturn RenderSystem::DrawAsset(const n0::CompAsset& casset, RenderPar
 		auto& cmask = static_cast<const CompMask&>(casset);
 		DrawMask draw(cmask.GetBaseNode(), cmask.GetMaskNode(), rp.mt);
 		ret |= draw.Draw(nullptr);
+	}
+	else if (asset_type == n0::GetAssetUniqueTypeID<n2::CompMesh>())
+	{
+		auto& cmesh = static_cast<const CompMesh&>(casset);
+		auto& mesh = cmesh.GetMesh();
+		if (mesh) {
+			DrawMesh draw(*mesh);
+			ret |= draw.DrawTexture(nullptr, rp.mt);
+		}
 	}
 	else if (asset_type == n0::GetAssetUniqueTypeID<n2::CompScale9>())
 	{

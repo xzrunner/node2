@@ -378,8 +378,10 @@ pt2::RenderReturn RenderSystem::DrawAsset(const n0::CompAsset& casset, RenderPar
 			for (auto& child : children)
 			{
 				Draw(child, rp);
-				auto& casset = child->GetSharedComp<n0::CompAsset>();
-				rp.node_id += casset.GetNodeCount();
+                if (child->HasSharedComp<n0::CompAsset>()) {
+                    auto& casset = child->GetSharedComp<n0::CompAsset>();
+                    rp.node_id += casset.GetNodeCount();
+                }
 			}
 		}
 	}

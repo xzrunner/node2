@@ -41,6 +41,9 @@ public:
 	void SetCamScale(float s) { m_cam_scale = s; }
 	float GetCamScale() const { return m_cam_scale; }
 
+    void  SetScreenRegion(const sm::rect& r) { m_screen_region = r; }
+    auto& GetScreenRegion() const { return m_screen_region; }
+
 private:
 	N2_MAT mt;
 
@@ -54,6 +57,8 @@ private:
 	pt2::RenderColorCommon m_color;
 
 	float m_cam_scale = 1.0f;
+
+    sm::rect m_screen_region;
 
 	friend class RenderSystem;
 

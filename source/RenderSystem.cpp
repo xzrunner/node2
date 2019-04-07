@@ -223,17 +223,9 @@ pt2::RenderReturn RenderSystem::Draw(const n0::SceneNodePtr& node,
 			color = rp.GetColor().mul.ToABGR();
 		}
 
-		auto src = rp_child.mt.x;
-		sm::mat4 dst;
-		dst.x[0]  = src[0];
-		dst.x[1]  = src[1];
-		dst.x[4]  = src[2];
-		dst.x[5]  = src[3];
-		dst.x[12] = src[4];
-		dst.x[13] = src[5];
 		tess::Painter pt;
 		pt2::RenderSystem::DrawShape(pt, *shape, color, rp_child.GetCamScale());
-		pt2::RenderSystem::DrawPainter(pt, dst);
+		pt2::RenderSystem::DrawPainter(pt, sm::mat4(rp_child.mt));
 	}
 
 	// script

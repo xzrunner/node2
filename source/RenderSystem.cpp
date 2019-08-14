@@ -206,9 +206,9 @@ pt2::RenderReturn RenderSystem::Draw(const n0::SceneNodePtr& node,
 	}
 
 	// shape
-	if (node->HasUniqueComp<n2::CompShape>())
+	if (node->HasSharedComp<n2::CompShape>())
 	{
-		auto& cshape = node->GetUniqueComp<n2::CompShape>();
+		auto& cshape = node->GetSharedComp<n2::CompShape>();
 		auto& shape = cshape.GetShape();
 		assert(shape);
 

@@ -13,9 +13,4 @@ CompShape::CompShape(const std::shared_ptr<gs::Shape2D>& shape)
 {
 }
 
-std::unique_ptr<n0::NodeComp> CompShape::Clone(const n0::SceneNode& node) const
-{
-	return std::make_unique<CompShape>(m_shape->Clone());
-}
-
 }

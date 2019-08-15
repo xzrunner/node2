@@ -203,29 +203,27 @@ pt2::RenderReturn RenderSystem::Draw(const n0::SceneNodePtr& node,
 			auto& cp3d_inst = node->GetUniqueComp<n2::CompParticle3dInst>();
 			cp3d_inst.Draw(rp_child);
 		}
-	}
+        else if (asset_type == n0::GetAssetUniqueTypeID<n2::CompShape>())
+        {
+		    auto& cshape = node->GetSharedComp<n2::CompShape>();
+		    auto& shape = cshape.GetShape();
+		    assert(shape);
 
-	// shape
-	if (node->HasSharedComp<n2::CompShape>())
-	{
-		auto& cshape = node->GetSharedComp<n2::CompShape>();
-		auto& shape = cshape.GetShape();
-		assert(shape);
+		    uint32_t color = 0;
+		    if (node->HasUniqueComp<CompColorCommon>())
+		    {
+			    auto& ccol = node->GetUniqueComp<CompColorCommon>();
+			    color = (rp.GetColor() * ccol.GetColor()).mul.ToABGR();
+		    }
+		    else
+		    {
+			    color = rp.GetColor().mul.ToABGR();
+		    }
 
-		uint32_t color = 0;
-		if (node->HasUniqueComp<CompColorCommon>())
-		{
-			auto& ccol = node->GetUniqueComp<CompColorCommon>();
-			color = (rp.GetColor() * ccol.GetColor()).mul.ToABGR();
-		}
-		else
-		{
-			color = rp.GetColor().mul.ToABGR();
-		}
-
-		tess::Painter pt;
-		pt2::RenderSystem::DrawShape(pt, *shape, color, rp_child.GetCamScale());
-		pt2::RenderSystem::DrawPainter(pt, sm::mat4(rp_child.mt));
+		    tess::Painter pt;
+		    pt2::RenderSystem::DrawShape(pt, *shape, color, rp_child.GetCamScale());
+		    pt2::RenderSystem::DrawPainter(pt, sm::mat4(rp_child.mt));
+        }
 	}
 
 	// script

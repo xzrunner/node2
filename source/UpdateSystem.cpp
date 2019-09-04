@@ -42,8 +42,6 @@ bool UpdateSystem::Update(const n0::SceneNodePtr& node)
 				dirty = true;
 			}
 		}
-
-		return dirty;
 	}
 
 	// script

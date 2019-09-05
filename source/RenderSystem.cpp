@@ -20,6 +20,8 @@
 
 #include <node0/SceneNode.h>
 #include <node0/CompComplex.h>
+#include <node0/NodeFlagsHelper.h>
+#include <node0/NodeFlags.h>
 #include <painting2/RenderSystem.h>
 #include <painting2/DrawMask.h>
 #include <painting2/DrawMesh.h>
@@ -118,6 +120,9 @@ pt2::RenderReturn RenderSystem::Draw(const n0::SceneNodePtr& node,
 	if (!node) {
 		return pt2::RENDER_NO_DATA;
 	}
+    if (n0::NodeFlagsHelper::GetFlag<n0::NodeNotVisible>(*node)) {
+        return pt2::RENDER_INVISIBLE;
+    }
 
 	if (rp.patch) {
 		rp.patch->Seek(rp.node_id);

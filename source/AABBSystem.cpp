@@ -104,17 +104,20 @@ void AABBSystem::Combine(sm::rect& aabb, const n0::SceneNodePtr& child)
 
 sm::rect AABBSystem::GetBounding(const n0::SceneNode& node)
 {
-	if (node.HasSharedComp<n0::CompAsset>()) {
-		return GetBounding(node.GetSharedComp<n0::CompAsset>());
-	} else {
-		for (auto& func : m_get_bound_funcs) {
-			sm::rect bound;
-			if (func(node, bound)) {
-				return bound;
-			}
+    if (node.HasSharedComp<n0::CompAsset>()) {
+        auto aabb = GetBounding(node.GetSharedComp<n0::CompAsset>());
+        if (aabb.IsValid()) {
+            return aabb;
+        }
+    }
+
+	for (auto& func : m_get_bound_funcs) {
+		sm::rect bound;
+		if (func(node, bound)) {
+			return bound;
 		}
-		return sm::rect();
 	}
+	return sm::rect();
 }
 
 void AABBSystem::AddGetBoundFunc(std::function<bool(const n0::SceneNode&, sm::rect& bound)> func)

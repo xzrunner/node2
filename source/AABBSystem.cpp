@@ -9,6 +9,7 @@
 #include "node2/CompScale9.h"
 #include "node2/CompText.h"
 
+#include <unirender2/Texture.h>
 #include <node0/SceneNode.h>
 #include <node0/CompAsset.h>
 #include <node0/CompComplex.h>
@@ -33,8 +34,8 @@ sm::rect AABBSystem::GetBounding(const n0::CompAsset& casset)
 		auto& cimage = static_cast<const CompImage&>(casset);
 		auto& tex = cimage.GetTexture();
 		return sm::rect(
-			static_cast<float>(tex->Width()),
-			static_cast<float>(tex->Height())
+			static_cast<float>(tex->GetWidth()),
+			static_cast<float>(tex->GetHeight())
 		);
 	}
 	else if (type == n0::GetAssetUniqueTypeID<CompMask>())

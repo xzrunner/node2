@@ -1,7 +1,7 @@
 #pragma once
 
 #include <node0/CompAsset.h>
-#include <painting2/Texture.h>
+#include <unirender2/typedef.h>
 
 #include <memory>
 
@@ -22,15 +22,15 @@ public:
 	void SetFilepath(const std::string& filepath) { m_filepath = filepath; }
 	const std::string& GetFilepath() const { return m_filepath; }
 
-	void SetTexture(const std::shared_ptr<pt2::Texture>& tex) { m_tex = tex; }
-	const std::shared_ptr<pt2::Texture>& GetTexture() const { return m_tex; }
+	void SetTexture(const ur2::TexturePtr& tex) { m_tex = tex; }
+	const ur2::TexturePtr& GetTexture() const { return m_tex; }
 
 	static const char* const TYPE_NAME;
 
 private:
 	std::string m_filepath;
 
-	std::shared_ptr<pt2::Texture> m_tex = nullptr;
+    ur2::TexturePtr m_tex = nullptr;
 
 }; // CompImage
 

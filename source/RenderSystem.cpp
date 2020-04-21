@@ -355,7 +355,7 @@ pt2::RenderReturn RenderSystem::DrawAsset(const ur2::Device& dev, ur2::Context& 
 		auto& ctext = static_cast<const CompText&>(casset);
 		auto& text = ctext.GetText();
 		auto& col = rp.GetColor();
-		pt2::RenderSystem::DrawText(text.text, text.tb, rp.mt, col.mul, col.add);
+		pt2::RenderSystem::DrawText(ctx, text.text, text.tb, rp.mt, col.mul, col.add);
 	}
 	else if (asset_type == n0::GetAssetUniqueTypeID<n2::CompMask>())
 	{

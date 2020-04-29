@@ -22,7 +22,7 @@
 #include <node0/CompComplex.h>
 #include <node0/NodeFlagsHelper.h>
 #include <node0/NodeFlags.h>
-#include <unirender2/Texture.h>
+#include <unirender/Texture.h>
 #include <painting2/RenderSystem.h>
 #include <painting2/DrawMask.h>
 #include <painting2/DrawMesh.h>
@@ -48,14 +48,14 @@ public:
 	}
 
 protected:
-	virtual pt2::RenderReturn DrawBaseNode(const ur2::Device& dev, ur2::Context& ctx,
-        ur2::RenderState& rs, const n0::SceneNodePtr& node, const sm::Matrix2D& mt) const override
+	virtual pt2::RenderReturn DrawBaseNode(const ur::Device& dev, ur::Context& ctx,
+        ur::RenderState& rs, const n0::SceneNodePtr& node, const sm::Matrix2D& mt) const override
 	{
 		return n2::RenderSystem::Instance()->Draw(dev, ctx, rs, node);
 	}
 
-	virtual pt2::RenderReturn DrawMaskNode(const ur2::Device& dev, ur2::Context& ctx,
-        ur2::RenderState& rs, const n0::SceneNodePtr& node, const sm::Matrix2D& mt) const override
+	virtual pt2::RenderReturn DrawMaskNode(const ur::Device& dev, ur::Context& ctx,
+        ur::RenderState& rs, const n0::SceneNodePtr& node, const sm::Matrix2D& mt) const override
 	{
 		return n2::RenderSystem::Instance()->Draw(dev, ctx, rs, node);
 	}
@@ -80,8 +80,8 @@ public:
 		: pt2::DrawMesh<n0::SceneNodePtr, sm::Matrix2D>(mesh) {}
 
 protected:
-	virtual pt2::RenderReturn DrawNode(const ur2::Device& dev, ur2::Context& ctx,
-        ur2::RenderState& rs, const n0::SceneNodePtr& node, const sm::Matrix2D& mt) const override {
+	virtual pt2::RenderReturn DrawNode(const ur::Device& dev, ur::Context& ctx,
+        ur::RenderState& rs, const n0::SceneNodePtr& node, const sm::Matrix2D& mt) const override {
 		return n2::RenderSystem::Instance()->Draw(dev, ctx, rs, node);
 	}
 
@@ -118,7 +118,7 @@ RenderSystem::RenderSystem()
 {
 }
 
-pt2::RenderReturn RenderSystem::Draw(const ur2::Device& dev, ur2::Context& ctx, ur2::RenderState& rs,
+pt2::RenderReturn RenderSystem::Draw(const ur::Device& dev, ur::Context& ctx, ur::RenderState& rs,
                                      const n0::SceneNodePtr& node, const RenderParams& rp)
 {
 	if (!node) {
@@ -267,9 +267,9 @@ pt2::RenderReturn RenderSystem::Draw(const ur2::Device& dev, ur2::Context& ctx, 
 	return ret;
 }
 
-pt2::RenderReturn RenderSystem::Draw(const ur2::Device& dev,
-                                     ur2::Context& ctx,
-                                     ur2::RenderState& rs,
+pt2::RenderReturn RenderSystem::Draw(const ur::Device& dev,
+                                     ur::Context& ctx,
+                                     ur::RenderState& rs,
                                      const n0::CompAsset& casset,
 	                                 const sm::vec2& pos,
 	                                 float angle,
@@ -289,7 +289,7 @@ pt2::RenderReturn RenderSystem::Draw(const ur2::Device& dev,
 	return DrawAsset(dev, ctx, rs, casset, rp_child);
 }
 
-pt2::RenderReturn RenderSystem::Draw(const ur2::Device& dev, ur2::Context& ctx, ur2::RenderState& rs,
+pt2::RenderReturn RenderSystem::Draw(const ur::Device& dev, ur::Context& ctx, ur::RenderState& rs,
                                      const n0::CompAsset& casset, const sm::Matrix2D& mat)
 {
 	RenderParams rp;
@@ -300,7 +300,7 @@ pt2::RenderReturn RenderSystem::Draw(const ur2::Device& dev, ur2::Context& ctx, 
 	return DrawAsset(dev, ctx, rs, casset, rp);
 }
 
-void RenderSystem::DrawScissorRect(const ur2::Device& dev, ur2::Context& ctx, ur2::RenderState& rs,
+void RenderSystem::DrawScissorRect(const ur::Device& dev, ur::Context& ctx, ur::RenderState& rs,
                                    const sm::rect& rect, float line_width, const N2_MAT& mt)
 {
 	auto min = mt * sm::vec2(rect.xmin, rect.ymin);
@@ -319,12 +319,12 @@ void RenderSystem::AddDrawAssetFunc(n0::AssetID id, std::function<void(const n0:
 	m_draw_asset_funcs[id] = func;
 }
 
-void RenderSystem::AddDrawCompFunc(std::function<void(const ur2::Device&, ur2::Context&, const n0::SceneNode&, const n2::RenderParams&)> func)
+void RenderSystem::AddDrawCompFunc(std::function<void(const ur::Device&, ur::Context&, const n0::SceneNode&, const n2::RenderParams&)> func)
 {
 	m_draw_comp_funcs.push_back(func);
 }
 
-pt2::RenderReturn RenderSystem::DrawAsset(const ur2::Device& dev, ur2::Context& ctx, ur2::RenderState& rs,
+pt2::RenderReturn RenderSystem::DrawAsset(const ur::Device& dev, ur::Context& ctx, ur::RenderState& rs,
                                           const n0::CompAsset& casset, RenderParams& rp)
 {
 	pt2::RenderReturn ret = pt2::RENDER_OK;

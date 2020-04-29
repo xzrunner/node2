@@ -13,7 +13,7 @@
 #include <functional>
 #include <vector>
 
-namespace ur2 { class Device; class Context; struct RenderState; }
+namespace ur { class Device; class Context; struct RenderState; }
 namespace n0 { class CompAsset; }
 
 namespace n2
@@ -68,11 +68,11 @@ private:
 class RenderSystem
 {
 public:
-	pt2::RenderReturn Draw(const ur2::Device& dev, ur2::Context& ctx, ur2::RenderState& rs,
+	pt2::RenderReturn Draw(const ur::Device& dev, ur::Context& ctx, ur::RenderState& rs,
         const n0::SceneNodePtr& node, const RenderParams& rp = RenderParams());
 
 	pt2::RenderReturn Draw(
-        const ur2::Device& dev, ur2::Context& ctx, ur2::RenderState& rs,
+        const ur::Device& dev, ur::Context& ctx, ur::RenderState& rs,
 		const n0::CompAsset& casset,
 		const sm::vec2& pos = sm::vec2(0, 0),
 		float angle = 0,
@@ -80,22 +80,22 @@ public:
 		const sm::vec2& shear = sm::vec2(0, 0),
 		const RenderParams& rp = RenderParams()
 	);
-	pt2::RenderReturn Draw(const ur2::Device& dev, ur2::Context& ctx, ur2::RenderState& rs,
+	pt2::RenderReturn Draw(const ur::Device& dev, ur::Context& ctx, ur::RenderState& rs,
         const n0::CompAsset& casset, const sm::Matrix2D& mat);
 
-	void DrawScissorRect(const ur2::Device& dev, ur2::Context& ctx, ur2::RenderState& rs,
+	void DrawScissorRect(const ur::Device& dev, ur::Context& ctx, ur::RenderState& rs,
         const sm::rect& rect, float line_width, const N2_MAT& mt);
 
 	void AddDrawAssetFunc(n0::AssetID id, std::function<void(const n0::CompAsset&, const n2::RenderParams&)> func);
-	void AddDrawCompFunc(std::function<void(const ur2::Device&, ur2::Context&, const n0::SceneNode&, const n2::RenderParams&)> func);
+	void AddDrawCompFunc(std::function<void(const ur::Device&, ur::Context&, const n0::SceneNode&, const n2::RenderParams&)> func);
 
 private:
-	pt2::RenderReturn DrawAsset(const ur2::Device& dev, ur2::Context& ctx, ur2::RenderState& rs,
+	pt2::RenderReturn DrawAsset(const ur::Device& dev, ur::Context& ctx, ur::RenderState& rs,
         const n0::CompAsset& casset, RenderParams& rp);
 
 private:
 	std::vector<std::function<void(const n0::CompAsset&, const n2::RenderParams&)>> m_draw_asset_funcs;
-	std::vector<std::function<void(const ur2::Device&, ur2::Context&, const n0::SceneNode&, const n2::RenderParams&)>> m_draw_comp_funcs;
+	std::vector<std::function<void(const ur::Device&, ur::Context&, const n0::SceneNode&, const n2::RenderParams&)>> m_draw_comp_funcs;
 
 	CU_SINGLETON_DECLARATION(RenderSystem)
 

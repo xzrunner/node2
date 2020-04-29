@@ -9,7 +9,7 @@
 #include "node2/CompScale9.h"
 #include "node2/CompText.h"
 
-#include <unirender2/Texture.h>
+#include <unirender/Texture.h>
 #include <node0/SceneNode.h>
 #include <node0/CompAsset.h>
 #include <node0/CompComplex.h>

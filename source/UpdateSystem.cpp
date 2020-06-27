@@ -16,7 +16,7 @@ UpdateSystem::UpdateSystem()
 {
 }
 
-bool UpdateSystem::Update(const n0::SceneNodePtr& node)
+bool UpdateSystem::Update(const n0::SceneNodePtr& node, const ur::Device* dev)
 {
 	if (!node) {
 		return false;
@@ -53,7 +53,7 @@ bool UpdateSystem::Update(const n0::SceneNodePtr& node)
 
 	// ext comp
 	for (auto& func : m_update_comp_funcs) {
-		if (func(*node)) {
+		if (func(*node, dev)) {
 			dirty = true;
 		}
 	}
@@ -61,7 +61,7 @@ bool UpdateSystem::Update(const n0::SceneNodePtr& node)
 	return dirty;
 }
 
-void UpdateSystem::AddUpdateCompFunc(std::function<bool(const n0::SceneNode&)> func)
+void UpdateSystem::AddUpdateCompFunc(std::function<bool(const n0::SceneNode&, const ur::Device*)> func)
 {
 	m_update_comp_funcs.push_back(func);
 }
